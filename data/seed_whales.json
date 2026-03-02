@@ -1,0 +1,35 @@
+{
+  "_note": "Seed list of known Hyperliquid whale addresses. Discovered via HLP vault depositor scanning.",
+  "whales": [
+    {
+      "address": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
+      "label": "HLP Vault",
+      "notes": "Hyperliquid Liquidity Provider vault — $357M AV, positions on sub-accounts"
+    },
+    {
+      "address": "0xefffa330cbae8d916ad1d33f0eeb16cfa711fa91",
+      "label": null,
+      "notes": "HLP depositor ($10M vault equity). AV: ~$4M, massive AVAX position"
+    },
+    {
+      "address": "0x6417da1d2452a4b4a81aa151b7235ffec865082f",
+      "label": null,
+      "notes": "HLP depositor ($3.2M vault equity). AV: ~$712K, multi-coin (BTC/ETH/HYPE)"
+    },
+    {
+      "address": "0xbe19541903f64af97bcf8436f4d15bf3a56b8bd1",
+      "label": null,
+      "notes": "HLP depositor ($2.5M vault equity). AV: ~$638K, heavy shorts (ETH/ENA/XPL) in major profit"
+    },
+    {
+      "address": "0xfcf1dd2d206a1cadfbef0e0e24cbc68e66a0b541",
+      "label": null,
+      "notes": "HLP depositor ($6M vault equity). AV: ~$429K"
+    },
+    {
+      "address": "0xb190075e80abb5c0ffa0c0c55fae47c03abac2f8",
+      "label": null,
+      "notes": "HLP depositor ($3M vault equity). AV: ~$1.38M"
+    }
+  ]
+}

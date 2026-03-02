@@ -1,0 +1,19 @@
+{
+  "whales": [
+    {
+      "address": "0xefffa330cbae8d916ad1d33f0eeb16cfa711fa91",
+      "label": null,
+      "notes": "Found via HLP vault depositor scan. AV: $3,986,224, 1 positions"
+    },
+    {
+      "address": "0x6417da1d2452a4b4a81aa151b7235ffec865082f",
+      "label": null,
+      "notes": "Found via HLP vault depositor scan. AV: $712,003, 5 positions"
+    },
+    {
+      "address": "0xbe19541903f64af97bcf8436f4d15bf3a56b8bd1",
+      "label": null,
+      "notes": "Found via HLP vault depositor scan. AV: $638,228, 5 positions"
+    }
+  ]
+}
