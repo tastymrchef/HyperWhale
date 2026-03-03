@@ -200,10 +200,25 @@ function render(asset) {
     if (n.x === undefined || n.x === null) { n.x = n._tx; n.y = n._ty; }
   });
 
+  /* Gap of 14px either side of divX keeps the two sides visually separate */
+  var GAP      = 14;
+  var shortL   = PAD;
+  var shortR   = divX - GAP;
+  var longL    = divX + GAP;
+  var longR    = W - PAD;
+
   activeSnap.forEach(function(n) {
-    var conviction = Math.abs(n._b.bias) / 100;
-    var offset = (1 - conviction) * halfW;
-    n._tx = n._b.bias >= 0 ? centre + offset : centre - offset;
+    var conviction = Math.abs(n._b.bias) / 100;  /* 1 = pure, 0 = hedged */
+    var isLong = n._b.bias >= 0;
+    if (isLong) {
+      /* long side: pure conviction → near divX+GAP (left of long zone),
+                   hedged          → near W-PAD (right of long zone) */
+      n._tx = longL + (1 - conviction) * (longR - longL);
+    } else {
+      /* short side: pure conviction → near divX-GAP (right of short zone),
+                    hedged           → near PAD (left of short zone) */
+      n._tx = shortR - (1 - conviction) * (shortR - shortL);
+    }
     n._ty = yLog(n._b.tot);
     if (n.x === undefined || n.x === null) { n.x = n._tx; n.y = n._ty; }
   });
@@ -311,7 +326,7 @@ function render(asset) {
   /*  sim2: active  */
   sim2 = d3.forceSimulation(activeSnap)
     .alphaDecay(0.03)
-    .force('cx', d3.forceX(function(d){ return d._tx; }).strength(0.35))
+    .force('cx', d3.forceX(function(d){ return d._tx; }).strength(0.55))
     .force('cy', d3.forceY(function(d){ return d._ty; }).strength(0.28))
     .force('collide', d3.forceCollide(function(d){ return d._r + 2; }).strength(0.9))
     .on('tick', function() {
@@ -320,6 +335,13 @@ function render(asset) {
         var hi = actBot  - d._r;
         if (hi < lo) hi = lo;
         d.y = Math.max(lo, Math.min(hi, d.y));
+        /* hard X clamp — keep long right of divX+GAP, short left of divX-GAP */
+        var isLong = d._b.bias >= 0;
+        if (isLong) {
+          if (d.x < divX + GAP + d._r) d.x = divX + GAP + d._r;
+        } else {
+          if (d.x > divX - GAP - d._r) d.x = divX - GAP - d._r;
+        }
       });
       bubbleLayer.selectAll('g.active')
         .attr('transform', function(d){ return 'translate('+d.x+','+d.y+')'; });
@@ -391,17 +413,20 @@ html, body { width:100%; height:100%; background:#0d1117; color:#c9d1d9;
 
 /*  stats panel (top 20%)  */
 #stats {
-  height:20vh; min-height:120px; flex-shrink:0;
+  height:20vh; min-height:130px; flex-shrink:0;
   background:#0d1117; border-bottom:1px solid #21262d;
   display:flex; flex-direction:column; justify-content:center;
-  padding:0 20px; gap:10px;
+  padding:0 20px; gap:8px;
 }
 #stats-title {
   font-size:15px; font-weight:600; color:#e6edf3; letter-spacing:0.5px;
 }
 #stats-title span { font-size:11px; color:#8b949e; font-weight:400; margin-left:10px; }
+#stats-bottom {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
 #stats-row {
-  display:flex; flex-wrap:wrap; gap:6px 12px;
+  display:flex; flex-wrap:wrap; gap:6px 10px;
 }
 .stat-card {
   background:#161b22; border:1px solid #21262d; border-radius:6px;
@@ -414,6 +439,15 @@ html, body { width:100%; height:100%; background:#0d1117; color:#c9d1d9;
 .stat-val.red   { color:#e05252; }
 .stat-val.blue  { color:#4C8EDA; }
 .stat-val.grey  { color:#8b949e; }
+
+/*  tier legend  */
+#legend {
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:0 4px;
+}
+.leg-item { display:flex; align-items:center; gap:5px; }
+.leg-dot  { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.leg-lbl  { font-size:11px; color:#8b949e; }
 
 /*  coin buttons  */
 #btnbar {
@@ -482,6 +516,17 @@ def build_html(snap):
         "</div>"
     )
 
+    legend_html = (
+        "<div id='legend'>"
+        "<span style='font-size:10px;color:#555;text-transform:uppercase;letter-spacing:0.8px;margin-right:4px;'>Tier</span>"
+        "<div class='leg-item'><div class='leg-dot' style='background:#FFD700'></div><span class='leg-lbl'>Apex</span></div>"
+        "<div class='leg-item'><div class='leg-dot' style='background:#4C8EDA'></div><span class='leg-lbl'>Whale</span></div>"
+        "<div class='leg-item'><div class='leg-dot' style='background:#2EC4B6'></div><span class='leg-lbl'>Shark</span></div>"
+        "<div class='leg-item'><div class='leg-dot' style='background:#48BB78'></div><span class='leg-lbl'>Dolphin</span></div>"
+        "<div class='leg-item'><div class='leg-dot' style='background:#6E7681'></div><span class='leg-lbl'>Dormant</span></div>"
+        "</div>"
+    )
+
     return (
         "<!DOCTYPE html><html lang='en'><head>"
         "<meta charset='UTF-8'>"
@@ -494,7 +539,10 @@ def build_html(snap):
           "<div id='stats-title'>&#x1F433; HyperWhale"
             "<span>Snapshot: " + fetched_at + "</span>"
           "</div>"
-          "<div id='stats-row'>" + stats_cards + "</div>"
+          "<div id='stats-bottom'>"
+            "<div id='stats-row'>" + stats_cards + "</div>"
+            + legend_html +
+          "</div>"
         "</div>"
         "<div id='btnbar'></div>"
         "<div id='chart'></div>"
