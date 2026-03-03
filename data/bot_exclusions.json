@@ -1,0 +1,205 @@
+{
+  "generated_at": "2026-03-03T07:34:57.409076+00:00",
+  "description": "Addresses excluded from alerts \u2014 identified as bots or market makers",
+  "threshold_used": 60,
+  "count": 13,
+  "addresses": [
+    "0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00",
+    "0xfc667adba8d4837586078f4fdcdc29804337ca06",
+    "0x162cc7c861ebd0c06b3d72319201150482518185",
+    "0x007d76eec0ba411ce873a8819df50dd443d967a0",
+    "0x023a3d058020fb76cca98f01b3c48c8938a22355",
+    "0x31dea2516beee92135b96f464eeec3cf292a13f2",
+    "0x3bcae23e8c380dab4732e9a159c0456f12d866f3",
+    "0xc926ddba8b7617dbc65712f20cf8e1b58b8598d3",
+    "0x57dd78cd36e76e2011e8f6dc25cabbaba994494b",
+    "0x88b2448328f4335ad2a8cac06485c378ebe66fe3",
+    "0xeadc152ac1014ace57c6b353f89adf5faffe9d55",
+    "0x2025137a136bea7446deba681cbfc7cf1970840e",
+    "0x69906b0ed626ca01a4b7c001e5711e5714ccf207"
+  ],
+  "detail": [
+    {
+      "address": "0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00",
+      "label": "\u2014",
+      "bot_score": 100,
+      "signals": {
+        "fills_per_min": 134.5,
+        "fill_span_min": 14.9,
+        "avg_gap_ms": 446,
+        "zero_gap_pct": 22.4,
+        "open_orders": 1889,
+        "side_balance": 0.85,
+        "unique_coins": 74
+      }
+    },
+    {
+      "address": "0xfc667adba8d4837586078f4fdcdc29804337ca06",
+      "label": "\u2014",
+      "bot_score": 70,
+      "signals": {
+        "fills_per_min": 27.3,
+        "fill_span_min": 73.2,
+        "avg_gap_ms": 2198,
+        "zero_gap_pct": 36.9,
+        "open_orders": 19,
+        "side_balance": 0.41,
+        "unique_coins": 29
+      }
+    },
+    {
+      "address": "0x162cc7c861ebd0c06b3d72319201150482518185",
+      "label": "ABC",
+      "bot_score": 90,
+      "signals": {
+        "fills_per_min": 34.9,
+        "fill_span_min": 57.4,
+        "avg_gap_ms": 1722,
+        "zero_gap_pct": 49.6,
+        "open_orders": 716,
+        "side_balance": 0.62,
+        "unique_coins": 18
+      }
+    },
+    {
+      "address": "0x007d76eec0ba411ce873a8819df50dd443d967a0",
+      "label": "\u2014",
+      "bot_score": 65,
+      "signals": {
+        "fills_per_min": 56.2,
+        "fill_span_min": 35.6,
+        "avg_gap_ms": 1068,
+        "zero_gap_pct": 97.9,
+        "open_orders": 1,
+        "side_balance": 0.0,
+        "unique_coins": 2
+      }
+    },
+    {
+      "address": "0x023a3d058020fb76cca98f01b3c48c8938a22355",
+      "label": "Auros",
+      "bot_score": 90,
+      "signals": {
+        "fills_per_min": 30.1,
+        "fill_span_min": 66.4,
+        "avg_gap_ms": 1992,
+        "zero_gap_pct": 42.2,
+        "open_orders": 556,
+        "side_balance": 0.34,
+        "unique_coins": 51
+      }
+    },
+    {
+      "address": "0x31dea2516beee92135b96f464eeec3cf292a13f2",
+      "label": "\u2014",
+      "bot_score": 70,
+      "signals": {
+        "fills_per_min": 17.2,
+        "fill_span_min": 116.0,
+        "avg_gap_ms": 3482,
+        "zero_gap_pct": 28.8,
+        "open_orders": 32,
+        "side_balance": 0.79,
+        "unique_coins": 5
+      }
+    },
+    {
+      "address": "0x3bcae23e8c380dab4732e9a159c0456f12d866f3",
+      "label": "\u2014",
+      "bot_score": 70,
+      "signals": {
+        "fills_per_min": 16.9,
+        "fill_span_min": 118.1,
+        "avg_gap_ms": 3546,
+        "zero_gap_pct": 62.7,
+        "open_orders": 397,
+        "side_balance": 0.5,
+        "unique_coins": 5
+      }
+    },
+    {
+      "address": "0xc926ddba8b7617dbc65712f20cf8e1b58b8598d3",
+      "label": "\u2014",
+      "bot_score": 90,
+      "signals": {
+        "fills_per_min": 270.0,
+        "fill_span_min": 7.4,
+        "avg_gap_ms": 222,
+        "zero_gap_pct": 70.8,
+        "open_orders": 72,
+        "side_balance": 0.9,
+        "unique_coins": 35
+      }
+    },
+    {
+      "address": "0x57dd78cd36e76e2011e8f6dc25cabbaba994494b",
+      "label": "\u2014",
+      "bot_score": 90,
+      "signals": {
+        "fills_per_min": 48.7,
+        "fill_span_min": 41.1,
+        "avg_gap_ms": 1232,
+        "zero_gap_pct": 20.2,
+        "open_orders": 1822,
+        "side_balance": 0.67,
+        "unique_coins": 76
+      }
+    },
+    {
+      "address": "0x88b2448328f4335ad2a8cac06485c378ebe66fe3",
+      "label": "\u2014",
+      "bot_score": 60,
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 36363.0,
+        "avg_gap_ms": 1091435,
+        "zero_gap_pct": 75.9,
+        "open_orders": 200,
+        "side_balance": 0.98,
+        "unique_coins": 3
+      }
+    },
+    {
+      "address": "0xeadc152ac1014ace57c6b353f89adf5faffe9d55",
+      "label": "\u2014",
+      "bot_score": 60,
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 71001.4,
+        "avg_gap_ms": 2131106,
+        "zero_gap_pct": 64.8,
+        "open_orders": 131,
+        "side_balance": 0.71,
+        "unique_coins": 17
+      }
+    },
+    {
+      "address": "0x2025137a136bea7446deba681cbfc7cf1970840e",
+      "label": "\u2014",
+      "bot_score": 70,
+      "signals": {
+        "fills_per_min": 12.5,
+        "fill_span_min": 160.6,
+        "avg_gap_ms": 4820,
+        "zero_gap_pct": 39.0,
+        "open_orders": 222,
+        "side_balance": 0.41,
+        "unique_coins": 14
+      }
+    },
+    {
+      "address": "0x69906b0ed626ca01a4b7c001e5711e5714ccf207",
+      "label": "stuxfred",
+      "bot_score": 60,
+      "signals": {
+        "fills_per_min": 0.6,
+        "fill_span_min": 3450.8,
+        "avg_gap_ms": 103576,
+        "zero_gap_pct": 88.1,
+        "open_orders": 202,
+        "side_balance": 0.97,
+        "unique_coins": 11
+      }
+    }
+  ]
+}

@@ -1,0 +1,2476 @@
+{
+  "scanned_at": "2026-03-03T07:34:57.404610+00:00",
+  "total": 139,
+  "confirmed_bots": 13,
+  "suspicious": 45,
+  "humans": 80,
+  "errors": 1,
+  "results": [
+    {
+      "address": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
+      "label": "HLP Vault",
+      "tier": "dormant_whale",
+      "bot_score": 0,
+      "verdict": "human",
+      "signals": {
+        "reason": "too_few_fills"
+      },
+      "fills_returned": 0,
+      "scanned_at": "2026-03-03T07:29:05.704089+00:00"
+    },
+    {
+      "address": "0xefffa330cbae8d916ad1d33f0eeb16cfa711fa91",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 27190.9,
+        "avg_gap_ms": 816135,
+        "zero_gap_pct": 87.5,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:08.563964+00:00"
+    },
+    {
+      "address": "0x6417da1d2452a4b4a81aa151b7235ffec865082f",
+      "label": "\u2014",
+      "tier": "skip",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 51352.5,
+        "avg_gap_ms": 1541345,
+        "zero_gap_pct": 52.4,
+        "open_orders": 87,
+        "side_balance": 0.9,
+        "unique_coins": 9
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:10.986492+00:00"
+    },
+    {
+      "address": "0xbe19541903f64af97bcf8436f4d15bf3a56b8bd1",
+      "label": "\u2014",
+      "tier": "skip",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 152949.0,
+        "avg_gap_ms": 4590765,
+        "zero_gap_pct": 10.4,
+        "open_orders": 0,
+        "side_balance": 0.02,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:13.385017+00:00"
+    },
+    {
+      "address": "0xfcf1dd2d206a1cadfbef0e0e24cbc68e66a0b541",
+      "label": "\u2014",
+      "tier": "skip",
+      "bot_score": 0,
+      "verdict": "human",
+      "signals": {
+        "reason": "too_few_fills"
+      },
+      "fills_returned": 0,
+      "scanned_at": "2026-03-03T07:29:15.264508+00:00"
+    },
+    {
+      "address": "0xb190075e80abb5c0ffa0c0c55fae47c03abac2f8",
+      "label": "\u2014",
+      "tier": "skip",
+      "bot_score": 0,
+      "verdict": "human",
+      "signals": {
+        "reason": "too_few_fills"
+      },
+      "fills_returned": 0,
+      "scanned_at": "2026-03-03T07:29:16.899246+00:00"
+    },
+    {
+      "address": "0xecb63caa47c7c4e77f60f1ce858cf28dc2b82b00",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 100,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 134.5,
+        "fill_span_min": 14.9,
+        "avg_gap_ms": 446,
+        "zero_gap_pct": 22.4,
+        "open_orders": 1889,
+        "side_balance": 0.85,
+        "unique_coins": 74
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:19.946706+00:00"
+    },
+    {
+      "address": "0xfc667adba8d4837586078f4fdcdc29804337ca06",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 70,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 27.3,
+        "fill_span_min": 73.2,
+        "avg_gap_ms": 2198,
+        "zero_gap_pct": 36.9,
+        "open_orders": 19,
+        "side_balance": 0.41,
+        "unique_coins": 29
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:21.833655+00:00"
+    },
+    {
+      "address": "0x162cc7c861ebd0c06b3d72319201150482518185",
+      "label": "ABC",
+      "tier": "whale",
+      "bot_score": 90,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 34.9,
+        "fill_span_min": 57.4,
+        "avg_gap_ms": 1722,
+        "zero_gap_pct": 49.6,
+        "open_orders": 716,
+        "side_balance": 0.62,
+        "unique_coins": 18
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:24.943726+00:00"
+    },
+    {
+      "address": "0x939f95036d2e7b6d7419ec072bf9d967352204d2",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 36032.2,
+        "avg_gap_ms": 1081507,
+        "zero_gap_pct": 60.3,
+        "open_orders": 0,
+        "side_balance": 0.58,
+        "unique_coins": 10
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:26.922031+00:00"
+    },
+    {
+      "address": "0x7e698eea0709e4a0dbbd790fc493d60691801157",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 40,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 3.8,
+        "fill_span_min": 520.3,
+        "avg_gap_ms": 15616,
+        "zero_gap_pct": 21.9,
+        "open_orders": 19,
+        "side_balance": 0.98,
+        "unique_coins": 28
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:30.280309+00:00"
+    },
+    {
+      "address": "0xa5b0edf6b55128e0ddae8e51ac538c3188401d41",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 17970.4,
+        "avg_gap_ms": 539381,
+        "zero_gap_pct": 98.8,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:32.364465+00:00"
+    },
+    {
+      "address": "0xd47587702a91731dc1089b5db0932cf820151a91",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 2.4,
+        "fill_span_min": 834.3,
+        "avg_gap_ms": 25040,
+        "zero_gap_pct": 26.4,
+        "open_orders": 0,
+        "side_balance": 0.67,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:34.230295+00:00"
+    },
+    {
+      "address": "0x8def9f50456c6c4e37fa5d3d57f108ed23992dae",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.9,
+        "fill_span_min": 2303.2,
+        "avg_gap_ms": 69132,
+        "zero_gap_pct": 42.8,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:36.341993+00:00"
+    },
+    {
+      "address": "0x007d76eec0ba411ce873a8819df50dd443d967a0",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 65,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 56.2,
+        "fill_span_min": 35.6,
+        "avg_gap_ms": 1068,
+        "zero_gap_pct": 97.9,
+        "open_orders": 1,
+        "side_balance": 0.0,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:38.322546+00:00"
+    },
+    {
+      "address": "0x40e7f70d8c5dbf7b27dab33ed826484b3c657e56",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 3.1,
+        "fill_span_min": 653.7,
+        "avg_gap_ms": 19621,
+        "zero_gap_pct": 34.6,
+        "open_orders": 0,
+        "side_balance": 0.51,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:40.161653+00:00"
+    },
+    {
+      "address": "0x7dacca323e44f168494c779bb5e7483c468ef410",
+      "label": "\u2014",
+      "tier": "skip",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 77960.9,
+        "avg_gap_ms": 2339997,
+        "zero_gap_pct": 63.9,
+        "open_orders": 0,
+        "side_balance": 0.01,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:43.198628+00:00"
+    },
+    {
+      "address": "0x023a3d058020fb76cca98f01b3c48c8938a22355",
+      "label": "Auros",
+      "tier": "apex",
+      "bot_score": 90,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 30.1,
+        "fill_span_min": 66.4,
+        "avg_gap_ms": 1992,
+        "zero_gap_pct": 42.2,
+        "open_orders": 556,
+        "side_balance": 0.34,
+        "unique_coins": 51
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:45.921534+00:00"
+    },
+    {
+      "address": "0xe867fbdad3291530e41530301ecb77693850c78e",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 1.2,
+        "fill_span_min": 1702.4,
+        "avg_gap_ms": 51098,
+        "zero_gap_pct": 90.8,
+        "open_orders": 0,
+        "side_balance": 0.81,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:48.211098+00:00"
+    },
+    {
+      "address": "0xcac19662ec88d23fa1c81ac0e8570b0cf2ff26b3",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 17339.1,
+        "avg_gap_ms": 520433,
+        "zero_gap_pct": 25.1,
+        "open_orders": 0,
+        "side_balance": 0.65,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:50.509987+00:00"
+    },
+    {
+      "address": "0x6c8512516ce5669d35113a11ca8b8de322fd84f6",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 18433.4,
+        "avg_gap_ms": 553278,
+        "zero_gap_pct": 94.7,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:52.950745+00:00"
+    },
+    {
+      "address": "0x0a8494f70031623c9c0043aff4d40f334b458b11",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 5829.2,
+        "avg_gap_ms": 174965,
+        "zero_gap_pct": 84.6,
+        "open_orders": 0,
+        "side_balance": 0.43,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:55.257814+00:00"
+    },
+    {
+      "address": "0x7fdafde5cfb5465924316eced2d3715494c517d1",
+      "label": "BobbyBigSize",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 3.3,
+        "fill_span_min": 606.1,
+        "avg_gap_ms": 18191,
+        "zero_gap_pct": 15.5,
+        "open_orders": 2,
+        "side_balance": 0.22,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:29:59.240232+00:00"
+    },
+    {
+      "address": "0x35d1151ef1aab579cbb3109e69fa82f94ff5acb1",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 6972.6,
+        "avg_gap_ms": 209283,
+        "zero_gap_pct": 57.6,
+        "open_orders": 0,
+        "side_balance": 0.29,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:01.676830+00:00"
+    },
+    {
+      "address": "0x0ddf9bae2af4b874b96d287a5ad42eb47138a902",
+      "label": "Penision Fund",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 2.4,
+        "fill_span_min": 822.5,
+        "avg_gap_ms": 24687,
+        "zero_gap_pct": 55.9,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:03.971959+00:00"
+    },
+    {
+      "address": "0x856c35038594767646266bc7fd68dc26480e910d",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 55,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 11.8,
+        "fill_span_min": 168.8,
+        "avg_gap_ms": 5068,
+        "zero_gap_pct": 17.2,
+        "open_orders": 2,
+        "side_balance": 0.95,
+        "unique_coins": 11
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:06.559542+00:00"
+    },
+    {
+      "address": "0x45d26f28196d226497130c4bac709d808fed4029",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 14236.1,
+        "avg_gap_ms": 427298,
+        "zero_gap_pct": 56.5,
+        "open_orders": 0,
+        "side_balance": 0.29,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:08.189672+00:00"
+    },
+    {
+      "address": "0x519c721de735f7c9e6146d167852e60d60496a47",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 6113.5,
+        "avg_gap_ms": 183496,
+        "zero_gap_pct": 83.4,
+        "open_orders": 0,
+        "side_balance": 0.26,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:10.609141+00:00"
+    },
+    {
+      "address": "0xefd3ab65915e35105caa462442c9ecc1346728df",
+      "label": "2 fr\u00e8res 2 fauves",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 3.0,
+        "fill_span_min": 667.2,
+        "avg_gap_ms": 20027,
+        "zero_gap_pct": 44.7,
+        "open_orders": 0,
+        "side_balance": 0.72,
+        "unique_coins": 27
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:13.376829+00:00"
+    },
+    {
+      "address": "0x8af700ba841f30e0a3fcb0ee4c4a9d223e1efa05",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 40,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.5,
+        "fill_span_min": 4340.4,
+        "avg_gap_ms": 130278,
+        "zero_gap_pct": 72.5,
+        "open_orders": 100,
+        "side_balance": 0.48,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:15.805423+00:00"
+    },
+    {
+      "address": "0x5b9306593ae710a66832c4101e019e3e96f65d0a",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 36848.2,
+        "avg_gap_ms": 1106000,
+        "zero_gap_pct": 35.8,
+        "open_orders": 0,
+        "side_balance": 0.48,
+        "unique_coins": 9
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:17.518331+00:00"
+    },
+    {
+      "address": "0x880ac484a1743862989a441d6d867238c7aa311c",
+      "label": "x.com/SilkBtc",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.5,
+        "fill_span_min": 4419.1,
+        "avg_gap_ms": 132639,
+        "zero_gap_pct": 42.9,
+        "open_orders": 2,
+        "side_balance": 0.79,
+        "unique_coins": 12
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:19.163556+00:00"
+    },
+    {
+      "address": "0x6555e1cc97d3cba6eaddebbcd7ca51d75771e0b8",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 105226.6,
+        "avg_gap_ms": 3158377,
+        "zero_gap_pct": 57.2,
+        "open_orders": 0,
+        "side_balance": 0.05,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:20.542623+00:00"
+    },
+    {
+      "address": "0x8e096995c3e4a3f0bc5b3ea1cba94de2aa4d70c9",
+      "label": "\u61a8\u5df4\u5c0f\u9f99",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 6999.9,
+        "avg_gap_ms": 210102,
+        "zero_gap_pct": 81.3,
+        "open_orders": 0,
+        "side_balance": 0.07,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:22.395943+00:00"
+    },
+    {
+      "address": "0xc26cbb6483229e0d0f9a1cab675271eda535b8f4",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 35866.0,
+        "avg_gap_ms": 1076518,
+        "zero_gap_pct": 69.0,
+        "open_orders": 0,
+        "side_balance": 0.76,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:24.446348+00:00"
+    },
+    {
+      "address": "0x71dfc07de32c2ebf1c4801f4b1c9e40b76d4a23d",
+      "label": "GCRsNiggaSlave",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 36842.0,
+        "avg_gap_ms": 1105814,
+        "zero_gap_pct": 81.4,
+        "open_orders": 0,
+        "side_balance": 0.16,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:26.371067+00:00"
+    },
+    {
+      "address": "0x091144e651b334341eabdbbbfed644ad0100023e",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.6,
+        "fill_span_min": 3451.7,
+        "avg_gap_ms": 103604,
+        "zero_gap_pct": 29.3,
+        "open_orders": 0,
+        "side_balance": 0.69,
+        "unique_coins": 14
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:28.307409+00:00"
+    },
+    {
+      "address": "0x7be1cba648ebe1ab8084244d23f28d68a86480d8",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 43975.2,
+        "avg_gap_ms": 1319917,
+        "zero_gap_pct": 78.2,
+        "open_orders": 0,
+        "side_balance": 0.01,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:30.485861+00:00"
+    },
+    {
+      "address": "0xe7ec7fbf4f195fc8e57d814e15c3a2857cb632a3",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.4,
+        "fill_span_min": 5615.3,
+        "avg_gap_ms": 168543,
+        "zero_gap_pct": 98.4,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:33.576022+00:00"
+    },
+    {
+      "address": "0xa87a233e8a7d8951ff790a2e39738086cb5f71b7",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 251888.8,
+        "avg_gap_ms": 7560444,
+        "zero_gap_pct": 30.1,
+        "open_orders": 0,
+        "side_balance": 0.48,
+        "unique_coins": 17
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:35.320139+00:00"
+    },
+    {
+      "address": "0x0b8aa35c28b7c6ab18f11dc168f437a8a69fd4f8",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 28710.5,
+        "avg_gap_ms": 861747,
+        "zero_gap_pct": 69.7,
+        "open_orders": 0,
+        "side_balance": 0.44,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:37.442822+00:00"
+    },
+    {
+      "address": "0x31dea2516beee92135b96f464eeec3cf292a13f2",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 70,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 17.2,
+        "fill_span_min": 116.0,
+        "avg_gap_ms": 3482,
+        "zero_gap_pct": 28.8,
+        "open_orders": 32,
+        "side_balance": 0.79,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:40.185629+00:00"
+    },
+    {
+      "address": "0x98265c164a55b7b348bc3c4ab0bf109e047fed8a",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 21167.2,
+        "avg_gap_ms": 635332,
+        "zero_gap_pct": 42.0,
+        "open_orders": 0,
+        "side_balance": 0.03,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:41.971066+00:00"
+    },
+    {
+      "address": "0x5b5d51203a0f9079f8aeb098a6523a13f298c060",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 1.5,
+        "fill_span_min": 1348.7,
+        "avg_gap_ms": 40481,
+        "zero_gap_pct": 45.8,
+        "open_orders": 0,
+        "side_balance": 0.01,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:45.759726+00:00"
+    },
+    {
+      "address": "0x8607a7d180de23645db594d90621d837749408d5",
+      "label": "wanyekest",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 79731.4,
+        "avg_gap_ms": 2393137,
+        "zero_gap_pct": 55.6,
+        "open_orders": 0,
+        "side_balance": 0.98,
+        "unique_coins": 12
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:49.128801+00:00"
+    },
+    {
+      "address": "0xaf0fdd39e5d92499b0ed9f68693da99c0ec1e92e",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 128178.1,
+        "avg_gap_ms": 3847267,
+        "zero_gap_pct": 61.7,
+        "open_orders": 8,
+        "side_balance": 0.83,
+        "unique_coins": 19
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:51.033130+00:00"
+    },
+    {
+      "address": "0xb83de012dba672c76a7dbbbf3e459cb59d7d6e36",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 7.0,
+        "fill_span_min": 287.6,
+        "avg_gap_ms": 8632,
+        "zero_gap_pct": 41.9,
+        "open_orders": 0,
+        "side_balance": 0.4,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:52.825978+00:00"
+    },
+    {
+      "address": "0x3bcae23e8c380dab4732e9a159c0456f12d866f3",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 70,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 16.9,
+        "fill_span_min": 118.1,
+        "avg_gap_ms": 3546,
+        "zero_gap_pct": 62.7,
+        "open_orders": 397,
+        "side_balance": 0.5,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:30:59.741555+00:00"
+    },
+    {
+      "address": "0x94d3735543ecb3d339064151118644501c933814",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 8.3,
+        "fill_span_min": 242.4,
+        "avg_gap_ms": 7274,
+        "zero_gap_pct": 98.0,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:01.765813+00:00"
+    },
+    {
+      "address": "0xc926ddba8b7617dbc65712f20cf8e1b58b8598d3",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 90,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 270.0,
+        "fill_span_min": 7.4,
+        "avg_gap_ms": 222,
+        "zero_gap_pct": 70.8,
+        "open_orders": 72,
+        "side_balance": 0.9,
+        "unique_coins": 35
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:04.021886+00:00"
+    },
+    {
+      "address": "0xa312114b5795dff9b8db50474dd57701aa78ad1e",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.2,
+        "fill_span_min": 9031.3,
+        "avg_gap_ms": 271075,
+        "zero_gap_pct": 55.3,
+        "open_orders": 0,
+        "side_balance": 0.85,
+        "unique_coins": 9
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:05.979511+00:00"
+    },
+    {
+      "address": "0x8d0e342e0524392d035fb37461c6f5813ff59244",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 1.5,
+        "fill_span_min": 1357.3,
+        "avg_gap_ms": 40739,
+        "zero_gap_pct": 88.8,
+        "open_orders": 0,
+        "side_balance": 0.86,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:07.875325+00:00"
+    },
+    {
+      "address": "0x57dd78cd36e76e2011e8f6dc25cabbaba994494b",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 90,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 48.7,
+        "fill_span_min": 41.1,
+        "avg_gap_ms": 1232,
+        "zero_gap_pct": 20.2,
+        "open_orders": 1822,
+        "side_balance": 0.67,
+        "unique_coins": 76
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:10.511152+00:00"
+    },
+    {
+      "address": "0x77375a8c9d13bf79afb2a87f1b0ac1dfd5f5bf66",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 40,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.2,
+        "fill_span_min": 8266.6,
+        "avg_gap_ms": 248121,
+        "zero_gap_pct": 98.1,
+        "open_orders": 36,
+        "side_balance": 0.59,
+        "unique_coins": 22
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:12.856390+00:00"
+    },
+    {
+      "address": "0x88b2448328f4335ad2a8cac06485c378ebe66fe3",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 60,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 36363.0,
+        "avg_gap_ms": 1091435,
+        "zero_gap_pct": 75.9,
+        "open_orders": 200,
+        "side_balance": 0.98,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:14.674192+00:00"
+    },
+    {
+      "address": "0x4d470e0a241c3d7321b4b6c6f23f214db85bfa47",
+      "label": "meowwww",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 707115.2,
+        "avg_gap_ms": 21224069,
+        "zero_gap_pct": 75.7,
+        "open_orders": 0,
+        "side_balance": 0.65,
+        "unique_coins": 13
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:16.843402+00:00"
+    },
+    {
+      "address": "0xe86b057f5eb764c9738d6b0d38170befd0723664",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 45,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 2.7,
+        "fill_span_min": 749.1,
+        "avg_gap_ms": 22483,
+        "zero_gap_pct": 9.2,
+        "open_orders": 213,
+        "side_balance": 0.9,
+        "unique_coins": 47
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:19.026638+00:00"
+    },
+    {
+      "address": "0x4e31ecf36d9d57a32010fc9dd80f2ddaf5d78442",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 30174.9,
+        "avg_gap_ms": 905700,
+        "zero_gap_pct": 98.0,
+        "open_orders": 0,
+        "side_balance": 0.5,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:20.723669+00:00"
+    },
+    {
+      "address": "0x985f02b19dbc062e565c981aac5614baf2cf501f",
+      "label": "\u2014",
+      "tier": "apex",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.5,
+        "fill_span_min": 3853.3,
+        "avg_gap_ms": 115656,
+        "zero_gap_pct": 30.6,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:22.349380+00:00"
+    },
+    {
+      "address": "0xeadc152ac1014ace57c6b353f89adf5faffe9d55",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 60,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 71001.4,
+        "avg_gap_ms": 2131106,
+        "zero_gap_pct": 64.8,
+        "open_orders": 131,
+        "side_balance": 0.71,
+        "unique_coins": 17
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:24.697818+00:00"
+    },
+    {
+      "address": "0x20c2d95a3dfdca9e9ad12794d5fa6fad99da44f5",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.2,
+        "fill_span_min": 12562.3,
+        "avg_gap_ms": 377057,
+        "zero_gap_pct": 85.5,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:26.507304+00:00"
+    },
+    {
+      "address": "0xb581d667c53fd8a50bf7ffd817be0e62daa16f4f",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.8,
+        "fill_span_min": 2582.0,
+        "avg_gap_ms": 77499,
+        "zero_gap_pct": 82.6,
+        "open_orders": 0,
+        "side_balance": 0.41,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:29.197779+00:00"
+    },
+    {
+      "address": "0x8cc94dc843e1ea7a19805e0cca43001123512b6a",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 7.7,
+        "fill_span_min": 258.1,
+        "avg_gap_ms": 7747,
+        "zero_gap_pct": 12.4,
+        "open_orders": 0,
+        "side_balance": 0.36,
+        "unique_coins": 23
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:31.330593+00:00"
+    },
+    {
+      "address": "0x418aa6bf98a2b2bc93779f810330d88cde488888",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 15,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.6,
+        "fill_span_min": 3420.4,
+        "avg_gap_ms": 102662,
+        "zero_gap_pct": 1.1,
+        "open_orders": 49,
+        "side_balance": 0.0,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:33.214496+00:00"
+    },
+    {
+      "address": "0x015354106478dda69c4aae3c0cf801290b738052",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 191721.5,
+        "avg_gap_ms": 5754522,
+        "zero_gap_pct": 93.7,
+        "open_orders": 0,
+        "side_balance": 0.31,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:35.167449+00:00"
+    },
+    {
+      "address": "0x469e9a7f624b04c24f0e64edf8d8a277e6bf58a5",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 1.1,
+        "fill_span_min": 1798.8,
+        "avg_gap_ms": 53990,
+        "zero_gap_pct": 74.4,
+        "open_orders": 0,
+        "side_balance": 0.62,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:37.235045+00:00"
+    },
+    {
+      "address": "0x152e41f0b83e6cad4b5dc730c1d6279b7d67c9dc",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.6,
+        "fill_span_min": 3591.3,
+        "avg_gap_ms": 107794,
+        "zero_gap_pct": 59.7,
+        "open_orders": 0,
+        "side_balance": 0.34,
+        "unique_coins": 7
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:39.234195+00:00"
+    },
+    {
+      "address": "0xbdd243d77a59a3b38d21bf61e78a6ba4702f2bbc",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 41556.5,
+        "avg_gap_ms": 1247318,
+        "zero_gap_pct": 72.7,
+        "open_orders": 0,
+        "side_balance": 0.84,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:41.242710+00:00"
+    },
+    {
+      "address": "0x936cf4fb95c30ce83f658b5bbb247e4bb381bb0f",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 2.1,
+        "fill_span_min": 935.8,
+        "avg_gap_ms": 28089,
+        "zero_gap_pct": 58.7,
+        "open_orders": 0,
+        "side_balance": 0.93,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:45.068358+00:00"
+    },
+    {
+      "address": "0xc59498175d6d317642aeb97f895a7ce1aa992191",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 22573.4,
+        "avg_gap_ms": 677542,
+        "zero_gap_pct": 79.7,
+        "open_orders": 0,
+        "side_balance": 0.31,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:46.609324+00:00"
+    },
+    {
+      "address": "0x15271757b398cd1d3d7cca05c4f7b0c159afa7c2",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 34399.7,
+        "avg_gap_ms": 1032507,
+        "zero_gap_pct": 78.7,
+        "open_orders": 0,
+        "side_balance": 0.21,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:50.218418+00:00"
+    },
+    {
+      "address": "0x7717a7a245d9f950e586822b8c9b46863ed7bd7e",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": -1,
+      "verdict": "error",
+      "signals": {
+        "error": "Client error '429 Too Many Requests' for url 'https://api.hyperliquid.xyz/info'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"
+      },
+      "fills_returned": 0,
+      "scanned_at": "2026-03-03T07:31:56.158034+00:00"
+    },
+    {
+      "address": "0xfae95f601f3a25ace60d19dbb929f2a5c57e3571",
+      "label": "thank you jefef",
+      "tier": "skip",
+      "bot_score": 10,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 678008.4,
+        "avg_gap_ms": 20350427,
+        "zero_gap_pct": 3.2,
+        "open_orders": 0,
+        "side_balance": 0.02,
+        "unique_coins": 13
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:31:59.806084+00:00"
+    },
+    {
+      "address": "0xf83ff544ed6f00fe7a74782aee3fd9ea54d96728",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 30987.7,
+        "avg_gap_ms": 930097,
+        "zero_gap_pct": 91.0,
+        "open_orders": 0,
+        "side_balance": 0.63,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:01.925316+00:00"
+    },
+    {
+      "address": "0x091159a8106b077c13e89bc09701117e8b5f129a",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.6,
+        "fill_span_min": 3464.9,
+        "avg_gap_ms": 104000,
+        "zero_gap_pct": 75.6,
+        "open_orders": 0,
+        "side_balance": 0.6,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:04.156101+00:00"
+    },
+    {
+      "address": "0x2d99fe0f36c1aebd28a1a2c0e82e8ca13c2ea351",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 15812.9,
+        "avg_gap_ms": 474624,
+        "zero_gap_pct": 75.1,
+        "open_orders": 0,
+        "side_balance": 0.46,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:06.079326+00:00"
+    },
+    {
+      "address": "0xceec48581b3145a575508719f45da07dc57fa7ce",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 39590.5,
+        "avg_gap_ms": 1188309,
+        "zero_gap_pct": 73.7,
+        "open_orders": 1,
+        "side_balance": 0.5,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:07.851672+00:00"
+    },
+    {
+      "address": "0xed41a12ea862f31df054e9bd3af1dd59486c6029",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 105659.7,
+        "avg_gap_ms": 3171378,
+        "zero_gap_pct": 72.2,
+        "open_orders": 0,
+        "side_balance": 0.9,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:11.566620+00:00"
+    },
+    {
+      "address": "0x9c89f595f5515609ad61f6fda94beff85ae6600e",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 42478.6,
+        "avg_gap_ms": 1274997,
+        "zero_gap_pct": 70.7,
+        "open_orders": 1,
+        "side_balance": 0.31,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:14.610136+00:00"
+    },
+    {
+      "address": "0x2025137a136bea7446deba681cbfc7cf1970840e",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 70,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 12.5,
+        "fill_span_min": 160.6,
+        "avg_gap_ms": 4820,
+        "zero_gap_pct": 39.0,
+        "open_orders": 222,
+        "side_balance": 0.41,
+        "unique_coins": 14
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:16.740601+00:00"
+    },
+    {
+      "address": "0xd2b2a8ab7a8c903501f4db4ee45c67522a4511ed",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.4,
+        "fill_span_min": 4464.6,
+        "avg_gap_ms": 134006,
+        "zero_gap_pct": 21.5,
+        "open_orders": 0,
+        "side_balance": 0.45,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:19.312186+00:00"
+    },
+    {
+      "address": "0xd62d484bda5391d75b414e68f9ddcedb207b7d91",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.7,
+        "fill_span_min": 2946.9,
+        "avg_gap_ms": 88452,
+        "zero_gap_pct": 99.5,
+        "open_orders": 0,
+        "side_balance": 0.48,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:21.043707+00:00"
+    },
+    {
+      "address": "0x56cd86d6ef24a3f51ce6992b7f1db751b0a0276a",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 347716.8,
+        "avg_gap_ms": 10436723,
+        "zero_gap_pct": 72.0,
+        "open_orders": 247,
+        "side_balance": 0.7,
+        "unique_coins": 14
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:22.913822+00:00"
+    },
+    {
+      "address": "0x082e843a431aef031264dc232693dd710aedca88",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 24600.4,
+        "avg_gap_ms": 738381,
+        "zero_gap_pct": 37.3,
+        "open_orders": 0,
+        "side_balance": 0.52,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:25.497747+00:00"
+    },
+    {
+      "address": "0x0d9654172413fa8bcd2f5738a7b2fa6d19864125",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 7881.2,
+        "avg_gap_ms": 236554,
+        "zero_gap_pct": 78.5,
+        "open_orders": 0,
+        "side_balance": 0.52,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:27.648533+00:00"
+    },
+    {
+      "address": "0xec0b9ebf2a304c99cafe85c548c14dd7783cb078",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 169767.1,
+        "avg_gap_ms": 5095561,
+        "zero_gap_pct": 99.5,
+        "open_orders": 0,
+        "side_balance": 0.99,
+        "unique_coins": 7
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:30.338629+00:00"
+    },
+    {
+      "address": "0x9b83f16d0a6456f90a8a330f04c0ca1b2f0425b0",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 67572.0,
+        "avg_gap_ms": 2028174,
+        "zero_gap_pct": 46.5,
+        "open_orders": 0,
+        "side_balance": 0.49,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:34.381652+00:00"
+    },
+    {
+      "address": "0x7839e2f2c375dd2935193f2736167514efff9916",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 125464.5,
+        "avg_gap_ms": 3765818,
+        "zero_gap_pct": 50.2,
+        "open_orders": 0,
+        "side_balance": 0.52,
+        "unique_coins": 10
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:37.813481+00:00"
+    },
+    {
+      "address": "0x48d826da83e69844f2f84b2db50703a933d137a2",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 40,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.7,
+        "fill_span_min": 2952.3,
+        "avg_gap_ms": 88614,
+        "zero_gap_pct": 70.8,
+        "open_orders": 47,
+        "side_balance": 0.07,
+        "unique_coins": 8
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:40.621615+00:00"
+    },
+    {
+      "address": "0x5bc43f38c2ddcd85857f218674cd384f172c3b0c",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.4,
+        "fill_span_min": 4878.3,
+        "avg_gap_ms": 146421,
+        "zero_gap_pct": 36.3,
+        "open_orders": 0,
+        "side_balance": 0.16,
+        "unique_coins": 13
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:44.865355+00:00"
+    },
+    {
+      "address": "0x720a68bf0813853cd3ed74d2fd0f54edfc7a43e1",
+      "label": "H universe",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 7301.0,
+        "avg_gap_ms": 219141,
+        "zero_gap_pct": 99.6,
+        "open_orders": 0,
+        "side_balance": 0.9,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:51.593294+00:00"
+    },
+    {
+      "address": "0x61ceef212ff4a86933c69fb6aca2fe35d8f2a62b",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 45,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 16.4,
+        "fill_span_min": 121.6,
+        "avg_gap_ms": 3651,
+        "zero_gap_pct": 69.7,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:32:55.298096+00:00"
+    },
+    {
+      "address": "0xda744273f80b22412417f7cfe0503f3d721f987d",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 99005.8,
+        "avg_gap_ms": 2971660,
+        "zero_gap_pct": 35.9,
+        "open_orders": 0,
+        "side_balance": 0.66,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:02.705220+00:00"
+    },
+    {
+      "address": "0xbbcb0c0aef0b28125af2f719f81d6a5b76f56f30",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 30,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 34402.7,
+        "avg_gap_ms": 1032597,
+        "zero_gap_pct": 83.8,
+        "open_orders": 24,
+        "side_balance": 0.68,
+        "unique_coins": 11
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:05.547009+00:00"
+    },
+    {
+      "address": "0x7ea90af38397575a372e36bdc0f5970fb512fc7f",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 44391.6,
+        "avg_gap_ms": 1332414,
+        "zero_gap_pct": 73.0,
+        "open_orders": 3,
+        "side_balance": 0.44,
+        "unique_coins": 7
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:07.783898+00:00"
+    },
+    {
+      "address": "0xc7290b4b308431a985fa9e3e8a335c2f7650517c",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 136761.2,
+        "avg_gap_ms": 4104889,
+        "zero_gap_pct": 83.8,
+        "open_orders": 0,
+        "side_balance": 0.42,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:10.406657+00:00"
+    },
+    {
+      "address": "0x208db9f389989c5c387cc3a2620cc5251eace716",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.5,
+        "fill_span_min": 4306.6,
+        "avg_gap_ms": 129264,
+        "zero_gap_pct": 17.2,
+        "open_orders": 2,
+        "side_balance": 0.08,
+        "unique_coins": 5
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:12.530792+00:00"
+    },
+    {
+      "address": "0x6859da14835424957a1e6b397d8026b1d9ff7e1e",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 40,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 2.3,
+        "fill_span_min": 864.7,
+        "avg_gap_ms": 25953,
+        "zero_gap_pct": 19.3,
+        "open_orders": 72,
+        "side_balance": 0.65,
+        "unique_coins": 31
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:14.726619+00:00"
+    },
+    {
+      "address": "0x5f94a51948d2376ad34a6fadfa2544e651b74b96",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 42124.6,
+        "avg_gap_ms": 1264369,
+        "zero_gap_pct": 84.8,
+        "open_orders": 1,
+        "side_balance": 0.8,
+        "unique_coins": 15
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:16.728319+00:00"
+    },
+    {
+      "address": "0x089fe537f4b2af55fa990bc64ff4125800bba4f8",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 71477.0,
+        "avg_gap_ms": 2145381,
+        "zero_gap_pct": 94.0,
+        "open_orders": 283,
+        "side_balance": 0.34,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:18.819302+00:00"
+    },
+    {
+      "address": "0xd4c1f7e8d876c4749228d515473d36f919583d1d",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 45,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 16.3,
+        "fill_span_min": 122.6,
+        "avg_gap_ms": 3679,
+        "zero_gap_pct": 61.7,
+        "open_orders": 0,
+        "side_balance": 0.16,
+        "unique_coins": 10
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:20.750434+00:00"
+    },
+    {
+      "address": "0x6ef9aa1ccef50f19a6c82d927401d98030973abf",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 74031.7,
+        "avg_gap_ms": 2222062,
+        "zero_gap_pct": 92.3,
+        "open_orders": 267,
+        "side_balance": 0.25,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:23.643588+00:00"
+    },
+    {
+      "address": "0x0048d42f232164a85a41f15ccf26cf859e58b108",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 63266.8,
+        "avg_gap_ms": 1898953,
+        "zero_gap_pct": 96.3,
+        "open_orders": 292,
+        "side_balance": 0.27,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:26.084849+00:00"
+    },
+    {
+      "address": "0xe02e420ec55b4e03924d77c7b342c012541ba2d3",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.4,
+        "fill_span_min": 4992.4,
+        "avg_gap_ms": 149848,
+        "zero_gap_pct": 56.7,
+        "open_orders": 709,
+        "side_balance": 0.68,
+        "unique_coins": 10
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:28.395812+00:00"
+    },
+    {
+      "address": "0x5e13d5cedbddd7237f659947ce64bec1294e2607",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 144284.0,
+        "avg_gap_ms": 4330687,
+        "zero_gap_pct": 89.7,
+        "open_orders": 5,
+        "side_balance": 0.45,
+        "unique_coins": 8
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:31.556335+00:00"
+    },
+    {
+      "address": "0x960b6c2c4b1498681b8422eb572a8b3a6aa3f0fc",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 120676.8,
+        "avg_gap_ms": 3622116,
+        "zero_gap_pct": 73.9,
+        "open_orders": 1,
+        "side_balance": 0.44,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:35.500547+00:00"
+    },
+    {
+      "address": "0x3fc56e944aa7b1594c85861b2d46a07f82a2c0c1",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 1.8,
+        "fill_span_min": 1105.2,
+        "avg_gap_ms": 33174,
+        "zero_gap_pct": 77.3,
+        "open_orders": 1,
+        "side_balance": 0.94,
+        "unique_coins": 9
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:39.211980+00:00"
+    },
+    {
+      "address": "0x325edd95bb016c36027ce3b9f7595af7094a9564",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 50,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 2.4,
+        "fill_span_min": 830.4,
+        "avg_gap_ms": 24926,
+        "zero_gap_pct": 93.6,
+        "open_orders": 326,
+        "side_balance": 0.12,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:42.362959+00:00"
+    },
+    {
+      "address": "0x77eeda199553e33b246e4b4666849b9ad0972902",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 113909.2,
+        "avg_gap_ms": 3418986,
+        "zero_gap_pct": 95.3,
+        "open_orders": 0,
+        "side_balance": 0.24,
+        "unique_coins": 17
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:45.700306+00:00"
+    },
+    {
+      "address": "0x906d31b2ee92c4bc720232112274a0e1ffb0ad6e",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 96255.5,
+        "avg_gap_ms": 5634469,
+        "zero_gap_pct": 76.2,
+        "open_orders": 1,
+        "side_balance": 0.68,
+        "unique_coins": 2
+      },
+      "fills_returned": 1026,
+      "scanned_at": "2026-03-03T07:33:48.040350+00:00"
+    },
+    {
+      "address": "0xf28e1b06e00e8774c612e31ab3ac35d5a720085f",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 1.8,
+        "fill_span_min": 1109.5,
+        "avg_gap_ms": 33301,
+        "zero_gap_pct": 37.3,
+        "open_orders": 3,
+        "side_balance": 0.0,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:51.058616+00:00"
+    },
+    {
+      "address": "0x123dbca6a27005a3c4ce10cb66ee8ece8fc13bff",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 10,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 2.2,
+        "fill_span_min": 913.6,
+        "avg_gap_ms": 27421,
+        "zero_gap_pct": 5.9,
+        "open_orders": 4,
+        "side_balance": 0.65,
+        "unique_coins": 8
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:53.723133+00:00"
+    },
+    {
+      "address": "0x75dacaf3c87ffa170aaf0482af68086e091ccdaa",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 0,
+      "verdict": "human",
+      "signals": {
+        "reason": "too_few_fills"
+      },
+      "fills_returned": 7,
+      "scanned_at": "2026-03-03T07:33:55.450621+00:00"
+    },
+    {
+      "address": "0xc38ac1a5fdd12fbe60b5b27e61c3990e1d5b7b1f",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 2.2,
+        "fill_span_min": 898.0,
+        "avg_gap_ms": 26952,
+        "zero_gap_pct": 68.3,
+        "open_orders": 0,
+        "side_balance": 0.71,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:33:58.995051+00:00"
+    },
+    {
+      "address": "0x7a7da855c61ba2326decf722691c6e2d14a50344",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 21120.2,
+        "avg_gap_ms": 633923,
+        "zero_gap_pct": 12.5,
+        "open_orders": 0,
+        "side_balance": 0.77,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:00.932614+00:00"
+    },
+    {
+      "address": "0xbc1bc64be47052fbab69d12fe5da1c3327788d1b",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 112749.0,
+        "avg_gap_ms": 3384161,
+        "zero_gap_pct": 97.0,
+        "open_orders": 0,
+        "side_balance": 1.0,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:02.411107+00:00"
+    },
+    {
+      "address": "0x948bf5b626e6ecd563f305cfe2b3ef1243461fa5",
+      "label": "\u2014",
+      "tier": "skip",
+      "bot_score": 0,
+      "verdict": "human",
+      "signals": {
+        "reason": "too_few_fills"
+      },
+      "fills_returned": 2,
+      "scanned_at": "2026-03-03T07:34:03.548398+00:00"
+    },
+    {
+      "address": "0xb2152c5b6a4667d2e26abd0fc843ef920e758289",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 36785.1,
+        "avg_gap_ms": 3052707,
+        "zero_gap_pct": 57.0,
+        "open_orders": 3,
+        "side_balance": 0.16,
+        "unique_coins": 6
+      },
+      "fills_returned": 724,
+      "scanned_at": "2026-03-03T07:34:05.296156+00:00"
+    },
+    {
+      "address": "0x7c976f00e84db0b44f945fc6d7fad34b43150a1a",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 61898.4,
+        "avg_gap_ms": 1857882,
+        "zero_gap_pct": 48.6,
+        "open_orders": 6,
+        "side_balance": 0.0,
+        "unique_coins": 18
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:07.459576+00:00"
+    },
+    {
+      "address": "0x1e771e1b95c86491299d6e2a5c3b3842d03b552e",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 202165.3,
+        "avg_gap_ms": 6067994,
+        "zero_gap_pct": 65.3,
+        "open_orders": 0,
+        "side_balance": 0.85,
+        "unique_coins": 14
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:09.284470+00:00"
+    },
+    {
+      "address": "0x8ae4c5b303bc77c3aa68f2b71f37c9fa6d3b3d60",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.4,
+        "fill_span_min": 4484.0,
+        "avg_gap_ms": 134588,
+        "zero_gap_pct": 88.9,
+        "open_orders": 0,
+        "side_balance": 0.72,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:11.316132+00:00"
+    },
+    {
+      "address": "0xe927f4a34074229d5432c17091af8828514498ef",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 40,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 18883.9,
+        "avg_gap_ms": 566801,
+        "zero_gap_pct": 65.3,
+        "open_orders": 55,
+        "side_balance": 0.1,
+        "unique_coins": 4
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:14.684556+00:00"
+    },
+    {
+      "address": "0x0748e296e5a350ec36c8487a1cea406e1b57d4b2",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 33067.9,
+        "avg_gap_ms": 992532,
+        "zero_gap_pct": 67.4,
+        "open_orders": 0,
+        "side_balance": 0.91,
+        "unique_coins": 9
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:17.894056+00:00"
+    },
+    {
+      "address": "0x8ea85cbd59affca28162fc286d5c093dd0f8edbc",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 27753.2,
+        "avg_gap_ms": 1174325,
+        "zero_gap_pct": 86.5,
+        "open_orders": 0,
+        "side_balance": 0.62,
+        "unique_coins": 2
+      },
+      "fills_returned": 1419,
+      "scanned_at": "2026-03-03T07:34:20.188392+00:00"
+    },
+    {
+      "address": "0xfd97600ac44b3c4e20ac1a5f23e3b18d10fa5912",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.2,
+        "fill_span_min": 9250.6,
+        "avg_gap_ms": 277655,
+        "zero_gap_pct": 80.8,
+        "open_orders": 0,
+        "side_balance": 0.22,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:22.009208+00:00"
+    },
+    {
+      "address": "0x4ed0b41dff79e0e53a054903873899bc32abc853",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 33376.2,
+        "avg_gap_ms": 1137179,
+        "zero_gap_pct": 82.5,
+        "open_orders": 6,
+        "side_balance": 0.46,
+        "unique_coins": 1
+      },
+      "fills_returned": 1762,
+      "scanned_at": "2026-03-03T07:34:23.824083+00:00"
+    },
+    {
+      "address": "0xea6670ebdb4a388a8cfc16f6497bf4f267b061ee",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 10,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.3,
+        "fill_span_min": 6236.3,
+        "avg_gap_ms": 187183,
+        "zero_gap_pct": 8.7,
+        "open_orders": 1,
+        "side_balance": 0.0,
+        "unique_coins": 3
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:26.086943+00:00"
+    },
+    {
+      "address": "0xeee0d806e4f0a427277433d6b580619918770b53",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 36788.9,
+        "avg_gap_ms": 9433046,
+        "zero_gap_pct": 87.6,
+        "open_orders": 0,
+        "side_balance": 0.14,
+        "unique_coins": 5
+      },
+      "fills_returned": 235,
+      "scanned_at": "2026-03-03T07:34:27.478276+00:00"
+    },
+    {
+      "address": "0xdf9ea6ec3b7109935ccb4fb267e15ac1fb077ab1",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.2,
+        "fill_span_min": 10134.2,
+        "avg_gap_ms": 304179,
+        "zero_gap_pct": 31.6,
+        "open_orders": 0,
+        "side_balance": 0.0,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:29.618528+00:00"
+    },
+    {
+      "address": "0x74da055d4ccf9dca3f15789c603e1a88a1d2d81f",
+      "label": "folhas99",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.5,
+        "fill_span_min": 3673.7,
+        "avg_gap_ms": 110267,
+        "zero_gap_pct": 92.1,
+        "open_orders": 3,
+        "side_balance": 0.98,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:32.566709+00:00"
+    },
+    {
+      "address": "0xf3d0e131bb5d8e043bbbc87b345ec4aa2b875f4b",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 17108.3,
+        "avg_gap_ms": 1722316,
+        "zero_gap_pct": 42.3,
+        "open_orders": 2,
+        "side_balance": 0.11,
+        "unique_coins": 2
+      },
+      "fills_returned": 597,
+      "scanned_at": "2026-03-03T07:34:34.714656+00:00"
+    },
+    {
+      "address": "0x1bbfb3a33600338d5a948618189649a4588d5fc4",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.5,
+        "fill_span_min": 4319.5,
+        "avg_gap_ms": 129649,
+        "zero_gap_pct": 99.1,
+        "open_orders": 0,
+        "side_balance": 0.95,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:36.730842+00:00"
+    },
+    {
+      "address": "0x42b6d907f36255d48f70db8b4a2684088a162634",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 64873.9,
+        "avg_gap_ms": 1947190,
+        "zero_gap_pct": 86.0,
+        "open_orders": 0,
+        "side_balance": 0.19,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:39.889874+00:00"
+    },
+    {
+      "address": "0x69906b0ed626ca01a4b7c001e5711e5714ccf207",
+      "label": "stuxfred",
+      "tier": "shark",
+      "bot_score": 60,
+      "verdict": "bot",
+      "signals": {
+        "fills_per_min": 0.6,
+        "fill_span_min": 3450.8,
+        "avg_gap_ms": 103576,
+        "zero_gap_pct": 88.1,
+        "open_orders": 202,
+        "side_balance": 0.97,
+        "unique_coins": 11
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:42.406585+00:00"
+    },
+    {
+      "address": "0x8bae3527e5a33fa0cf184f37bc112d071463ab6d",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 18778.4,
+        "avg_gap_ms": 563634,
+        "zero_gap_pct": 39.4,
+        "open_orders": 0,
+        "side_balance": 0.44,
+        "unique_coins": 14
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:44.512232+00:00"
+    },
+    {
+      "address": "0x8bcf7a888c66f635ac4a2caf42a8dd12a3b20b14",
+      "label": "\u2014",
+      "tier": "dolphin",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 42721.2,
+        "avg_gap_ms": 1282277,
+        "zero_gap_pct": 90.5,
+        "open_orders": 0,
+        "side_balance": 0.9,
+        "unique_coins": 11
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:50.311820+00:00"
+    },
+    {
+      "address": "0x7eb9026d0183942458bd4660371c3cc0a2df3beb",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 35,
+      "verdict": "suspicious",
+      "signals": {
+        "fills_per_min": 0.1,
+        "fill_span_min": 31073.0,
+        "avg_gap_ms": 932657,
+        "zero_gap_pct": 93.4,
+        "open_orders": 0,
+        "side_balance": 0.85,
+        "unique_coins": 1
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:52.110970+00:00"
+    },
+    {
+      "address": "0xe2823659be02e0f48a4660e4da008b5e1abfdf29",
+      "label": "\u2014",
+      "tier": "whale",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 56613.8,
+        "avg_gap_ms": 1699263,
+        "zero_gap_pct": 76.9,
+        "open_orders": 6,
+        "side_balance": 0.55,
+        "unique_coins": 6
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:54.075684+00:00"
+    },
+    {
+      "address": "0x0b00c540bc5f203d97ac87da62164d3d37e19798",
+      "label": "\u2014",
+      "tier": "shark",
+      "bot_score": 25,
+      "verdict": "human",
+      "signals": {
+        "fills_per_min": 0.0,
+        "fill_span_min": 128258.0,
+        "avg_gap_ms": 3849666,
+        "zero_gap_pct": 66.8,
+        "open_orders": 0,
+        "side_balance": 0.06,
+        "unique_coins": 2
+      },
+      "fills_returned": 2000,
+      "scanned_at": "2026-03-03T07:34:57.040972+00:00"
+    }
+  ]
+}
