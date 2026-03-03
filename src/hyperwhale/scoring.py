@@ -20,9 +20,12 @@ from hyperwhale.constants import (
     SCORE_WEIGHT_ACCOUNT,
     SCORE_WEIGHT_POSITION,
     SCORE_WEIGHT_ACTIVITY,
+    SCORE_WEIGHT_STAKING,
     ACCOUNT_SCORE_BREAKPOINTS,
     POSITION_SCORE_BREAKPOINTS,
     ACTIVITY_SCORE_BREAKPOINTS,
+    STAKING_SCORE_BREAKPOINTS,
+    STAKING_TIER_LABELS,
     RECENCY_BONUS_24H,
     RECENCY_BONUS_7D,
     TIER_CUTOFF_APEX,
@@ -43,17 +46,30 @@ class ScoreResult:
     account_score: float        # sub-score 0-100
     position_score: float       # sub-score 0-100
     activity_score: float       # sub-score 0-100
+    staking_score: float = 0.0  # sub-score 0-100 (HYPE staking conviction)
+    staked_hype_tier: str = "none"  # inferred label: none/low/mid/high/elite
 
 
-def _lookup_breakpoint(value: float, breakpoints: list[tuple[float, int]]) -> float:
+def _lookup_breakpoint(
+    value: float,
+    breakpoints: list[tuple[float, int]],
+    floor_zero: bool = False,
+) -> float:
     """Map a value to a sub-score using a sorted-descending breakpoint table.
 
-    If the value is below all breakpoints, linearly interpolate 0-20
-    using the lowest breakpoint as the ceiling ($1M by default).
+    Args:
+        value: The input value to score.
+        breakpoints: List of (threshold, score) pairs, sorted descending by threshold.
+        floor_zero: If True, return 0.0 for values below the lowest breakpoint instead
+                    of linearly interpolating.  Use this for binary-style scores like
+                    staking where sub-threshold values should earn nothing.
     """
     for threshold, score in breakpoints:
         if value >= threshold:
             return float(score)
+
+    if floor_zero:
+        return 0.0
 
     # Below the lowest breakpoint → linear interpolation 0-20
     lowest_threshold = breakpoints[-1][0] if breakpoints else 1_000_000
@@ -119,6 +135,32 @@ class WhaleScorer:
 
         return min(base + bonus, 100.0)
 
+    @staticmethod
+    def staking_score(active_staking_discount: float) -> tuple[float, str]:
+        """Score based on HYPE staking conviction (via fee discount proxy).
+
+        Args:
+            active_staking_discount: The activeStakingDiscount from userFees API
+                (e.g. 0.03 = 3% discount). Pass 0.0 if unavailable.
+
+        Returns:
+            Tuple of (sub-score 0-100, tier label: none/low/mid/high/elite).
+        """
+        score = _lookup_breakpoint(
+            active_staking_discount, STAKING_SCORE_BREAKPOINTS, floor_zero=True
+        )
+
+        # Derive human-readable tier
+        tier = "none"
+        for label, threshold in sorted(STAKING_TIER_LABELS.items(), key=lambda x: -x[1]):
+            if label == "none":
+                continue
+            if active_staking_discount >= threshold:
+                tier = label
+                break
+
+        return score, tier
+
     # ------------------------------------------------------------------
     # Composite score + classification
     # ------------------------------------------------------------------
@@ -129,18 +171,23 @@ class WhaleScorer:
         total_notional: float = 0.0,
         trade_count_30d: int = 0,
         last_trade_time: Optional[datetime] = None,
+        staking_discount: float = 0.0,
     ) -> ScoreResult:
         """Compute the full composite score and classify a wallet.
 
         This is the main entry point. It applies:
           1. Hard rules (dormant whale, minimum account value)
-          2. Sub-score calculation
+          2. Sub-score calculation (account + position + activity + staking)
           3. Weighted composite
           4. Tier assignment from score cutoffs
-        """
-        # --- Layer 1: Hard rules ---
 
-        # Rule: Below minimum → SKIP immediately
+        Args:
+            staking_discount: activeStakingDiscount from userFees API (0.0–0.1+).
+                              Pass 0.0 if unavailable — gracefully treated as no staking.
+        """
+        st_score, st_tier = self.staking_score(staking_discount)
+
+        # --- Layer 1: Hard rules ---
         if account_value < MIN_ACCOUNT_VALUE:
             a_score = self.account_score(account_value)
             p_score = self.position_score(total_notional)
@@ -148,7 +195,8 @@ class WhaleScorer:
             composite = round(
                 SCORE_WEIGHT_ACCOUNT * a_score
                 + SCORE_WEIGHT_POSITION * p_score
-                + SCORE_WEIGHT_ACTIVITY * act_score,
+                + SCORE_WEIGHT_ACTIVITY * act_score
+                + SCORE_WEIGHT_STAKING * st_score,
                 1,
             )
             return ScoreResult(
@@ -157,6 +205,8 @@ class WhaleScorer:
                 account_score=a_score,
                 position_score=p_score,
                 activity_score=act_score,
+                staking_score=st_score,
+                staked_hype_tier=st_tier,
             )
 
         # Rule: $50M+ with no open positions AND no recent trades → DORMANT_WHALE
@@ -174,7 +224,8 @@ class WhaleScorer:
         composite = round(
             SCORE_WEIGHT_ACCOUNT * a_score
             + SCORE_WEIGHT_POSITION * p_score
-            + SCORE_WEIGHT_ACTIVITY * act_score,
+            + SCORE_WEIGHT_ACTIVITY * act_score
+            + SCORE_WEIGHT_STAKING * st_score,
             1,
         )
 
@@ -198,4 +249,6 @@ class WhaleScorer:
             account_score=a_score,
             position_score=p_score,
             activity_score=act_score,
+            staking_score=st_score,
+            staked_hype_tier=st_tier,
         )

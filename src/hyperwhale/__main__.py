@@ -7,6 +7,7 @@ Usage:
     python -m hyperwhale discover --new-only    Skip refreshing existing wallets
     python -m hyperwhale monitor                Start continuous position monitoring
     python -m hyperwhale monitor --once         Single poll cycle (for testing)
+    python -m hyperwhale rescore-all            Re-fetch staking for every whale and re-score
     python -m hyperwhale status                 Show tracked whales and DB stats
     python -m hyperwhale test-api               Quick API connectivity test
 """
@@ -124,17 +125,83 @@ def cmd_discover() -> None:
 
 def cmd_monitor(once: bool = False) -> None:
     """Start position monitoring."""
+    from hyperwhale.alerts.telegram import TelegramAlerter
     from hyperwhale.tracker.position_monitor import PositionMonitor
 
     monitor = PositionMonitor()
+
+    # Register Telegram alerter if credentials are configured in .env
+    alerter = TelegramAlerter(registry=monitor.registry)
+    if alerter._enabled:
+        monitor.on_event(alerter)
+        alerter.send_startup_message(whale_count=monitor.registry.count)
+        console.print("[green]Telegram alerts enabled[/green]")
+    else:
+        console.print("[yellow]Telegram alerts disabled — set TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID in .env[/yellow]")
 
     if once:
         console.print("\n[bold cyan]🐋 Running single poll cycle...[/bold cyan]\n")
         events = monitor.poll_once()
         console.print(f"\n[bold green]Done — {len(events)} events detected[/bold green]")
+        alerter.close()
     else:
         console.print("\n[bold cyan]🐋 Starting continuous monitoring...[/bold cyan]\n")
-        monitor.run()
+        try:
+            monitor.run()
+        finally:
+            alerter.close()
+
+
+def cmd_rescore_all() -> None:
+    """Re-fetch staking discount for every whale in the registry and re-score."""
+    from hyperwhale.data.collector import HyperliquidCollector
+    from hyperwhale.data.whale_registry import WhaleRegistry
+
+    registry = WhaleRegistry()
+    collector = HyperliquidCollector()
+
+    total = registry.count
+    console.print(f"\n[bold cyan]♻  Re-scoring {total} whales with live staking data...[/bold cyan]\n")
+
+    updated = 0
+    errors = 0
+
+    for i, whale in enumerate(list(registry.whales.values()), 1):
+        addr = whale.address
+        try:
+            staking_discount = collector.get_staking_discount(addr)
+            registry.rescore(
+                address=addr,
+                account_value=whale.account_value,
+                total_notional=whale.total_notional,
+                trade_count_30d=whale.trade_count_30d,
+                staking_discount=staking_discount,
+            )
+            updated += 1
+
+            tier_str = whale.staked_hype_tier
+            if tier_str != "none":
+                console.print(
+                    f"  [{i}/{total}] [green]{addr[:10]}...[/green]  "
+                    f"staking=[bold yellow]{tier_str}[/bold yellow]  "
+                    f"discount={staking_discount:.1%}  score={whale.whale_score:.1f}"
+                )
+        except Exception as e:
+            errors += 1
+            logger.warning(f"Failed to rescore {addr}: {e}")
+
+    registry.save()
+    collector.close()
+
+    console.print(f"\n[bold green]Done — {updated} whales rescored, {errors} errors.[/bold green]")
+    console.print(f"[dim]Registry saved to {registry.filepath}[/dim]\n")
+
+    # Print staking tier distribution
+    from collections import Counter
+    tiers = Counter(w.staked_hype_tier for w in registry.whales.values())
+    console.print("[bold]Staking tier breakdown:[/bold]")
+    for tier, count in sorted(tiers.items(), key=lambda x: x[0]):
+        console.print(f"  {tier:>8s}: {count}")
 
 
 def cmd_status() -> None:
@@ -193,6 +260,8 @@ def main() -> None:
     elif command == "monitor":
         once = "--once" in sys.argv
         cmd_monitor(once=once)
+    elif command == "rescore-all":
+        cmd_rescore_all()
     elif command == "status":
         cmd_status()
     else:

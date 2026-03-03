@@ -108,6 +108,43 @@ class HyperliquidCollector:
             payload["endTime"] = end_time
         return self._post(payload)
 
+    def get_user_fees(self, address: str) -> dict:
+        """Get a user's fee schedule and staking discount.
+
+        Returns a dict including `activeStakingDiscount`, which is itself a dict:
+            {
+              "bpsOfMaxSupply": "0.05",  # % of total HYPE supply staked
+              "discount": "0.03"         # actual fee discount as a decimal string
+            }
+
+        Use get_staking_discount(address) for the parsed float value.
+
+        The discount is proportional to staked HYPE:
+            0.00 → no stake
+            0.01 → ~1,000 HYPE
+            0.03 → ~10,000 HYPE
+            0.05 → ~100,000+ HYPE
+        """
+        try:
+            result = self._post({"type": "userFees", "user": address})
+            return result if isinstance(result, dict) else {}
+        except Exception:
+            return {}
+
+    def get_staking_discount(self, address: str) -> float:
+        """Convenience wrapper — returns the activeStakingDiscount as a float (0.0–1.0).
+
+        Returns 0.0 on any error or if the wallet has no staking.
+        """
+        try:
+            fees = self.get_user_fees(address)
+            raw = fees.get("activeStakingDiscount", {})
+            if isinstance(raw, dict):
+                return float(raw.get("discount", 0.0))
+            return float(raw)
+        except Exception:
+            return 0.0
+
     def get_open_orders(self, address: str) -> list[dict]:
         """Get a user's open orders."""
         return self._post({"type": "openOrders", "user": address})

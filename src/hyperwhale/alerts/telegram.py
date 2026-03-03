@@ -1,0 +1,175 @@
+"""Telegram alerter — sends PositionEvent notifications via Telegram Bot API.
+
+Uses httpx (sync) so it fits naturally into the synchronous monitor loop
+without requiring asyncio. Messages are sent with parse_mode=HTML.
+
+Usage:
+    from hyperwhale.alerts.telegram import TelegramAlerter
+    from hyperwhale.tracker.position_monitor import PositionMonitor
+
+    alerter = TelegramAlerter(token="...", chat_id="...")
+    monitor = PositionMonitor()
+    monitor.on_event(alerter)   # register as callback
+    monitor.run()
+"""
+
+from __future__ import annotations
+
+import time
+from typing import Optional
+
+import httpx
+from loguru import logger
+
+from hyperwhale.alerts.formatter import format_event
+from hyperwhale.config import settings
+from hyperwhale.models import EventType, PositionEvent, WhaleTier
+
+
+# Event types that are too noisy to always alert on
+_SKIP_EVENT_TYPES = {
+    EventType.NEW_COIN_ADDED,   # fires alongside POSITION_OPENED — duplicate
+}
+
+# Minimum notional value to send an alert (filter out small positions)
+DEFAULT_MIN_NOTIONAL = 500_000   # $500k
+
+# Minimum whale score to send an alert (skip very low-score wallets)
+DEFAULT_MIN_SCORE = 20.0
+
+
+class TelegramAlerter:
+    """Sends whale position alerts to a Telegram chat.
+
+    Designed to be registered as an event callback on PositionMonitor:
+
+        monitor.on_event(TelegramAlerter())
+
+    Filters out noisy/low-value events before sending.
+    """
+
+    def __init__(
+        self,
+        token: Optional[str] = None,
+        chat_id: Optional[str] = None,
+        min_notional: float = DEFAULT_MIN_NOTIONAL,
+        min_score: float = DEFAULT_MIN_SCORE,
+        registry=None,  # WhaleRegistry — optional, enriches messages with profile data
+    ) -> None:
+        self.token = token or settings.telegram_bot_token
+        self.chat_id = chat_id or settings.telegram_chat_id
+        self.min_notional = min_notional
+        self.min_score = min_score
+        self._registry = registry
+
+        if not self.token or not self.chat_id:
+            logger.warning(
+                "TelegramAlerter: no token/chat_id set — alerts are DISABLED. "
+                "Set TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in .env"
+            )
+            self._enabled = False
+        else:
+            self._enabled = True
+            logger.info(f"TelegramAlerter enabled — chat_id={self.chat_id}")
+
+        self._base_url = f"https://api.telegram.org/bot{self.token}"
+        self._client = httpx.Client(timeout=10.0)
+
+    # ------------------------------------------------------------------
+    # Callback entry point (called by PositionMonitor)
+    # ------------------------------------------------------------------
+
+    def __call__(self, event: PositionEvent) -> None:
+        """Receive a PositionEvent and send a Telegram alert if it passes filters."""
+        if not self._enabled:
+            return
+
+        # --- Filters ---
+        if event.event_type in _SKIP_EVENT_TYPES:
+            return
+
+        if event.notional_value < self.min_notional:
+            logger.debug(
+                f"Skipping alert — notional ${event.notional_value:,.0f} "
+                f"below threshold ${self.min_notional:,.0f}"
+            )
+            return
+
+        # Optionally enrich with whale profile
+        whale = None
+        if self._registry:
+            whale = self._registry.get(event.address)
+            if whale and whale.whale_score < self.min_score:
+                logger.debug(
+                    f"Skipping alert — score {whale.whale_score:.1f} "
+                    f"below threshold {self.min_score:.1f}"
+                )
+                return
+
+        # --- Format and send ---
+        message = format_event(event, whale=whale)
+        self.send(message)
+
+    # ------------------------------------------------------------------
+    # Send
+    # ------------------------------------------------------------------
+
+    def send(self, text: str, retries: int = 2) -> bool:
+        """Send a raw HTML message to the configured chat.
+
+        Args:
+            text: HTML-formatted message string.
+            retries: Number of retry attempts on failure.
+
+        Returns:
+            True if sent successfully, False otherwise.
+        """
+        if not self._enabled:
+            return False
+
+        url = f"{self._base_url}/sendMessage"
+        payload = {
+            "chat_id": self.chat_id,
+            "text": text,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": True,
+        }
+
+        for attempt in range(1, retries + 2):
+            try:
+                resp = self._client.post(url, json=payload)
+                resp.raise_for_status()
+                logger.debug(f"Telegram alert sent (attempt {attempt})")
+                return True
+
+            except httpx.HTTPStatusError as e:
+                # 429 = rate limit — back off
+                if e.response.status_code == 429:
+                    retry_after = int(e.response.headers.get("Retry-After", 5))
+                    logger.warning(f"Telegram rate limit — waiting {retry_after}s")
+                    time.sleep(retry_after)
+                else:
+                    logger.error(f"Telegram HTTP error: {e.response.status_code} — {e.response.text}")
+                    return False
+
+            except httpx.RequestError as e:
+                logger.error(f"Telegram network error (attempt {attempt}): {e}")
+                if attempt <= retries:
+                    time.sleep(2 ** attempt)  # exponential backoff
+
+        logger.error("Telegram alert failed after all retries")
+        return False
+
+    def send_startup_message(self, whale_count: int) -> None:
+        """Send a startup notification so you know the monitor is live."""
+        msg = (
+            "🐋 <b>HyperWhale monitor started</b>\n"
+            f"Tracking <b>{whale_count}</b> whale wallets\n"
+            f"Min notional: <b>${self.min_notional:,.0f}</b>  "
+            f"Min score: <b>{self.min_score:.0f}</b>"
+        )
+        self.send(msg)
+
+    def close(self) -> None:
+        """Close the underlying HTTP client."""
+        self._client.close()

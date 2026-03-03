@@ -12,9 +12,10 @@ INFO_ENDPOINT = "/info"
 # ---------------------------------------------------------------------------
 
 # --- Composite Score Weights (must sum to 1.0) ---
-SCORE_WEIGHT_ACCOUNT = 0.60      # 60% — account value dominance
+SCORE_WEIGHT_ACCOUNT = 0.55      # 55% — account value dominance
 SCORE_WEIGHT_POSITION = 0.20     # 20% — position sizing
-SCORE_WEIGHT_ACTIVITY = 0.20     # 20% — trading activity
+SCORE_WEIGHT_ACTIVITY = 0.15     # 15% — trading activity
+SCORE_WEIGHT_STAKING = 0.10      # 10% — HYPE staking conviction (new)
 
 # --- Account Score Breakpoints (account value → sub-score) ---
 ACCOUNT_SCORE_BREAKPOINTS = [
@@ -49,6 +50,29 @@ ACTIVITY_SCORE_BREAKPOINTS = [
 # Recency bonus (added to activity sub-score, capped at 100)
 RECENCY_BONUS_24H = 10           # last trade < 24 hours ago
 RECENCY_BONUS_7D = 5             # last trade < 7 days ago
+
+# --- Staking Score Breakpoints (activeStakingDiscount → sub-score) ---
+# Hyperliquid grants fee discounts proportional to staked HYPE:
+#   0.00 (0%)  → no stake
+#   0.01 (1%)  → ~1,000 HYPE staked   (low)
+#   0.03 (3%)  → ~10,000 HYPE staked  (mid)
+#   0.05 (5%)  → ~100,000 HYPE staked (high)
+#   0.07 (7%)+ → 1M+ HYPE staked      (elite)
+STAKING_SCORE_BREAKPOINTS = [
+    (0.07, 100),  # elite staker  → 100
+    (0.05,  80),  # high staker   → 80
+    (0.03,  60),  # mid staker    → 60
+    (0.01,  35),  # low staker    → 35
+]
+# Below 0.01 (no staking) → 0
+
+STAKING_TIER_LABELS = {
+    "elite": 0.07,
+    "high":  0.05,
+    "mid":   0.03,
+    "low":   0.01,
+    "none":  0.0,
+}
 
 # --- Tier Cutoffs (composite score → tier) ---
 TIER_CUTOFF_APEX = 75            # 75+  → APEX

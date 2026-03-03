@@ -325,6 +325,9 @@ class WhaleDiscovery:
                 except Exception:
                     pass  # Non-critical
 
+                # Fetch HYPE staking discount (non-critical)
+                staking_discount = self.collector.get_staking_discount(addr)
+
                 # Add or update in registry
                 if is_new:
                     label = candidate.label if candidate else ""
@@ -334,13 +337,14 @@ class WhaleDiscovery:
                 else:
                     result.whales_updated += 1
 
-                # Score with live data
+                # Score with live data (including staking)
                 self.registry.rescore(
                     address=addr,
                     account_value=snapshot.account_value,
                     total_notional=total_notional,
                     trade_count_30d=trade_count_30d,
                     last_trade_time=last_trade_time,
+                    staking_discount=staking_discount,
                 )
 
                 tier = self.registry.get(addr).tier

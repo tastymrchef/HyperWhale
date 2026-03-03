@@ -46,6 +46,7 @@ class WhaleRegistry:
             account_value = entry.get("account_value", 0.0)
             total_notional = entry.get("total_notional", 0.0)
             trade_count_30d = entry.get("trade_count_30d", 0)
+            staking_discount_stored = entry.get("staking_score", 0.0)  # stored sub-score, not re-fetched
 
             # Re-score on load to pick up any config changes
             result = _scorer.score(
@@ -64,6 +65,8 @@ class WhaleRegistry:
                 account_score=result.account_score,
                 position_score=result.position_score,
                 activity_score=result.activity_score,
+                staking_score=entry.get("staking_score", 0.0),
+                staked_hype_tier=entry.get("staked_hype_tier", "none"),
                 trade_count_30d=trade_count_30d,
                 total_notional=total_notional,
             )
@@ -84,6 +87,8 @@ class WhaleRegistry:
                     "account_score": w.account_score,
                     "position_score": w.position_score,
                     "activity_score": w.activity_score,
+                    "staking_score": w.staking_score,
+                    "staked_hype_tier": w.staked_hype_tier,
                     "trade_count_30d": w.trade_count_30d,
                     "total_notional": w.total_notional,
                     "notes": w.notes,
@@ -127,11 +132,15 @@ class WhaleRegistry:
         total_notional: float = 0.0,
         trade_count_30d: int = 0,
         last_trade_time: Optional[datetime] = None,
+        staking_discount: float = 0.0,
     ) -> None:
         """Re-score a whale with fresh data and update all fields.
 
         This is the primary method for updating a whale after fetching
         new data from the API. It replaces the old update_account_value().
+
+        Args:
+            staking_discount: activeStakingDiscount from userFees API (0.0 = no staking).
         """
         addr = address.lower()
         if addr not in self.whales:
@@ -142,6 +151,7 @@ class WhaleRegistry:
             total_notional=total_notional,
             trade_count_30d=trade_count_30d,
             last_trade_time=last_trade_time,
+            staking_discount=staking_discount,
         )
 
         whale = self.whales[addr]
@@ -153,6 +163,8 @@ class WhaleRegistry:
         whale.account_score = result.account_score
         whale.position_score = result.position_score
         whale.activity_score = result.activity_score
+        whale.staking_score = result.staking_score
+        whale.staked_hype_tier = result.staked_hype_tier
         whale.last_updated = datetime.utcnow()
 
     def update_account_value(self, address: str, value: float) -> None:

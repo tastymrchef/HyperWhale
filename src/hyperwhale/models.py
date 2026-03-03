@@ -71,6 +71,8 @@ class WhaleProfile(BaseModel):
     account_score: float = Field(default=0.0, description="Account value sub-score (0-100)")
     position_score: float = Field(default=0.0, description="Position size sub-score (0-100)")
     activity_score: float = Field(default=0.0, description="Trading activity sub-score (0-100)")
+    staking_score: float = Field(default=0.0, description="HYPE staking conviction sub-score (0-100)")
+    staked_hype_tier: str = Field(default="none", description="Inferred staking tier: none / low / mid / high / elite")
     trade_count_30d: int = Field(default=0, description="Number of trades in last 30 days")
     total_notional: float = Field(default=0.0, description="Total open notional position value")
 
@@ -132,6 +134,11 @@ class PositionEvent(BaseModel):
     old_leverage: float = 0.0
     new_leverage: float = 0.0
     notional_value: float = 0.0                  # current notional
+    entry_price: float = 0.0                     # average entry price
+    mark_price: float = 0.0                      # current mark price
+    unrealized_pnl: float = 0.0                  # current unrealized PnL
+    liquidation_price: Optional[float] = None    # liquidation price
+    account_value: float = 0.0                   # whale's total account value at event time
     side: Optional[PositionSide] = None
     timestamp: datetime = Field(default_factory=datetime.utcnow)
 

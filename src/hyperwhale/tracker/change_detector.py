@@ -41,20 +41,13 @@ class ChangeDetector:
         events: list[PositionEvent] = []
 
         if old_snapshot is None:
-            # First snapshot — report all positions as new
-            for pos in new_snapshot.positions:
-                events.append(
-                    PositionEvent(
-                        address=new_snapshot.address,
-                        coin=pos.coin,
-                        event_type=EventType.POSITION_OPENED,
-                        new_size=pos.size,
-                        new_leverage=pos.leverage,
-                        notional_value=pos.notional_value,
-                        side=pos.side,
-                        timestamp=new_snapshot.timestamp,
-                    )
-                )
+            # First snapshot for this whale — silently baseline, no alerts.
+            # We don't know what changed vs before we started tracking,
+            # so firing POSITION_OPENED for everything would be a false flood.
+            logger.debug(
+                f"First snapshot for {new_snapshot.address[:10]}... — "
+                f"baselined {len(new_snapshot.positions)} positions, no alerts"
+            )
             return events
 
         # Build lookup dicts: coin → Position
@@ -77,6 +70,11 @@ class ChangeDetector:
                         new_size=new_pos.size,
                         new_leverage=new_pos.leverage,
                         notional_value=new_pos.notional_value,
+                        entry_price=new_pos.entry_price,
+                        mark_price=new_pos.mark_price,
+                        unrealized_pnl=new_pos.unrealized_pnl,
+                        liquidation_price=new_pos.liquidation_price,
+                        account_value=new_snapshot.account_value,
                         side=new_pos.side,
                         timestamp=new_snapshot.timestamp,
                     )
@@ -107,6 +105,10 @@ class ChangeDetector:
                         size_change_pct=-100.0,
                         old_leverage=old_pos.leverage,
                         notional_value=old_pos.notional_value,
+                        entry_price=old_pos.entry_price,
+                        mark_price=old_pos.mark_price,
+                        unrealized_pnl=old_pos.unrealized_pnl,
+                        account_value=new_snapshot.account_value,
                         side=old_pos.side,
                         timestamp=new_snapshot.timestamp,
                     )
@@ -159,6 +161,10 @@ class ChangeDetector:
                     old_leverage=old.leverage,
                     new_leverage=new.leverage,
                     notional_value=new.notional_value,
+                    entry_price=new.entry_price,
+                    mark_price=new.mark_price,
+                    unrealized_pnl=new.unrealized_pnl,
+                    liquidation_price=new.liquidation_price,
                     side=new.side,
                     timestamp=timestamp,
                 )
@@ -176,6 +182,10 @@ class ChangeDetector:
                     old_leverage=old.leverage,
                     new_leverage=new.leverage,
                     notional_value=new.notional_value,
+                    entry_price=new.entry_price,
+                    mark_price=new.mark_price,
+                    unrealized_pnl=new.unrealized_pnl,
+                    liquidation_price=new.liquidation_price,
                     side=new.side,
                     timestamp=timestamp,
                 )
