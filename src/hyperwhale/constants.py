@@ -83,7 +83,7 @@ TIER_CUTOFF_DOLPHIN = 20         # 20-34 → DOLPHIN
 
 # --- Hard Rules (override score-based classification) ---
 DORMANT_WHALE_THRESHOLD = 50_000_000   # $50M+ with no activity → DORMANT_WHALE
-MIN_ACCOUNT_VALUE = 1_000_000          # Below $1M → auto-SKIP (not worth tracking)
+MIN_ACCOUNT_VALUE = 100_000            # Below $100K → auto-SKIP (leaderboard AV is stale; filter loosely here)
 
 # ---------------------------------------------------------------------------
 # Change Detection Defaults

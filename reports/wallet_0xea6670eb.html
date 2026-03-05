@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HyperWhale — 0xea6670ebdb4a38...</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0d1117;color:#c9d1d9;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.topbar{background:#161b22;border-bottom:1px solid #30363d;padding:14px 28px;display:flex;align-items:center;gap:16px}
+.topbar .back{color:#8b949e;font-size:13px;cursor:pointer}
+.topbar .back:hover{color:#c9d1d9}
+.topbar h1{font-size:18px;font-weight:600;flex:1}
+
+.page{max-width:1100px;margin:0 auto;padding:28px 20px;display:grid;gap:20px}
+
+/* header card */
+.header-card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px 28px;display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0}
+.wallet-info h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.wallet-info .addr{font-size:12px;color:#8b949e;font-family:monospace}
+.tier-badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.stats-row{display:flex;flex-wrap:wrap;gap:12px;margin-left:auto}
+.stat-pill{background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:10px 16px;text-align:center;min-width:110px}
+.stat-pill .val{font-size:18px;font-weight:700;color:#e6edf3}
+.stat-pill .lbl{font-size:11px;color:#8b949e;margin-top:2px}
+
+/* section cards */
+.card{background:#161b22;border:1px solid #30363d;border-radius:12px;overflow:hidden}
+.card-title{padding:16px 20px;border-bottom:1px solid #30363d;font-size:14px;font-weight:600;color:#e6edf3;display:flex;align-items:center;gap:8px}
+.card-body{padding:20px}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;color:#8b949e;font-weight:500;border-bottom:1px solid #21262d;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #21262d}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#1c2128}
+.mono{font-family:monospace;font-size:12px}
+.snap-header td{background:#1c2128;color:#8b949e;font-size:11px;padding:6px 12px;font-style:italic}
+
+/* chart */
+.chart-wrap{position:relative;height:220px}
+
+/* long/short bar */
+.bias-bar{height:8px;border-radius:4px;background:#30363d;overflow:hidden;margin-top:8px}
+.bias-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#f85149 0%,#3fb950 100%)}
+.bias-labels{display:flex;justify-content:space-between;font-size:11px;color:#8b949e;margin-top:4px}
+
+/* placeholder */
+.placeholder{padding:40px 20px;text-align:center;color:#8b949e;font-size:13px}
+.placeholder .icon{font-size:32px;margin-bottom:8px}
+
+/* external link */
+.ext-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#58a6ff;padding:6px 12px;border:1px solid #30363d;border-radius:6px;margin-left:auto}
+.ext-link:hover{background:#1c2128}
+
+/* grid layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="back" onclick="history.back()"> Back</span>
+  <h1>Wallet Profile</h1>
+  <a class="ext-link" href="https://hypurrscan.io/address/0xea6670ebdb4a388a8cfc16f6497bf4f267b061ee" target="_blank">
+    View on Hypurrscan 
+  </a>
+</div>
+
+<div class="page">
+
+  <!-- HEADER CARD -->
+  <div class="header-card">
+    <div class="avatar" style="background:#2EC4B622;color:#2EC4B6">S</div>
+    <div class="wallet-info">
+      <h2>0xea6670ebdb4a38...</h2>
+      <div class="addr">0xea6670ebdb4a388a8cfc16f6497bf4f267b061ee</div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <span class="tier-badge" style="background:#2EC4B622;color:#2EC4B6">shark</span>
+        <span style="font-size:12px;color:#8b949e">Score: 45.5</span>
+        <span style="font-size:12px;color:#8b949e">  22 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 02:13:34</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill">
+        <div class="val">$4.81M</div>
+        <div class="lbl">Account Value</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">$10.77M</div>
+        <div class="lbl">Total Long</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">$0.00</div>
+        <div class="lbl">Total Short</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">12</div>
+        <div class="lbl">Open Positions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AV CHART + BIAS -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"> Account Value History</div>
+      <div class="card-body">
+        <div class="chart-wrap">
+          <canvas id="avChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"> Long / Short Bias</div>
+      <div class="card-body" style="padding-top:28px">
+        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">100% Long</div>
+        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">0% Short</div>
+        <div class="bias-bar">
+          <div class="bias-fill" style="width:100.0%;background:#3fb950"></div>
+        </div>
+        <div class="bias-labels"><span>Short</span><span>Long</span></div>
+        <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
+          <div style="background:#3fb95011;border:1px solid #3fb95033;border-radius:8px;padding:12px">
+            <div style="color:#3fb950;font-size:16px;font-weight:700">$10.77M</div>
+            <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
+          </div>
+          <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
+            <div style="color:#f85149;font-size:16px;font-weight:700">$0.00</div>
+            <div style="color:#8b949e;font-size:11px;margin-top:2px">Short Notional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRENT POSITIONS -->
+  <div class="card">
+    <div class="card-title"> Current Open Positions</div>
+    <div class="card-body" style="padding:0">
+      <table>
+        <thead>
+          <tr>
+            <th>Coin</th><th>Side</th><th>Notional</th>
+            <th>Unrealised PnL</th><th>Entry</th><th>Liq Price</th><th>Leverage</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="mono">ETH</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$3.06M</td>
+                <td><span style="color:#f85149">$840.3K</span></td>
+                <td>2697.75</td>
+                <td>None</td>
+                <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">XPL</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$2.03M</td>
+                <td><span style="color:#f85149">$312.4K</span></td>
+                <td>0.12692</td>
+                <td>None</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">STBL</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$1.34M</td>
+                <td><span style="color:#f85149">$183.4K</span></td>
+                <td>0.045625</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">MEGA</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$1.04M</td>
+                <td><span style="color:#f85149">$1.4K</span></td>
+                <td>0.141295</td>
+                <td>0.0317305944</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">MAVIA</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$938.0K</td>
+                <td><span style="color:#f85149">$381.0K</span></td>
+                <td>0.04916</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">HEMI</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$769.6K</td>
+                <td><span style="color:#f85149">$416.1K</span></td>
+                <td>0.01251</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">HMSTR</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$577.1K</td>
+                <td><span style="color:#f85149">$252.0K</span></td>
+                <td>0.000228</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">SAGA</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$529.2K</td>
+                <td><span style="color:#f85149">$652.67</span></td>
+                <td>0.03222</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">GRIFFAIN</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$484.1K</td>
+                <td><span style="color:#f85149">$344.5K</span></td>
+                <td>0.015984</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">VVV</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$388.08</td>
+                <td><span style="color:#3fb950">+$281.18</span></td>
+                <td>1.8994</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">BTC</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$0.73</td>
+                <td><span style="color:#3fb950">+$0.06</span></td>
+                <td>66444.4</td>
+                <td>None</td>
+                <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">NIL</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$0.05</td>
+                <td><span style="color:#3fb950">+$0.00</span></td>
+                <td>0.054369</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- POSITION HISTORY -->
+  <div class="card">
+    <div class="card-title"> Position History  <span style="font-size:11px;color:#8b949e;font-weight:400">across snapshots</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead>
+          <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
+        </thead>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$3.06M</td>
+            <td><span style="color:#f85149">$840.3K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$2.03M</td>
+            <td><span style="color:#f85149">$312.4K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">STBL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.34M</td>
+            <td><span style="color:#f85149">$183.4K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MEGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.04M</td>
+            <td><span style="color:#f85149">$1.4K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MAVIA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$938.0K</td>
+            <td><span style="color:#f85149">$381.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HEMI</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$769.6K</td>
+            <td><span style="color:#f85149">$416.1K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HMSTR</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$577.1K</td>
+            <td><span style="color:#f85149">$252.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SAGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$529.2K</td>
+            <td><span style="color:#f85149">$652.67</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">GRIFFAIN</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$484.1K</td>
+            <td><span style="color:#f85149">$344.5K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">VVV</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$388.08</td>
+            <td><span style="color:#3fb950">+$281.18</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.73</td>
+            <td><span style="color:#3fb950">+$0.06</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">NIL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.05</td>
+            <td><span style="color:#3fb950">+$0.00</span></td>
+            <td>3.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 01:49</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$3.07M</td>
+            <td><span style="color:#f85149">$830.1K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$2.07M</td>
+            <td><span style="color:#f85149">$278.8K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">STBL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.36M</td>
+            <td><span style="color:#f85149">$166.6K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MEGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.04M</td>
+            <td><span style="color:#f85149">$189.99</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MAVIA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$941.2K</td>
+            <td><span style="color:#f85149">$377.8K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HEMI</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$771.9K</td>
+            <td><span style="color:#f85149">$413.9K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HMSTR</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$577.1K</td>
+            <td><span style="color:#f85149">$252.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SAGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$531.8K</td>
+            <td><span style="color:#3fb950">+$2.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">GRIFFAIN</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$485.2K</td>
+            <td><span style="color:#f85149">$343.4K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">VVV</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$382.89</td>
+            <td><span style="color:#3fb950">+$275.99</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.73</td>
+            <td><span style="color:#3fb950">+$0.06</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">NIL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.05</td>
+            <td><span style="color:#3fb950">+$0.00</span></td>
+            <td>3.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 18:16</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$3.10M</td>
+            <td><span style="color:#f85149">$798.1K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$2.15M</td>
+            <td><span style="color:#f85149">$198.1K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">STBL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.38M</td>
+            <td><span style="color:#f85149">$142.1K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MEGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.06M</td>
+            <td><span style="color:#3fb950">+$15.2K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MAVIA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$957.0K</td>
+            <td><span style="color:#f85149">$362.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HEMI</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$776.9K</td>
+            <td><span style="color:#f85149">$408.8K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HMSTR</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$584.4K</td>
+            <td><span style="color:#f85149">$244.7K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SAGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$538.1K</td>
+            <td><span style="color:#3fb950">+$8.2K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">GRIFFAIN</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$493.8K</td>
+            <td><span style="color:#f85149">$334.8K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">VVV</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$331.01</td>
+            <td><span style="color:#3fb950">+$224.11</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.73</td>
+            <td><span style="color:#3fb950">+$0.07</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">NIL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.05</td>
+            <td><span style="color:#3fb950">+$0.00</span></td>
+            <td>3.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 17:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$3.10M</td>
+            <td><span style="color:#f85149">$800.7K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$2.20M</td>
+            <td><span style="color:#f85149">$142.6K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">STBL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.39M</td>
+            <td><span style="color:#f85149">$135.3K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MEGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$1.03M</td>
+            <td><span style="color:#f85149">$9.8K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MAVIA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$953.8K</td>
+            <td><span style="color:#f85149">$365.2K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HEMI</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$781.1K</td>
+            <td><span style="color:#f85149">$404.6K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HMSTR</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$584.4K</td>
+            <td><span style="color:#f85149">$244.7K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SAGA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$540.5K</td>
+            <td><span style="color:#3fb950">+$10.7K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">GRIFFAIN</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$496.7K</td>
+            <td><span style="color:#f85149">$332.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">VVV</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$344.94</td>
+            <td><span style="color:#3fb950">+$238.04</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.73</td>
+            <td><span style="color:#3fb950">+$0.07</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">NIL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$0.05</td>
+            <td><span style="color:#3fb950">+$0.00</span></td>
+            <td>3.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 16:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$3.10M</td>
+            <td><span style="color:#f85149">$795.2K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$2.17M</td>
+            <td><span style="color:#f85149">$171.3K</span></td>
+            <td>10.0x</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"> Anomaly Detection</div>
+      <div class="placeholder">
+        <div class="icon"></div>
+        Available once 7+ days of data is collected.<br>Will show σ-score vs this wallet's own baseline.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"> Correlated Wallets</div>
+      <div class="placeholder">
+        <div class="icon"></div>
+        Available once correlation engine is built.<br>Will show wallets that move with this one.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var avLabels = ["2026-03-03 13:58", "2026-03-03 16:35", "2026-03-03 17:03", "2026-03-04 01:26", "2026-03-04 02:14", "2026-03-04 03:02", "2026-03-04 06:09", "2026-03-04 06:46", "2026-03-04 07:02", "2026-03-04 08:21", "2026-03-04 09:02", "2026-03-04 10:06", "2026-03-04 11:02", "2026-03-04 12:05", "2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13"];
+var avValues = [4473826.67, 4634993.17, 4674466.1, 4616676.38, 4725499.9, 4705823.85, 4594135.24, 4615025.97, 4574273.26, 4606973.76, 4852829.36, 4915180.24, 4820789.97, 4702512.2, 4714780.74, 4714382.85, 5044830.52, 5107122.3, 5121035.9, 5079773.82, 4881286.05, 4809630.99];
+
+var ctx = document.getElementById('avChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: avLabels,
+    datasets: [{
+      data: avValues,
+      borderColor: '#4C8EDA',
+      backgroundColor: 'rgba(76,142,218,0.08)',
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor: '#4C8EDA',
+      fill: true,
+      tension: 0.3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color:'#8b949e', maxRotation:30, font:{size:10} }, grid:{ color:'#21262d' } },
+      y: {
+        ticks: { color:'#8b949e', font:{size:10},
+          callback: function(v) {
+            if(v>=1e6) return '$'+(v/1e6).toFixed(1)+'M';
+            if(v>=1e3) return '$'+(v/1e3).toFixed(0)+'K';
+            return '$'+v;
+          }
+        },
+        grid:{ color:'#21262d' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

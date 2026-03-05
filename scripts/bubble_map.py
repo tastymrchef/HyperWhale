@@ -304,6 +304,11 @@ function render(asset) {
       if (pinned === d.address) { pinned = null; tooltip.style.display = 'none'; }
       else { pinned = d.address; showTip(event, d); }
       event.stopPropagation();
+    })
+    .on('dblclick', function(event, d) {
+      var slug = d.address.slice(0, 10).toLowerCase();
+      window.open('wallet_' + slug + '.html', '_blank');
+      event.stopPropagation();
     });
 
   /*  sim: dormant  */
@@ -367,6 +372,8 @@ function showTip(event, d) {
   }
   tooltip.innerHTML = html;
   tooltip.style.display = 'block';
+  var addr = d.address;
+  tooltip.innerHTML += '<div style="margin-top:6px;font-size:10px;color:#8b949e;">double-click to open profile ↗</div>';
   moveTip(event);
 }
 

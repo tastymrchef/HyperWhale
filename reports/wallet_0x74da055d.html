@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HyperWhale — folhas99</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0d1117;color:#c9d1d9;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.topbar{background:#161b22;border-bottom:1px solid #30363d;padding:14px 28px;display:flex;align-items:center;gap:16px}
+.topbar .back{color:#8b949e;font-size:13px;cursor:pointer}
+.topbar .back:hover{color:#c9d1d9}
+.topbar h1{font-size:18px;font-weight:600;flex:1}
+
+.page{max-width:1100px;margin:0 auto;padding:28px 20px;display:grid;gap:20px}
+
+/* header card */
+.header-card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px 28px;display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0}
+.wallet-info h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.wallet-info .addr{font-size:12px;color:#8b949e;font-family:monospace}
+.tier-badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.stats-row{display:flex;flex-wrap:wrap;gap:12px;margin-left:auto}
+.stat-pill{background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:10px 16px;text-align:center;min-width:110px}
+.stat-pill .val{font-size:18px;font-weight:700;color:#e6edf3}
+.stat-pill .lbl{font-size:11px;color:#8b949e;margin-top:2px}
+
+/* section cards */
+.card{background:#161b22;border:1px solid #30363d;border-radius:12px;overflow:hidden}
+.card-title{padding:16px 20px;border-bottom:1px solid #30363d;font-size:14px;font-weight:600;color:#e6edf3;display:flex;align-items:center;gap:8px}
+.card-body{padding:20px}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;color:#8b949e;font-weight:500;border-bottom:1px solid #21262d;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #21262d}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#1c2128}
+.mono{font-family:monospace;font-size:12px}
+.snap-header td{background:#1c2128;color:#8b949e;font-size:11px;padding:6px 12px;font-style:italic}
+
+/* chart */
+.chart-wrap{position:relative;height:220px}
+
+/* long/short bar */
+.bias-bar{height:8px;border-radius:4px;background:#30363d;overflow:hidden;margin-top:8px}
+.bias-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#f85149 0%,#3fb950 100%)}
+.bias-labels{display:flex;justify-content:space-between;font-size:11px;color:#8b949e;margin-top:4px}
+
+/* placeholder */
+.placeholder{padding:40px 20px;text-align:center;color:#8b949e;font-size:13px}
+.placeholder .icon{font-size:32px;margin-bottom:8px}
+
+/* external link */
+.ext-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#58a6ff;padding:6px 12px;border:1px solid #30363d;border-radius:6px;margin-left:auto}
+.ext-link:hover{background:#1c2128}
+
+/* grid layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="back" onclick="history.back()"> Back</span>
+  <h1>Wallet Profile</h1>
+  <a class="ext-link" href="https://hypurrscan.io/address/0x74da055d4ccf9dca3f15789c603e1a88a1d2d81f" target="_blank">
+    View on Hypurrscan 
+  </a>
+</div>
+
+<div class="page">
+
+  <!-- HEADER CARD -->
+  <div class="header-card">
+    <div class="avatar" style="background:#2EC4B622;color:#2EC4B6">S</div>
+    <div class="wallet-info">
+      <h2>folhas99</h2>
+      <div class="addr">0x74da055d4ccf9dca3f15789c603e1a88a1d2d81f</div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <span class="tier-badge" style="background:#2EC4B622;color:#2EC4B6">shark</span>
+        <span style="font-size:12px;color:#8b949e">Score: 45.5</span>
+        <span style="font-size:12px;color:#8b949e">  22 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 02:13:34</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill">
+        <div class="val">$4.87M</div>
+        <div class="lbl">Account Value</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">$0.00</div>
+        <div class="lbl">Total Long</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">$29.02M</div>
+        <div class="lbl">Total Short</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">1</div>
+        <div class="lbl">Open Positions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AV CHART + BIAS -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"> Account Value History</div>
+      <div class="card-body">
+        <div class="chart-wrap">
+          <canvas id="avChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"> Long / Short Bias</div>
+      <div class="card-body" style="padding-top:28px">
+        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">0% Long</div>
+        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">100% Short</div>
+        <div class="bias-bar">
+          <div class="bias-fill" style="width:0.0%;background:#3fb950"></div>
+        </div>
+        <div class="bias-labels"><span>Short</span><span>Long</span></div>
+        <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
+          <div style="background:#3fb95011;border:1px solid #3fb95033;border-radius:8px;padding:12px">
+            <div style="color:#3fb950;font-size:16px;font-weight:700">$0.00</div>
+            <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
+          </div>
+          <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
+            <div style="color:#f85149;font-size:16px;font-weight:700">$29.02M</div>
+            <div style="color:#8b949e;font-size:11px;margin-top:2px">Short Notional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRENT POSITIONS -->
+  <div class="card">
+    <div class="card-title"> Current Open Positions</div>
+    <div class="card-body" style="padding:0">
+      <table>
+        <thead>
+          <tr>
+            <th>Coin</th><th>Side</th><th>Notional</th>
+            <th>Unrealised PnL</th><th>Entry</th><th>Liq Price</th><th>Leverage</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="mono">BTC</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$29.02M</td>
+                <td><span style="color:#3fb950">+$244.6K</span></td>
+                <td>73165.4</td>
+                <td>83672.7097848025</td>
+                <td>40.0x</td>
+            </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- POSITION HISTORY -->
+  <div class="card">
+    <div class="card-title"> Position History  <span style="font-size:11px;color:#8b949e;font-weight:400">across snapshots</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead>
+          <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
+        </thead>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$29.02M</td>
+            <td><span style="color:#3fb950">+$244.6K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 01:49</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$29.12M</td>
+            <td><span style="color:#3fb950">+$146.6K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 18:16</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$21.95M</td>
+            <td><span style="color:#f85149">$10.5K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 17:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$14.66M</td>
+            <td><span style="color:#f85149">$56.8K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 16:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$11.00M</td>
+            <td><span style="color:#f85149">$55.5K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 15:59</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$3.63M</td>
+            <td><span style="color:#3fb950">+$3.5K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 14:23</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$10.69M</td>
+            <td><span style="color:#3fb950">+$385.9K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 13:13</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$10.69M</td>
+            <td><span style="color:#3fb950">+$389.2K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 12:05</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$10.65M</td>
+            <td><span style="color:#3fb950">+$344.5K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 11:02</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$10.70M</td>
+            <td><span style="color:#3fb950">+$392.3K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 10:06</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$10.72M</td>
+            <td><span style="color:#3fb950">+$419.2K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 09:02</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$37.59M</td>
+            <td><span style="color:#3fb950">+$1.11M</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 08:21</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$41.52M</td>
+            <td><span style="color:#3fb950">+$305.6K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 07:02</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$41.13M</td>
+            <td><span style="color:#f85149">$82.6K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 06:46</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$41.11M</td>
+            <td><span style="color:#f85149">$100.0K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 06:09</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$40.86M</td>
+            <td><span style="color:#f85149">$347.8K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 03:02</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$40.85M</td>
+            <td><span style="color:#f85149">$358.0K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 02:14</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$40.94M</td>
+            <td><span style="color:#f85149">$276.4K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 01:26</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$40.80M</td>
+            <td><span style="color:#f85149">$416.8K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-03 17:03</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$40.78M</td>
+            <td><span style="color:#f85149">$430.6K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-03 16:35</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$30.75M</td>
+            <td><span style="color:#f85149">$267.8K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-03 13:58</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$40.15M</td>
+            <td><span style="color:#3fb950">+$61.5K</span></td>
+            <td>40.0x</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"> Anomaly Detection</div>
+      <div class="placeholder">
+        <div class="icon"></div>
+        Available once 7+ days of data is collected.<br>Will show σ-score vs this wallet's own baseline.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"> Correlated Wallets</div>
+      <div class="placeholder">
+        <div class="icon"></div>
+        Available once correlation engine is built.<br>Will show wallets that move with this one.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var avLabels = ["2026-03-03 13:58", "2026-03-03 16:35", "2026-03-03 17:03", "2026-03-04 01:26", "2026-03-04 02:14", "2026-03-04 03:02", "2026-03-04 06:09", "2026-03-04 06:46", "2026-03-04 07:02", "2026-03-04 08:21", "2026-03-04 09:02", "2026-03-04 10:06", "2026-03-04 11:02", "2026-03-04 12:05", "2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13"];
+var avValues = [3787971.99, 2255566.11, 2089442.44, 2101211.08, 2241509.78, 2159731.88, 2169791.34, 2417591.34, 2434665.66, 2822344.31, 3780070.41, 3965246.24, 4438521.11, 4390649.16, 4435349.16, 4432057.02, 4633134.31, 4572951.88, 4570774.11, 4616483.07, 4768137.7, 4865847.46];
+
+var ctx = document.getElementById('avChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: avLabels,
+    datasets: [{
+      data: avValues,
+      borderColor: '#4C8EDA',
+      backgroundColor: 'rgba(76,142,218,0.08)',
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor: '#4C8EDA',
+      fill: true,
+      tension: 0.3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color:'#8b949e', maxRotation:30, font:{size:10} }, grid:{ color:'#21262d' } },
+      y: {
+        ticks: { color:'#8b949e', font:{size:10},
+          callback: function(v) {
+            if(v>=1e6) return '$'+(v/1e6).toFixed(1)+'M';
+            if(v>=1e3) return '$'+(v/1e3).toFixed(0)+'K';
+            return '$'+v;
+          }
+        },
+        grid:{ color:'#21262d' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

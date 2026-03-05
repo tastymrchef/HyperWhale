@@ -15,9 +15,14 @@ Output:
 
 from __future__ import annotations
 
+import io
+import sys
 import json
 import time
 from collections import Counter
+
+# Force UTF-8 stdout so unicode chars work in Task Scheduler / non-UTF shells
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -89,7 +94,7 @@ def main() -> None:
         tier = whale.get("tier", "skip")
 
         if addr.lower() in excluded:
-            print(f"[{i:3d}/{total}]  {addr[:12]}…  ⊘ skipped (bot)")
+            print(f"[{i:3d}/{total}]  {addr[:12]}...  skipped (bot)")
             continue
 
         try:

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HyperWhale — 憨巴小龙</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0d1117;color:#c9d1d9;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.topbar{background:#161b22;border-bottom:1px solid #30363d;padding:14px 28px;display:flex;align-items:center;gap:16px}
+.topbar .back{color:#8b949e;font-size:13px;cursor:pointer}
+.topbar .back:hover{color:#c9d1d9}
+.topbar h1{font-size:18px;font-weight:600;flex:1}
+
+.page{max-width:1100px;margin:0 auto;padding:28px 20px;display:grid;gap:20px}
+
+/* header card */
+.header-card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px 28px;display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0}
+.wallet-info h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.wallet-info .addr{font-size:12px;color:#8b949e;font-family:monospace}
+.tier-badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.stats-row{display:flex;flex-wrap:wrap;gap:12px;margin-left:auto}
+.stat-pill{background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:10px 16px;text-align:center;min-width:110px}
+.stat-pill .val{font-size:18px;font-weight:700;color:#e6edf3}
+.stat-pill .lbl{font-size:11px;color:#8b949e;margin-top:2px}
+
+/* section cards */
+.card{background:#161b22;border:1px solid #30363d;border-radius:12px;overflow:hidden}
+.card-title{padding:16px 20px;border-bottom:1px solid #30363d;font-size:14px;font-weight:600;color:#e6edf3;display:flex;align-items:center;gap:8px}
+.card-body{padding:20px}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 12px;color:#8b949e;font-weight:500;border-bottom:1px solid #21262d;white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid #21262d}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#1c2128}
+.mono{font-family:monospace;font-size:12px}
+.snap-header td{background:#1c2128;color:#8b949e;font-size:11px;padding:6px 12px;font-style:italic}
+
+/* chart */
+.chart-wrap{position:relative;height:220px}
+
+/* long/short bar */
+.bias-bar{height:8px;border-radius:4px;background:#30363d;overflow:hidden;margin-top:8px}
+.bias-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#f85149 0%,#3fb950 100%)}
+.bias-labels{display:flex;justify-content:space-between;font-size:11px;color:#8b949e;margin-top:4px}
+
+/* placeholder */
+.placeholder{padding:40px 20px;text-align:center;color:#8b949e;font-size:13px}
+.placeholder .icon{font-size:32px;margin-bottom:8px}
+
+/* external link */
+.ext-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#58a6ff;padding:6px 12px;border:1px solid #30363d;border-radius:6px;margin-left:auto}
+.ext-link:hover{background:#1c2128}
+
+/* grid layout */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="back" onclick="history.back()"> Back</span>
+  <h1>Wallet Profile</h1>
+  <a class="ext-link" href="https://hypurrscan.io/address/0x8e096995c3e4a3f0bc5b3ea1cba94de2aa4d70c9" target="_blank">
+    View on Hypurrscan 
+  </a>
+</div>
+
+<div class="page">
+
+  <!-- HEADER CARD -->
+  <div class="header-card">
+    <div class="avatar" style="background:#4C8EDA22;color:#4C8EDA">W</div>
+    <div class="wallet-info">
+      <h2>憨巴小龙</h2>
+      <div class="addr">0x8e096995c3e4a3f0bc5b3ea1cba94de2aa4d70c9</div>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <span class="tier-badge" style="background:#4C8EDA22;color:#4C8EDA">whale</span>
+        <span style="font-size:12px;color:#8b949e">Score: 55.5</span>
+        <span style="font-size:12px;color:#8b949e">  22 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 02:13:34</span>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-pill">
+        <div class="val">$1.76M</div>
+        <div class="lbl">Account Value</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">$173.8K</div>
+        <div class="lbl">Total Long</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">$20.17M</div>
+        <div class="lbl">Total Short</div>
+      </div>
+      <div class="stat-pill">
+        <div class="val">24</div>
+        <div class="lbl">Open Positions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AV CHART + BIAS -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"> Account Value History</div>
+      <div class="card-body">
+        <div class="chart-wrap">
+          <canvas id="avChart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"> Long / Short Bias</div>
+      <div class="card-body" style="padding-top:28px">
+        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">1% Long</div>
+        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">99% Short</div>
+        <div class="bias-bar">
+          <div class="bias-fill" style="width:0.8544926326043675%;background:#3fb950"></div>
+        </div>
+        <div class="bias-labels"><span>Short</span><span>Long</span></div>
+        <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
+          <div style="background:#3fb95011;border:1px solid #3fb95033;border-radius:8px;padding:12px">
+            <div style="color:#3fb950;font-size:16px;font-weight:700">$173.8K</div>
+            <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
+          </div>
+          <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
+            <div style="color:#f85149;font-size:16px;font-weight:700">$20.17M</div>
+            <div style="color:#8b949e;font-size:11px;margin-top:2px">Short Notional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRENT POSITIONS -->
+  <div class="card">
+    <div class="card-title"> Current Open Positions</div>
+    <div class="card-body" style="padding:0">
+      <table>
+        <thead>
+          <tr>
+            <th>Coin</th><th>Side</th><th>Notional</th>
+            <th>Unrealised PnL</th><th>Entry</th><th>Liq Price</th><th>Leverage</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="mono">ETH</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$10.45M</td>
+                <td><span style="color:#f85149">$548.1K</span></td>
+                <td>2002.03</td>
+                <td>3485.4829856814</td>
+                <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">BTC</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$9.65M</td>
+                <td><span style="color:#3fb950">+$832.0K</span></td>
+                <td>78762.7</td>
+                <td>123891.400378293</td>
+                <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">MET</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$114.6K</td>
+                <td><span style="color:#f85149">$85.4K</span></td>
+                <td>0.309138</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">LINEA</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$59.2K</td>
+                <td><span style="color:#f85149">$140.8K</span></td>
+                <td>0.010883</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">ENA</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$51.1K</td>
+                <td><span style="color:#3fb950">+$199.9K</span></td>
+                <td>0.571882</td>
+                <td>15.1353859939</td>
+                <td>5.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">ADA</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$13.0K</td>
+                <td><span style="color:#3fb950">+$7.4K</span></td>
+                <td>0.427312</td>
+                <td>138.4196704533</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">kBONK</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$5.4K</td>
+                <td><span style="color:#3fb950">+$15.9K</span></td>
+                <td>0.024515</td>
+                <td>7.5905835468</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">POPCAT</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$2.7K</td>
+                <td><span style="color:#3fb950">+$18.8K</span></td>
+                <td>0.406919</td>
+                <td>125.2827514578</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">NEAR</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$1.1K</td>
+                <td><span style="color:#3fb950">+$1.4K</span></td>
+                <td>2.89995</td>
+                <td>7713.4035618078</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">AAVE</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$444.13</td>
+                <td><span style="color:#3fb950">+$767.88</span></td>
+                <td>315.628</td>
+                <td>1716873.7333420138</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">ZEC</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$439.39</td>
+                <td><span style="color:#3fb950">+$685.60</span></td>
+                <td>611.4114</td>
+                <td>3583038.2574094199</td>
+                <td>5.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">kPEPE</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$217.64</td>
+                <td><span style="color:#3fb950">+$475.60</span></td>
+                <td>0.011441</td>
+                <td>108.8044205328</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">STBL</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$125.27</td>
+                <td><span style="color:#3fb950">+$321.91</span></td>
+                <td>0.143053</td>
+                <td>1898.0298067562</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">SUI</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$77.42</td>
+                <td><span style="color:#3fb950">+$247.41</span></td>
+                <td>3.97586</td>
+                <td>80690.6783221426</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">PUMP</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$45.89</td>
+                <td><span style="color:#3fb950">+$87.26</span></td>
+                <td>0.005849</td>
+                <td>289.5847527289</td>
+                <td>2.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">XRP</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$45.41</td>
+                <td><span style="color:#3fb950">+$29.50</span></td>
+                <td>2.340974</td>
+                <td>211037.0455766768</td>
+                <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">WLFI</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$32.57</td>
+                <td><span style="color:#3fb950">+$35.84</span></td>
+                <td>0.221407</td>
+                <td>20364.8260681789</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">LINK</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$29.62</td>
+                <td><span style="color:#3fb950">+$52.98</span></td>
+                <td>25.81286</td>
+                <td>2060118.9458104165</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">HYPE</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$28.66</td>
+                <td><span style="color:#f85149">$0.56</span></td>
+                <td>32.1152</td>
+                <td>None</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">WLD</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$14.68</td>
+                <td><span style="color:#3fb950">+$31.98</span></td>
+                <td>1.31806</td>
+                <td>186225.0191859026</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">FARTCOIN</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$14.50</td>
+                <td><span style="color:#3fb950">+$16.71</span></td>
+                <td>0.3684</td>
+                <td>77831.9421255973</td>
+                <td>3.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">LDO</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$12.59</td>
+                <td><span style="color:#3fb950">+$71.38</span></td>
+                <td>2.09919</td>
+                <td>160726.8583507955</td>
+                <td>10.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">AVNT</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$2.74</td>
+                <td><span style="color:#3fb950">+$33.80</span></td>
+                <td>2.283753</td>
+                <td>393293.8390910795</td>
+                <td>5.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">HBAR</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$0.10</td>
+                <td><span style="color:#3fb950">+$0.13</span></td>
+                <td>0.225311</td>
+                <td>6292698.7835372724</td>
+                <td>5.0x</td>
+            </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- POSITION HISTORY -->
+  <div class="card">
+    <div class="card-title"> Position History  <span style="font-size:11px;color:#8b949e;font-weight:400">across snapshots</span></div>
+    <div class="card-body" style="padding:0;max-height:400px;overflow-y:auto">
+      <table>
+        <thead>
+          <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
+        </thead>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$10.45M</td>
+            <td><span style="color:#f85149">$548.1K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$9.65M</td>
+            <td><span style="color:#3fb950">+$832.0K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MET</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$114.6K</td>
+            <td><span style="color:#f85149">$85.4K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LINEA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$59.2K</td>
+            <td><span style="color:#f85149">$140.8K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ENA</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$51.1K</td>
+            <td><span style="color:#3fb950">+$199.9K</span></td>
+            <td>5.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ADA</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$13.0K</td>
+            <td><span style="color:#3fb950">+$7.4K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">kBONK</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$5.4K</td>
+            <td><span style="color:#3fb950">+$15.9K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">POPCAT</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.7K</td>
+            <td><span style="color:#3fb950">+$18.8K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">NEAR</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.1K</td>
+            <td><span style="color:#3fb950">+$1.4K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">AAVE</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$444.13</td>
+            <td><span style="color:#3fb950">+$767.88</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ZEC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$439.39</td>
+            <td><span style="color:#3fb950">+$685.60</span></td>
+            <td>5.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">kPEPE</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$217.64</td>
+            <td><span style="color:#3fb950">+$475.60</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">STBL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$125.27</td>
+            <td><span style="color:#3fb950">+$321.91</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SUI</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$77.42</td>
+            <td><span style="color:#3fb950">+$247.41</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">PUMP</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$45.89</td>
+            <td><span style="color:#3fb950">+$87.26</span></td>
+            <td>2.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XRP</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$45.41</td>
+            <td><span style="color:#3fb950">+$29.50</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">WLFI</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$32.57</td>
+            <td><span style="color:#3fb950">+$35.84</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LINK</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$29.62</td>
+            <td><span style="color:#3fb950">+$52.98</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$28.66</td>
+            <td><span style="color:#f85149">$0.56</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">WLD</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$14.68</td>
+            <td><span style="color:#3fb950">+$31.98</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">FARTCOIN</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$14.50</td>
+            <td><span style="color:#3fb950">+$16.71</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LDO</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$12.59</td>
+            <td><span style="color:#3fb950">+$71.38</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">AVNT</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.74</td>
+            <td><span style="color:#3fb950">+$33.80</span></td>
+            <td>5.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HBAR</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$0.10</td>
+            <td><span style="color:#3fb950">+$0.13</span></td>
+            <td>5.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 01:49</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$10.49M</td>
+            <td><span style="color:#f85149">$593.6K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$9.68M</td>
+            <td><span style="color:#3fb950">+$797.8K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">MET</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$115.0K</td>
+            <td><span style="color:#f85149">$85.0K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LINEA</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$59.5K</td>
+            <td><span style="color:#f85149">$140.5K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ENA</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$51.3K</td>
+            <td><span style="color:#3fb950">+$199.8K</span></td>
+            <td>5.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ADA</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$13.1K</td>
+            <td><span style="color:#3fb950">+$7.3K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">kBONK</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$5.4K</td>
+            <td><span style="color:#3fb950">+$15.9K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">POPCAT</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.7K</td>
+            <td><span style="color:#3fb950">+$18.7K</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">NEAR</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.1K</td>
+            <td><span style="color:#3fb950">+$1.4K</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">AAVE</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$446.13</td>
+            <td><span style="color:#3fb950">+$765.88</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ZEC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$440.09</td>
+            <td><span style="color:#3fb950">+$684.91</span></td>
+            <td>5.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">kPEPE</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$218.61</td>
+            <td><span style="color:#3fb950">+$474.63</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">STBL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$127.67</td>
+            <td><span style="color:#3fb950">+$319.51</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SUI</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$77.66</td>
+            <td><span style="color:#3fb950">+$247.17</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">PUMP</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$46.10</td>
+            <td><span style="color:#3fb950">+$87.06</span></td>
+            <td>2.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XRP</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$45.54</td>
+            <td><span style="color:#3fb950">+$29.37</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">WLFI</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$32.73</td>
+            <td><span style="color:#3fb950">+$35.69</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LINK</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$29.71</td>
+            <td><span style="color:#3fb950">+$52.89</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$28.91</td>
+            <td><span style="color:#f85149">$0.31</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">WLD</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$14.72</td>
+            <td><span style="color:#3fb950">+$31.94</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">FARTCOIN</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$14.61</td>
+            <td><span style="color:#3fb950">+$16.59</span></td>
+            <td>3.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LDO</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$12.63</td>
+            <td><span style="color:#3fb950">+$71.34</span></td>
+            <td>10.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">AVNT</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.75</td>
+            <td><span style="color:#3fb950">+$33.79</span></td>
+            <td>5.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HBAR</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$0.10</td>
+            <td><span style="color:#3fb950">+$0.12</span></td>
+            <td>5.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 18:16</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$10.61M</td>
+            <td><span style="color:#f85149">$713.3K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$9.74M</td>
+            <td><span style="color:#3fb950">+$738.4K</span></td>
+            <td>20.0x</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"> Anomaly Detection</div>
+      <div class="placeholder">
+        <div class="icon"></div>
+        Available once 7+ days of data is collected.<br>Will show σ-score vs this wallet's own baseline.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"> Correlated Wallets</div>
+      <div class="placeholder">
+        <div class="icon"></div>
+        Available once correlation engine is built.<br>Will show wallets that move with this one.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var avLabels = ["2026-03-03 13:58", "2026-03-03 16:35", "2026-03-03 17:03", "2026-03-04 01:26", "2026-03-04 02:14", "2026-03-04 03:02", "2026-03-04 06:09", "2026-03-04 06:46", "2026-03-04 07:02", "2026-03-04 08:21", "2026-03-04 09:02", "2026-03-04 10:06", "2026-03-04 11:02", "2026-03-04 12:05", "2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13"];
+var avValues = [1720177.33, 1352403.79, 1415392.17, 1489902.14, 1403951.04, 1427456.09, 1486425.51, 1361225.13, 1392118.16, 1181517.28, 751682.03, 1892219.64, 2114508.66, 2234912.88, 2216333.76, 2215428.47, 1664579.1, 1452725.78, 1551144.42, 1501094.04, 1678123.61, 1757421.37];
+
+var ctx = document.getElementById('avChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: avLabels,
+    datasets: [{
+      data: avValues,
+      borderColor: '#4C8EDA',
+      backgroundColor: 'rgba(76,142,218,0.08)',
+      borderWidth: 2,
+      pointRadius: 3,
+      pointBackgroundColor: '#4C8EDA',
+      fill: true,
+      tension: 0.3
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color:'#8b949e', maxRotation:30, font:{size:10} }, grid:{ color:'#21262d' } },
+      y: {
+        ticks: { color:'#8b949e', font:{size:10},
+          callback: function(v) {
+            if(v>=1e6) return '$'+(v/1e6).toFixed(1)+'M';
+            if(v>=1e3) return '$'+(v/1e3).toFixed(0)+'K';
+            return '$'+v;
+          }
+        },
+        grid:{ color:'#21262d' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

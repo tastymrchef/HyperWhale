@@ -146,6 +146,13 @@ class PositionMonitor:
                 cycle += 1
                 logger.info(f"--- Poll cycle {cycle} ---")
 
+                # Reload registry from disk every 60 cycles so that score/tier
+                # updates written by run.py (e.g. new staking data) take effect
+                # without restarting the monitor process.
+                if cycle % 60 == 0:
+                    logger.info("Reloading whale registry from disk…")
+                    self.registry.reload()
+
                 events = self.poll_once()
 
                 # Print events to console

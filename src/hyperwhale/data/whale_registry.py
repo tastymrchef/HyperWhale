@@ -46,25 +46,27 @@ class WhaleRegistry:
             account_value = entry.get("account_value", 0.0)
             total_notional = entry.get("total_notional", 0.0)
             trade_count_30d = entry.get("trade_count_30d", 0)
-            staking_discount_stored = entry.get("staking_score", 0.0)  # stored sub-score, not re-fetched
 
-            # Re-score on load to pick up any config changes
-            result = _scorer.score(
-                account_value=account_value,
-                total_notional=total_notional,
-                trade_count_30d=trade_count_30d,
-            )
+            # Use stored scores directly — the raw staking_discount is not persisted,
+            # only the sub-score is, so we cannot re-score through scorer.score() without
+            # losing the staking component.  Scores are recomputed by rescore() when
+            # live data is fetched; trusting what run.py last wrote is correct here.
+            stored_tier_str = entry.get("tier", "skip")
+            try:
+                stored_tier = WhaleTier(stored_tier_str)
+            except ValueError:
+                stored_tier = WhaleTier.SKIP
 
             self.whales[addr] = WhaleProfile(
                 address=addr,
                 label=entry.get("label", ""),
                 notes=entry.get("notes", ""),
                 account_value=account_value,
-                tier=result.tier,
-                whale_score=result.whale_score,
-                account_score=result.account_score,
-                position_score=result.position_score,
-                activity_score=result.activity_score,
+                tier=stored_tier,
+                whale_score=entry.get("whale_score", 0.0),
+                account_score=entry.get("account_score", 0.0),
+                position_score=entry.get("position_score", 0.0),
+                activity_score=entry.get("activity_score", 0.0),
                 staking_score=entry.get("staking_score", 0.0),
                 staked_hype_tier=entry.get("staked_hype_tier", "none"),
                 trade_count_30d=trade_count_30d,
@@ -72,6 +74,15 @@ class WhaleRegistry:
             )
 
         logger.info(f"Loaded {len(self.whales)} whale addresses from {self.filepath}")
+
+    def reload(self) -> None:
+        """Reload whale addresses from disk, replacing the current in-memory state.
+
+        Call this periodically on long-running processes (e.g. the monitor) so that
+        scores written by run.py become visible without restarting the process.
+        """
+        self.whales.clear()
+        self._load()
 
     def save(self) -> None:
         """Persist current whale list back to JSON."""
