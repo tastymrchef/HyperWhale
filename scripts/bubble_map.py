@@ -1,23 +1,38 @@
 ﻿# bubble_map.py  --  D3 force-simulation bubble map for HyperWhale
 import argparse, json, os, webbrowser
 
-BASE      = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_FILE = os.path.join(BASE, "data", "live_positions_snapshot.json")
-OUT_FILE  = os.path.join(BASE, "reports", "bubble_map.html")
+BASE           = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_FILE      = os.path.join(BASE, "data", "live_positions_snapshot.json")
+WHALE_FILE     = os.path.join(BASE, "data", "whale_addresses.json")
+OUT_FILE       = os.path.join(BASE, "reports", "bubble_map.html")
 
 def load_snapshot(path=DATA_FILE):
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        snap = json.load(f)
+
+    # Build staking lookup from whale_addresses.json (source of truth)
+    staking_lookup = {}
+    if os.path.exists(WHALE_FILE):
+        with open(WHALE_FILE, encoding="utf-8") as f:
+            for w in json.load(f).get("whales", []):
+                staking_lookup[w["address"].lower()] = w.get("staked_hype_tier", "none")
+
+    # Backfill staked_hype_tier into snapshot wallets — always from registry
+    for w in snap.get("wallets", []):
+        w["staked_hype_tier"] = staking_lookup.get(w["address"].lower(), "none")
+
+    return snap
 
 def build_wallet_js(wallets):
     out = []
     for w in wallets:
         out.append({
             "address":       w.get("address", ""),
-            "label":         w.get("label", w.get("address", "")[:8]),
-            "tier":          w.get("tier", "dolphin"),
-            "whale_score":   w.get("whale_score", 0),
-            "account_value": w.get("account_value", 0),
+            "label":            w.get("label", w.get("address", "")[:8]),
+            "tier":             w.get("tier", "dolphin"),
+            "whale_score":      w.get("whale_score", 0),
+            "account_value":    w.get("account_value", 0),
+            "staked_hype_tier": w.get("staked_hype_tier", "none"),
             "positions": [
                 {
                     "coin":     p.get("coin", ""),
@@ -48,6 +63,48 @@ var TIER_COLOR = {
   apex:'#FFD700', whale:'#4C8EDA', dormant_whale:'#6E7681',
   shark:'#2EC4B6', dolphin:'#48BB78'
 };
+
+/* staker ring visual config — keyed by staked_hype_tier */
+var STAKER_RING = {
+  elite: { width: 3.5, color: '#FFD700', opacity: 0.95, gap: 3 },
+  high:  { width: 2.5, color: '#E8C84A', opacity: 0.80, gap: 3 },
+  mid:   { width: 2.0, color: '#C4A832', opacity: 0.65, gap: 2 },
+  low:   { width: 1.5, color: '#A08820', opacity: 0.45, gap: 2 },
+};
+
+function stakerRing(sel) {
+  /* rings are only drawn when the staker toggle is active */
+  if (!curStakerFilter) return;
+  sel.each(function(d) {
+    var st = (d._w && d._w.staked_hype_tier) || 'none';
+    /* if a staking tier sub-filter is active, skip wallets that don't match */
+    if (curStakingTier !== 'ALL' && st !== curStakingTier) return;
+    var cfg = STAKER_RING[st];
+    if (!cfg) return;
+    d3.select(this).append('circle')
+      .attr('class', 'staker-ring')
+      .attr('r', d._r + cfg.gap + cfg.width / 2)
+      .attr('fill', 'none')
+      .attr('stroke', cfg.color)
+      .attr('stroke-width', cfg.width)
+      .attr('stroke-opacity', cfg.opacity);
+  });
+}
+
+/* ---------------------------------------------------------------
+   Tier filter — which tiers are currently visible
+   'ALL' means no filter applied
+--------------------------------------------------------------- */
+var curTierFilter   = 'ALL';
+var curStakerFilter = false;   /* true = highlight stakers + show staker bias panel */
+
+function getVisibleWallets() {
+  /* staker toggle NEVER hides bubbles — it only affects the staker bias panel */
+  if (curTierFilter === 'ALL') return WALLETS;
+  return WALLETS.filter(function(w) {
+    return (w.tier || 'dolphin').toLowerCase() === curTierFilter.toLowerCase();
+  });
+}
 
 /*  helpers  */
 function fmt(v) {
@@ -84,11 +141,12 @@ function bubbleR(av) {
 
 /*  stats panel  */
 function updateStats(asset) {
+  var visWallets = getVisibleWallets();
   var dormCount = 0, activeCount = 0;
   var dormAV = 0, activeAV = 0;
   var totL = 0, totS = 0, totNotional = 0;
 
-  WALLETS.forEach(function(w) {
+  visWallets.forEach(function(w) {
     var b = calcBias(w, asset);
     if (b.flat) {
       dormCount++;
@@ -102,7 +160,7 @@ function updateStats(asset) {
     }
   });
 
-  document.getElementById('st-total').textContent  = WALLETS.length;
+  document.getElementById('st-total').textContent  = visWallets.length;
   document.getElementById('st-active').textContent = activeCount;
   document.getElementById('st-dorm').textContent   = dormCount;
   document.getElementById('st-long').textContent   = '$' + fmt(totL);
@@ -110,6 +168,146 @@ function updateStats(asset) {
   document.getElementById('st-avact').textContent  = '$' + fmt(activeAV);
   document.getElementById('st-avdorm').textContent = '$' + fmt(dormAV);
   document.getElementById('st-lev').textContent    = '$' + fmt(totNotional);
+
+  updateSmartMoneyBias(asset);
+  updateStakerBias(asset);
+}
+
+/* ---------------------------------------------------------------
+   Smart Money Bias — APEX + WHALE tier only, for the current coin
+--------------------------------------------------------------- */
+function updateSmartMoneyBias(asset) {
+  var smL = 0, smS = 0, smCount = 0;
+  WALLETS.forEach(function(w) {
+    var t = (w.tier || '').toLowerCase();
+    if (t !== 'apex' && t !== 'whale') return;
+    var b = calcBias(w, asset);
+    if (b.flat) return;
+    smL += b.L;
+    smS += b.S;
+    smCount++;
+  });
+
+  var smTot = smL + smS;
+  var panel = document.getElementById('sm-bias-panel');
+  if (!panel) return;
+
+  if (smTot === 0 || smCount === 0) {
+    panel.innerHTML = '<span style="color:#666;font-size:13px;font-weight:600;">No APEX/WHALE positions' +
+      (asset !== 'ALL' ? ' in ' + asset : '') + '</span>';
+    return;
+  }
+
+  var longPct  = (smL / smTot * 100).toFixed(1);
+  var shortPct = (smS / smTot * 100).toFixed(1);
+  var longBarW  = (smL / smTot * 100).toFixed(1);
+  var shortBarW = (smS / smTot * 100).toFixed(1);
+
+  /* bias label */
+  var biasNum = ((smL - smS) / smTot * 100);
+  var biasLabel, biasColor;
+  if      (biasNum >=  60) { biasLabel = 'STRONG LONG';  biasColor = '#52e07c'; }
+  else if (biasNum >=  25) { biasLabel = 'LEAN LONG';    biasColor = '#85e09a'; }
+  else if (biasNum >= -25) { biasLabel = 'NEUTRAL';      biasColor = '#8b949e'; }
+  else if (biasNum >= -60) { biasLabel = 'LEAN SHORT';   biasColor = '#e08585'; }
+  else                     { biasLabel = 'STRONG SHORT'; biasColor = '#e05252'; }
+
+  var coinLabel = asset === 'ALL' ? 'ALL COINS' : asset;
+
+  panel.innerHTML =
+    /* row 1: header + bias label */
+    '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+      '<span style="font-size:13px;font-weight:700;color:#e6edf3;letter-spacing:.8px;white-space:nowrap;">' +
+        '&#x1F9E0; Smart Money — ' + coinLabel + '</span>' +
+      '<span style="font-size:15px;font-weight:800;color:' + biasColor + ';white-space:nowrap;letter-spacing:.5px;">' +
+        biasLabel + '</span>' +
+      '<span style="font-size:12px;font-weight:600;color:#8b949e;white-space:nowrap;">' +
+        smCount + ' wallets&nbsp;·&nbsp;$' + fmt(smTot) + ' notional</span>' +
+    '</div>' +
+    /* row 2: bar + percentages */
+    '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+      '<div style="display:flex;height:16px;border-radius:5px;overflow:hidden;width:240px;flex-shrink:0;">' +
+        '<div style="width:' + longBarW  + '%;background:#52e07c;"></div>' +
+        '<div style="width:' + shortBarW + '%;background:#e05252;"></div>' +
+      '</div>' +
+      '<span style="font-size:14px;font-weight:700;color:#52e07c;white-space:nowrap;">' + longPct  + '% L</span>' +
+      '<span style="font-size:14px;font-weight:700;color:#e05252;white-space:nowrap;">' + shortPct + '% S</span>' +
+    '</div>';
+}
+
+/* ---------------------------------------------------------------
+   Staker Bias — only wallets with any staking tier, current coin
+   Panel is shown/hidden based on curStakerFilter toggle
+--------------------------------------------------------------- */
+function updateStakerBias(asset) {
+  var panel = document.getElementById('staker-bias-panel');
+  var sep   = document.getElementById('staker-sep');
+  if (!panel) return;
+
+  /* hide everything when toggle is off */
+  if (!curStakerFilter) {
+    panel.style.display = 'none';
+    if (sep) sep.style.display = 'none';
+    return;
+  }
+  if (sep) sep.style.display = 'block';
+  panel.style.display = 'flex';
+
+  var stL = 0, stS = 0, stDorm = 0, stCount = 0;
+  getVisibleWallets().forEach(function(w) {
+    var wst = (w.staked_hype_tier || 'none');
+    if (wst === 'none') return;
+    /* apply staking tier sub-filter */
+    if (curStakingTier !== 'ALL' && wst !== curStakingTier) return;
+    var b = calcBias(w, asset);
+    stCount++;
+    if (b.flat) { stDorm++; return; }
+    stL += b.L;
+    stS += b.S;
+  });
+
+  var stTot = stL + stS;
+  var coinLabel = asset === 'ALL' ? 'ALL COINS' : asset;
+  var tierLabel = curStakingTier === 'ALL' ? 'All Stakers' : curStakingTier.charAt(0).toUpperCase() + curStakingTier.slice(1) + ' Stakers';
+
+  if (stCount === 0 || stTot === 0) {
+    panel.innerHTML =
+      '<div style="display:flex;align-items:center;gap:8px;">' +
+        '<span style="font-size:13px;font-weight:700;color:#FFD700;white-space:nowrap;">&#x1F48E; ' + tierLabel + '</span>' +
+        '<span style="font-size:12px;color:#666;">No positions' + (asset !== 'ALL' ? ' in ' + asset : '') + '</span>' +
+      '</div>';
+    return;
+  }
+
+  var longPct  = (stL / stTot * 100).toFixed(1);
+  var shortPct = (stS / stTot * 100).toFixed(1);
+  var activeCount = stCount - stDorm;
+
+  var biasNum = ((stL - stS) / stTot * 100);
+  var biasLabel, biasColor;
+  if      (biasNum >=  60) { biasLabel = 'STRONG LONG';  biasColor = '#52e07c'; }
+  else if (biasNum >=  25) { biasLabel = 'LEAN LONG';    biasColor = '#85e09a'; }
+  else if (biasNum >= -25) { biasLabel = 'NEUTRAL';      biasColor = '#8b949e'; }
+  else if (biasNum >= -60) { biasLabel = 'LEAN SHORT';   biasColor = '#e08585'; }
+  else                     { biasLabel = 'STRONG SHORT'; biasColor = '#e05252'; }
+
+  panel.innerHTML =
+    '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+      '<span style="font-size:13px;font-weight:700;color:#FFD700;letter-spacing:.8px;white-space:nowrap;">' +
+        '&#x1F48E; ' + tierLabel + ' — ' + coinLabel + '</span>' +
+      '<span style="font-size:15px;font-weight:800;color:' + biasColor + ';white-space:nowrap;">' +
+        biasLabel + '</span>' +
+      '<span style="font-size:12px;font-weight:600;color:#8b949e;white-space:nowrap;">' +
+        activeCount + ' active&nbsp;·&nbsp;' + stDorm + ' dormant&nbsp;·&nbsp;$' + fmt(stTot) + '</span>' +
+    '</div>' +
+    '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+      '<div style="display:flex;height:16px;border-radius:5px;overflow:hidden;width:200px;flex-shrink:0;">' +
+        '<div style="width:' + longPct  + '%;background:#52e07c;"></div>' +
+        '<div style="width:' + shortPct + '%;background:#e05252;"></div>' +
+      '</div>' +
+      '<span style="font-size:14px;font-weight:700;color:#52e07c;white-space:nowrap;">' + longPct  + '% L</span>' +
+      '<span style="font-size:14px;font-weight:700;color:#e05252;white-space:nowrap;">' + shortPct + '% S</span>' +
+    '</div>';
 }
 
 /*  module-level SVG  */
@@ -131,6 +329,7 @@ function render(asset) {
   curAsset = asset;
   updateStats(asset);
 
+  var visWallets = getVisibleWallets();
   var W = chartEl.clientWidth;
   var H = chartEl.clientHeight;
   if (!W || !H) { setTimeout(function(){ render(asset); }, 80); return; }
@@ -159,7 +358,7 @@ function render(asset) {
   dormSnap   = [];
   activeSnap = [];
 
-  WALLETS.forEach(function(w) {
+  visWallets.forEach(function(w) {
     var b = calcBias(w, asset);
     var r = bubbleR(w.account_value);
     var node = {
@@ -175,8 +374,7 @@ function render(asset) {
 
   /* long/short ratio -> vertical divider */
   var totL = 0, totS = 0;
-  activeSnap.forEach(function(n) { totL += n._b.L; totS += n._b.S; });
-  var totLS    = totL + totS || 1;
+  activeSnap.forEach(function(n) { totL += n._b.L; totS += n._b.S; });  var totLS    = totL + totS || 1;
   var longPct  = totL / totLS;
   var shortPct = totS / totLS;
   var divX     = PAD + shortPct * (W - PAD * 2);
@@ -263,6 +461,7 @@ function render(asset) {
     .attr('font-size', function(d){ return Math.max(7, d._r * 0.42); })
     .attr('fill','#8b949e').attr('pointer-events','none')
     .text(function(d){ return d.label; });
+  dormEnter.call(stakerRing);
   dormSel.exit().remove();
   var dormAll = dormEnter.merge(dormSel);
   dormAll.attr('transform', function(d){ return 'translate('+d._tx+','+d._ty+')'; });
@@ -286,6 +485,7 @@ function render(asset) {
         .attr('stroke-width', 1.5).attr('stroke-opacity', 0.5);
     }
   });
+  actEnter.call(stakerRing);
   actEnter.append('text')
     .attr('text-anchor','middle').attr('dy','0.35em')
     .attr('font-size', function(d){ return Math.max(8, d._r * 0.45); })
@@ -356,7 +556,13 @@ function render(asset) {
 /*  tooltip  */
 function showTip(event, d) {
   var w = d._w, b = d._b;
-  var html = '<strong>' + w.label + '</strong><br>'
+  var stLabel = { elite:'💎 Elite Staker', high:'💎 High Staker', mid:'💎 Mid Staker', low:'💎 Low Staker' };
+  var stBadge = (w.staked_hype_tier && stLabel[w.staked_hype_tier])
+    ? '<span style="background:#2a2000;border:1px solid #FFD700;color:#FFD700;' +
+      'border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:6px;">' +
+      stLabel[w.staked_hype_tier] + '</span>'
+    : '';
+  var html = '<strong>' + w.label + '</strong>' + stBadge + '<br>'
     + 'Tier: ' + w.tier + '&nbsp;&nbsp;AV: $' + fmt(w.account_value) + '<br>';
   if (!b.flat) {
     html += 'Bias: ' + b.bias.toFixed(1) + '%<br>'
@@ -404,6 +610,95 @@ function moveTip(event) {
   });
 })();
 
+/*  tier filter buttons  */
+(function buildTierButtons() {
+  var bar  = document.getElementById('tier-buttons');
+  var tiers = [
+    { id:'ALL',    label:'ALL TIERS', color:'#c9d1d9' },
+    { id:'apex',   label:'⭐ APEX',   color:'#FFD700' },
+    { id:'whale',  label:'🐋 WHALE',  color:'#4C8EDA' },
+    { id:'shark',  label:'🦈 SHARK',  color:'#2EC4B6' },
+    { id:'dolphin',label:'🐬 DOLPHIN',color:'#48BB78' },
+  ];
+  tiers.forEach(function(t) {
+    var el = document.createElement('button');
+    el.textContent = t.label;
+    el.className = t.id === 'ALL' ? 'btn tier-btn active' : 'btn tier-btn';
+    el.style.setProperty('--tier-color', t.color);
+    el.addEventListener('click', function() {
+      document.querySelectorAll('#tier-buttons .tier-btn').forEach(function(x){ x.classList.remove('active'); });
+      el.classList.add('active');
+      curTierFilter = t.id;
+      render(curAsset);
+    });
+    bar.appendChild(el);
+  });
+})();
+
+/* staker column — toggle + staking tier sub-filter + bias panel */
+var curStakingTier = 'ALL';   /* ALL / elite / high / mid / low */
+
+(function buildStakerSection() {
+  var col = document.getElementById('staker-col');
+  if (!col) return;
+
+  /* ── row 1: toggle button ── */
+  var row1 = document.createElement('div');
+  row1.style.cssText = 'display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+
+  var stakerBtn = document.createElement('button');
+  stakerBtn.id = 'staker-toggle';
+  stakerBtn.textContent = '\uD83D\uDC8E STAKERS OFF';
+  stakerBtn.className = 'btn staker-btn';
+  stakerBtn.title = 'Show only wallets with staked HYPE';
+  row1.appendChild(stakerBtn);
+  col.appendChild(row1);
+
+  /* ── row 2: staking tier sub-buttons (greyed when toggle off) ── */
+  var row2 = document.createElement('div');
+  row2.id = 'staking-tier-row';
+  row2.style.cssText = 'display:flex;align-items:center;gap:6px;flex-wrap:wrap;opacity:0.3;pointer-events:none;';
+
+  var stakingTiers = [
+    { id:'ALL',   label:'ALL STAKERS' },
+    { id:'elite', label:'\uD83D\uDC8E ELITE' },
+    { id:'high',  label:'\uD83D\uDC8E HIGH' },
+    { id:'mid',   label:'\uD83D\uDC8E MID' },
+    { id:'low',   label:'\uD83D\uDC8E LOW' },
+  ];
+  stakingTiers.forEach(function(t) {
+    var el = document.createElement('button');
+    el.textContent = t.label;
+    el.className = t.id === 'ALL' ? 'btn staking-tier-btn active' : 'btn staking-tier-btn';
+    el.dataset.stid = t.id;
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.staking-tier-btn').forEach(function(x){ x.classList.remove('active'); });
+      el.classList.add('active');
+      curStakingTier = t.id;
+      render(curAsset);
+    });
+    row2.appendChild(el);
+  });
+  col.appendChild(row2);
+
+  /* ── row 3: bias panel ── */
+  var row3 = document.createElement('div');
+  row3.id = 'staker-bias-panel';
+  row3.style.cssText = 'display:none;flex-direction:column;gap:8px;';
+  col.appendChild(row3);
+
+  /* toggle click handler */
+  stakerBtn.addEventListener('click', function() {
+    curStakerFilter = !curStakerFilter;
+    stakerBtn.classList.toggle('active', curStakerFilter);
+    stakerBtn.textContent = curStakerFilter ? '\uD83D\uDC8E STAKERS ON' : '\uD83D\uDC8E STAKERS OFF';
+    /* enable / disable sub-filter row */
+    row2.style.opacity = curStakerFilter ? '1' : '0.3';
+    row2.style.pointerEvents = curStakerFilter ? 'auto' : 'none';
+    render(curAsset);
+  });
+})();
+
 document.getElementById('chart').addEventListener('click', function() {
   pinned = null; tooltip.style.display = 'none';
 });
@@ -440,8 +735,8 @@ html, body { width:100%; height:100%; background:#0d1117; color:#c9d1d9;
   padding:6px 14px; display:flex; flex-direction:column; align-items:center; gap:2px;
   min-width:90px;
 }
-.stat-label { font-size:10px; color:#8b949e; text-transform:uppercase; letter-spacing:0.8px; }
-.stat-val   { font-size:15px; font-weight:600; color:#e6edf3; }
+.stat-label { font-size:11px; color:#8b949e; text-transform:uppercase; letter-spacing:0.8px; font-weight:700; }
+.stat-val   { font-size:16px; font-weight:700; color:#ffffff; }
 .stat-val.green { color:#52e07c; }
 .stat-val.red   { color:#e05252; }
 .stat-val.blue  { color:#4C8EDA; }
@@ -454,18 +749,104 @@ html, body { width:100%; height:100%; background:#0d1117; color:#c9d1d9;
 }
 .leg-item { display:flex; align-items:center; gap:5px; }
 .leg-dot  { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-.leg-lbl  { font-size:11px; color:#8b949e; }
+.leg-lbl  { font-size:12px; color:#c9d1d9; font-weight:600; }
 
-/*  coin buttons  */
-#btnbar {
-  display:flex; flex-wrap:wrap; gap:5px; padding:5px 12px;
-  background:#0d1117; border-bottom:1px solid #21262d; flex-shrink:0;
+/*  ── two-column control panel ──────────────────────────────────────
+    LEFT  col: coin filter buttons (row 1) + tier filter buttons (row 2)
+    RIGHT col: smart money bias (fills remaining width)
+    Separated by a vertical divider.
+-------------------------------------------------------------------- */
+#ctrlpanel {
+  display:flex; flex-direction:row; flex-shrink:0;
+  background:#0d1117; border-bottom:1px solid #21262d;
+  overflow:hidden;
 }
-.btn { background:#161b22; color:#8b949e; border:1px solid #21262d;
-  border-radius:4px; padding:3px 10px; font-size:11px; cursor:pointer; }
-.btn.active, .btn:hover { background:#388bfd22; border-color:#388bfd; color:#58a6ff; }
 
-/*  bubble canvas (bottom 80%)  */
+/* ---- left column ---- */
+#ctrl-left {
+  display:flex; flex-direction:column; flex-shrink:0;
+  padding:8px 14px; gap:8px;
+}
+
+/* section label (COINS / FILTER) */
+.ctrl-label {
+  font-size:10px; font-weight:700; color:#e6edf3;
+  letter-spacing:1.2px; text-transform:uppercase; margin-bottom:2px;
+}
+
+/* coin & tier button rows */
+#btnbar {
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+#tier-buttons {
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+
+/* shared button style */
+.btn {
+  background:#161b22; color:#c9d1d9; border:1px solid #21262d;
+  border-radius:5px; padding:5px 13px; font-size:13px;
+  font-weight:600; cursor:pointer; white-space:nowrap;
+}
+.btn.active, .btn:hover {
+  background:#388bfd22; border-color:#388bfd; color:#ffffff;
+}
+.tier-btn {
+  background:#161b22; border:1px solid #21262d;
+  border-radius:5px; padding:5px 13px; font-size:13px;
+  font-weight:600; cursor:pointer;
+  color: var(--tier-color, #c9d1d9); white-space:nowrap;
+}
+.tier-btn.active, .tier-btn:hover {
+  background: color-mix(in srgb, var(--tier-color, #388bfd) 18%, transparent);
+  border-color: var(--tier-color, #388bfd); color:#ffffff;
+}
+
+/* staker toggle button — gold theme, independent toggle */
+.staker-btn {
+  background:#1a1400; border:1px solid #4a3800; color:#C4A832;
+  border-radius:5px; padding:5px 13px; font-size:13px; font-weight:700;
+  cursor:pointer; white-space:nowrap; letter-spacing:.3px;
+}
+.staker-btn.active, .staker-btn:hover {
+  background:#2a2000; border-color:#FFD700; color:#FFD700;
+  box-shadow: 0 0 8px #FFD70044;
+}
+
+/* ---- vertical divider ---- */
+#ctrl-sep {
+  width:1px; background:#21262d; flex-shrink:0; margin:10px 0;
+}
+
+/* ---- right columns (smart money + staker) ---- */
+#sm-col {
+  flex:1; min-width:0; padding:10px 18px;
+  display:flex; flex-direction:column; justify-content:center; gap:8px;
+}
+#sm-bias-panel { display:flex; flex-direction:column; gap:8px; }
+
+/* vertical divider before staker col — hidden until toggle on */
+#staker-sep {
+  width:1px; background:#21262d; flex-shrink:0; margin:10px 0; display:none;
+}
+
+/* staker column */
+#staker-col {
+  flex:1; min-width:0; padding:10px 18px;
+  display:flex; flex-direction:column; justify-content:center; gap:8px;
+}
+
+/* staking tier sub-buttons */
+.staking-tier-btn {
+  background:#1a1400; border:1px solid #4a3800; color:#C4A832;
+  border-radius:5px; padding:4px 10px; font-size:12px; font-weight:600;
+  cursor:pointer; white-space:nowrap;
+}
+.staking-tier-btn.active, .staking-tier-btn:hover {
+  background:#2a2000; border-color:#FFD700; color:#FFD700;
+}
+
+/*  bubble canvas (bottom)  */
 #chart { flex:1; position:relative; overflow:hidden; }
 
 /*  tooltip  */
@@ -531,6 +912,10 @@ def build_html(snap):
         "<div class='leg-item'><div class='leg-dot' style='background:#2EC4B6'></div><span class='leg-lbl'>Shark</span></div>"
         "<div class='leg-item'><div class='leg-dot' style='background:#48BB78'></div><span class='leg-lbl'>Dolphin</span></div>"
         "<div class='leg-item'><div class='leg-dot' style='background:#6E7681'></div><span class='leg-lbl'>Dormant</span></div>"
+        "<div class='leg-item'>"
+          "<div class='leg-dot' style='background:none;border:2px solid #FFD700;box-sizing:border-box;'></div>"
+          "<span class='leg-lbl' style='color:#FFD700;'>💎 Staker</span>"
+        "</div>"
         "</div>"
     )
 
@@ -551,7 +936,22 @@ def build_html(snap):
             + legend_html +
           "</div>"
         "</div>"
-        "<div id='btnbar'></div>"
+        "<div id='ctrlpanel'>"
+          "<div id='ctrl-left'>"
+            "<div><span class='ctrl-label'>&#x1F4B9; Coins</span>"
+              "<div id='btnbar'></div>"
+            "</div>"
+            "<div><span class='ctrl-label'>&#x1F50D; Filter</span>"
+              "<div id='tier-buttons'></div>"
+            "</div>"
+          "</div>"
+          "<div id='ctrl-sep'></div>"
+          "<div id='sm-col'>"
+            "<div id='sm-bias-panel'></div>"
+          "</div>"
+          "<div id='staker-sep'></div>"
+          "<div id='staker-col'></div>"
+        "</div>"
         "<div id='chart'></div>"
         "</div>"
         "<div id='tooltip'></div>"

@@ -129,6 +129,7 @@ def main() -> None:
                 "tier": tier,
                 "whale_score": whale.get("whale_score", 0),
                 "account_value": round(av, 2),
+                "staked_hype_tier": whale.get("staked_hype_tier", "none"),
                 "positions": pos_list,
             })
 

@@ -85,8 +85,8 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#2EC4B622;color:#2EC4B6">shark</span>
         <span style="font-size:12px;color:#8b949e">Score: 41.5</span>
-        <span style="font-size:12px;color:#8b949e">  8 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 02:13:34</span>
+        <span style="font-size:12px;color:#8b949e">  10 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 06:17:24</span>
       </div>
     </div>
     <div class="stats-row">
@@ -160,7 +160,7 @@ tr:hover td{background:#1c2128}
                 <td>$488.6K</td>
                 <td><span style="color:#f85149">$5.8K</span></td>
                 <td>0.70475</td>
-                <td>2.7010543306</td>
+                <td>2.7012430376</td>
                 <td>5.0x</td>
             </tr></tbody>
       </table>
@@ -175,7 +175,21 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 06:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ASTER</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$488.6K</td>
+            <td><span style="color:#f85149">$5.8K</span></td>
+            <td>5.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 05:15</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ASTER</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$493.5K</td>
+            <td><span style="color:#f85149">$10.7K</span></td>
+            <td>5.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">ASTER</td>
             <td style="color:#f85149">SHORT</td>
@@ -299,8 +313,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13"];
-var avValues = [1541034.02, 1541088.83, 1542106.79, 1538516.26, 1534067.64, 1536516.03, 1545208.31, 1546923.72];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17"];
+var avValues = [1541034.02, 1541088.83, 1542106.79, 1538516.26, 1534067.64, 1536516.03, 1545208.31, 1546923.72, 1542161.52, 1547031.67];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

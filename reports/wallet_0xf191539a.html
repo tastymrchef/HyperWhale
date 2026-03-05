@@ -85,17 +85,17 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#8b949e22;color:#8b949e">skip</span>
         <span style="font-size:12px;color:#8b949e">Score: 14.9</span>
-        <span style="font-size:12px;color:#8b949e">  8 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 02:13:34</span>
+        <span style="font-size:12px;color:#8b949e">  10 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 06:17:24</span>
       </div>
     </div>
     <div class="stats-row">
       <div class="stat-pill">
-        <div class="val">$223.0K</div>
+        <div class="val">$222.2K</div>
         <div class="lbl">Account Value</div>
       </div>
       <div class="stat-pill">
-        <div class="val">$569.2K</div>
+        <div class="val">$568.5K</div>
         <div class="lbl">Total Long</div>
       </div>
       <div class="stat-pill">
@@ -130,7 +130,7 @@ tr:hover td{background:#1c2128}
         <div class="bias-labels"><span>Short</span><span>Long</span></div>
         <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
           <div style="background:#3fb95011;border:1px solid #3fb95033;border-radius:8px;padding:12px">
-            <div style="color:#3fb950;font-size:16px;font-weight:700">$569.2K</div>
+            <div style="color:#3fb950;font-size:16px;font-weight:700">$568.5K</div>
             <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
           </div>
           <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
@@ -157,10 +157,10 @@ tr:hover td{background:#1c2128}
             <tr>
                 <td class="mono">HYPE</td>
                 <td style="color:#3fb950;font-weight:600">LONG</td>
-                <td>$569.2K</td>
-                <td><span style="color:#f85149">$114.0K</span></td>
+                <td>$568.5K</td>
+                <td><span style="color:#f85149">$114.8K</span></td>
                 <td>37.9564</td>
-                <td>20.2454122188</td>
+                <td>20.2470726004</td>
                 <td>10.0x</td>
             </tr></tbody>
       </table>
@@ -175,7 +175,21 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 06:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$568.5K</td>
+            <td><span style="color:#f85149">$114.8K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 05:15</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$571.8K</td>
+            <td><span style="color:#f85149">$111.4K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">HYPE</td>
             <td style="color:#3fb950">LONG</td>
@@ -257,8 +271,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13"];
-var avValues = [235614.93, 240060.93, 248978.57, 246020.36, 241910.61, 233226.25, 224284.54, 223035.45];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17"];
+var avValues = [235614.93, 240060.93, 248978.57, 246020.36, 241910.61, 233226.25, 224284.54, 223035.45, 225588.15, 222233.06];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

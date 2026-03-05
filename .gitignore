@@ -47,3 +47,7 @@ logs/
 models/
 *.pkl
 *.joblib
+
+# Docs — internal reference (not for repo)
+docs/PROJECT_REFERENCE.md
+docs/WHALE_TRACKER_PRD.md
