@@ -48,6 +48,7 @@ models/
 *.pkl
 *.joblib
 
-# Docs — internal reference (not for repo)
+# Docs — internal references (not for repo)
 docs/PROJECT_REFERENCE.md
+docs/DEPLOYMENT_GUIDE.md
 docs/WHALE_TRACKER_PRD.md

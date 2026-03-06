@@ -85,8 +85,8 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#2EC4B622;color:#2EC4B6">shark</span>
         <span style="font-size:12px;color:#8b949e">Score: 37.5</span>
-        <span style="font-size:12px;color:#8b949e">  10 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 06:17:24</span>
+        <span style="font-size:12px;color:#8b949e">  21 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-06 07:17:28</span>
       </div>
     </div>
     <div class="stats-row">
@@ -166,7 +166,14 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-04 14:23</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 12:22</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$7.28M</td>
+            <td><span style="color:#f85149">$1.5K</span></td>
+            <td>40.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 14:23</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">BTC</td>
             <td style="color:#3fb950">LONG</td>
@@ -206,8 +213,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17"];
-var avValues = [894536.89, 865067.42, 1012353.37, 1012353.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17"];
+var avValues = [894536.89, 865067.42, 1012353.37, 1012353.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004102.37, 1004746.16, 1004157.94, 1004157.94, 1004157.94, 1004157.94, 1004157.94, 1004157.94];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

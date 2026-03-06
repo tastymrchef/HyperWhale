@@ -85,17 +85,17 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#48BB7822;color:#48BB78">dolphin</span>
         <span style="font-size:12px;color:#8b949e">Score: 31.6</span>
-        <span style="font-size:12px;color:#8b949e">  10 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 06:17:24</span>
+        <span style="font-size:12px;color:#8b949e">  21 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-06 07:17:28</span>
       </div>
     </div>
     <div class="stats-row">
       <div class="stat-pill">
-        <div class="val">$1.54M</div>
+        <div class="val">$1.55M</div>
         <div class="lbl">Account Value</div>
       </div>
       <div class="stat-pill">
-        <div class="val">$0.00</div>
+        <div class="val">$1.53M</div>
         <div class="lbl">Total Long</div>
       </div>
       <div class="stat-pill">
@@ -103,7 +103,7 @@ tr:hover td{background:#1c2128}
         <div class="lbl">Total Short</div>
       </div>
       <div class="stat-pill">
-        <div class="val">0</div>
+        <div class="val">2</div>
         <div class="lbl">Open Positions</div>
       </div>
     </div>
@@ -122,15 +122,15 @@ tr:hover td{background:#1c2128}
     <div class="card">
       <div class="card-title"> Long / Short Bias</div>
       <div class="card-body" style="padding-top:28px">
-        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">0% Long</div>
-        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">100% Short</div>
+        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">100% Long</div>
+        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">0% Short</div>
         <div class="bias-bar">
-          <div class="bias-fill" style="width:0%;background:#3fb950"></div>
+          <div class="bias-fill" style="width:100.0%;background:#3fb950"></div>
         </div>
         <div class="bias-labels"><span>Short</span><span>Long</span></div>
         <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
           <div style="background:#3fb95011;border:1px solid #3fb95033;border-radius:8px;padding:12px">
-            <div style="color:#3fb950;font-size:16px;font-weight:700">$0.00</div>
+            <div style="color:#3fb950;font-size:16px;font-weight:700">$1.53M</div>
             <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
           </div>
           <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
@@ -153,7 +153,25 @@ tr:hover td{background:#1c2128}
             <th>Unrealised PnL</th><th>Entry</th><th>Liq Price</th><th>Leverage</th>
           </tr>
         </thead>
-        <tbody><tr><td colspan="7" style="text-align:center;color:#8b949e">No open positions</td></tr></tbody>
+        <tbody>
+            <tr>
+                <td class="mono">BTC</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$929.9K</td>
+                <td><span style="color:#f85149">$2.8K</span></td>
+                <td>70970.2</td>
+                <td>None</td>
+                <td>4.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">ETH</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$605.1K</td>
+                <td><span style="color:#3fb950">+$1.1K</span></td>
+                <td>2073.5</td>
+                <td>None</td>
+                <td>4.0x</td>
+            </tr></tbody>
       </table>
     </div>
   </div>
@@ -166,7 +184,91 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-06 07:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$929.9K</td>
+            <td><span style="color:#f85149">$2.8K</span></td>
+            <td>4.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$605.1K</td>
+            <td><span style="color:#3fb950">+$1.1K</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 06:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$923.9K</td>
+            <td><span style="color:#f85149">$8.8K</span></td>
+            <td>4.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$601.4K</td>
+            <td><span style="color:#f85149">$2.7K</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 05:37</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$925.0K</td>
+            <td><span style="color:#f85149">$7.7K</span></td>
+            <td>4.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$601.6K</td>
+            <td><span style="color:#f85149">$2.4K</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 17:20</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$445.4K</td>
+            <td><span style="color:#3fb950">+$535.44</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 13:16</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$303.4K</td>
+            <td><span style="color:#3fb950">+$2.9K</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 12:22</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$307.7K</td>
+            <td><span style="color:#3fb950">+$2.2K</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 11:18</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$432.2K</td>
+            <td><span style="color:#3fb950">+$543.08</span></td>
+            <td>4.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$233.1K</td>
+            <td><span style="color:#3fb950">+$101.31</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 09:59</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$26.3K</td>
+            <td><span style="color:#3fb950">+$117.77</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">ETH</td>
             <td style="color:#3fb950">LONG</td>
@@ -304,8 +406,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17"];
-var avValues = [1588554.09, 1584810.74, 1551999.01, 1538053.35, 1540437.6, 1540150.47, 1533481.56, 1532057.76, 1536990.31, 1536990.31];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17"];
+var avValues = [1588554.09, 1584810.74, 1551999.01, 1538053.35, 1540437.6, 1540150.47, 1533481.56, 1532057.76, 1536990.31, 1536990.31, 1539508.82, 1548285.99, 1548270.23, 1548797.08, 1551308.05, 1553121.1, 1553722.39, 1549627.25, 1537381.27, 1536038.77, 1545748.22];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

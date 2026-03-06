@@ -85,13 +85,13 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#48BB7822;color:#48BB78">dolphin</span>
         <span style="font-size:12px;color:#8b949e">Score: 33.1</span>
-        <span style="font-size:12px;color:#8b949e">  10 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-05 06:17:24</span>
+        <span style="font-size:12px;color:#8b949e">  21 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-06 07:17:28</span>
       </div>
     </div>
     <div class="stats-row">
       <div class="stat-pill">
-        <div class="val">$740.6K</div>
+        <div class="val">$754.8K</div>
         <div class="lbl">Account Value</div>
       </div>
       <div class="stat-pill">
@@ -166,7 +166,35 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-04 18:16</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 17:20</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$121.3K</td>
+            <td><span style="color:#3fb950">+$2.0K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 16:39</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">XPL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$50.6K</td>
+            <td><span style="color:#3fb950">+$538.20</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 13:16</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">FARTCOIN</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$102.0K</td>
+            <td><span style="color:#3fb950">+$2.0K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 12:22</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">FARTCOIN</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$103.7K</td>
+            <td><span style="color:#3fb950">+$279.97</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-04 18:16</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">ETH</td>
             <td style="color:#f85149">SHORT</td>
@@ -220,8 +248,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17"];
-var avValues = [739392.27, 739392.27, 731833.96, 731823.66, 723845.98, 729321.07, 740612.08, 740612.08, 740612.08, 740612.08];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17"];
+var avValues = [739392.27, 739392.27, 731833.96, 731823.66, 723845.98, 729321.07, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740739.99, 743701.19, 745312.58, 752616.97, 754789.25, 754789.25, 754789.25];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

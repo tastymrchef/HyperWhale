@@ -10,6 +10,7 @@ steps = [
     ("Building bubble map...",      [PYTHON, os.path.join(BASE, "bubble_map.py")]),
     ("Generating wallet profiles...", [PYTHON, os.path.join(BASE, "wallet_profile.py"), "--all"]),
     ("Building liquidation heatmap...", [PYTHON, os.path.join(BASE, "liq_heatmap.py")]),
+    ("Fetching CEX sentiment...",   [PYTHON, os.path.join(BASE, "cex_sentiment.py")]),
 ]
 
 for msg, cmd in steps:
