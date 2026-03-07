@@ -23,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import sqlite3
 import time
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -38,6 +39,7 @@ ROOT          = Path(__file__).resolve().parent.parent
 SNAPSHOT_FILE = ROOT / "data" / "live_positions_snapshot.json"
 OUT_JSON      = ROOT / "data" / "cex_sentiment.json"
 OUT_HTML      = ROOT / "reports" / "cex_sentiment.html"
+DB_PATH       = ROOT / "data" / "hyperwhale.db"
 
 # ---------------------------------------------------------------------------
 # Exchange endpoints (all public, no API key)
@@ -258,6 +260,76 @@ def hl_bias_by_coin(snapshot: dict) -> dict[str, dict]:
 # Main
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# DB persistence
+# ---------------------------------------------------------------------------
+
+# DDL is minimal here — full schema lives in store_snapshot.py
+_CEX_BIAS_DDL = """
+CREATE TABLE IF NOT EXISTS cex_bias (
+    id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+    fetched_at            TEXT NOT NULL,
+    coin                  TEXT NOT NULL,
+    mark_price            REAL,
+    bn_top_long_pct       REAL,
+    bn_all_long_pct       REAL,
+    bn_funding_rate       REAL,
+    bn_oi_usd             REAL,
+    by_top_long_pct       REAL,
+    by_funding_rate       REAL,
+    by_oi_usd             REAL
+);
+CREATE INDEX IF NOT EXISTS idx_cex_bias_coin    ON cex_bias(coin);
+CREATE INDEX IF NOT EXISTS idx_cex_bias_fetched ON cex_bias(fetched_at);
+"""
+
+
+def store_cex_bias(results: dict, fetched_at: str) -> int:
+    """Append one row per coin into cex_bias table. Returns number of rows written."""
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    con = sqlite3.connect(DB_PATH)
+    con.executescript(_CEX_BIAS_DDL)
+
+    rows = []
+    for coin, d in results.items():
+        bn  = d.get("binance", {})
+        by  = d.get("bybit",   {})
+
+        bn_top  = bn.get("top_traders") or {}
+        bn_all  = bn.get("all_traders") or {}
+        bn_fund = bn.get("funding")     or {}
+        bn_oi   = bn.get("open_interest") or {}
+
+        by_top  = by.get("top_traders") or {}
+        by_fund = by.get("funding")     or {}
+        by_oi   = by.get("open_interest") or {}
+
+        rows.append((
+            fetched_at,
+            coin,
+            bn_fund.get("mark_price"),
+            bn_top.get("long_pct"),
+            bn_all.get("long_pct"),
+            bn_fund.get("funding_rate"),
+            bn_oi.get("oi_usd"),
+            by_top.get("long_pct"),
+            by_fund.get("funding_rate"),
+            by_oi.get("oi_usd"),
+        ))
+
+    con.executemany(
+        """INSERT INTO cex_bias
+           (fetched_at, coin, mark_price,
+            bn_top_long_pct, bn_all_long_pct, bn_funding_rate, bn_oi_usd,
+            by_top_long_pct, by_funding_rate, by_oi_usd)
+           VALUES (?,?,?,?,?,?,?,?,?,?)""",
+        rows,
+    )
+    con.commit()
+    con.close()
+    return len(rows)
+
+
 def main() -> None:
     print("=" * 60)
     print("CEX Sentiment Fetcher")
@@ -331,6 +403,10 @@ def main() -> None:
     }
     OUT_JSON.write_text(json.dumps(output, indent=2), encoding="utf-8")
     print(f"\n✅ Saved JSON → {OUT_JSON}")
+
+    # Persist to DB
+    n = store_cex_bias(results, output["fetched_at"])
+    print(f"✅ Stored {n} coin rows → hyperwhale.db (cex_bias table)")
 
     # Generate HTML report
     generate_html(output)

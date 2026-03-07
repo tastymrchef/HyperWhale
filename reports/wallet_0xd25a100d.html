@@ -85,13 +85,13 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#48BB7822;color:#48BB78">dolphin</span>
         <span style="font-size:12px;color:#8b949e">Score: 33.1</span>
-        <span style="font-size:12px;color:#8b949e">  21 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-06 07:17:28</span>
+        <span style="font-size:12px;color:#8b949e">  32 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-07 05:16:59</span>
       </div>
     </div>
     <div class="stats-row">
       <div class="stat-pill">
-        <div class="val">$754.8K</div>
+        <div class="val">$759.1K</div>
         <div class="lbl">Account Value</div>
       </div>
       <div class="stat-pill">
@@ -166,7 +166,28 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-05 17:20</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-06 17:33</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ZEC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$453.3K</td>
+            <td><span style="color:#f85149">$4.6K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 16:54</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ZEC</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$172.9K</td>
+            <td><span style="color:#f85149">$750.07</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 14:18</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">LIT</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$118.1K</td>
+            <td><span style="color:#3fb950">+$24.55</span></td>
+            <td>5.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-05 17:20</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">XPL</td>
             <td style="color:#f85149">SHORT</td>
@@ -248,8 +269,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17"];
-var avValues = [739392.27, 739392.27, 731833.96, 731823.66, 723845.98, 729321.07, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740739.99, 743701.19, 745312.58, 752616.97, 754789.25, 754789.25, 754789.25];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17", "2026-03-06 09:34", "2026-03-06 10:11", "2026-03-06 11:44", "2026-03-06 11:47", "2026-03-06 12:17", "2026-03-06 13:15", "2026-03-06 14:18", "2026-03-06 16:54", "2026-03-06 17:33", "2026-03-07 02:37", "2026-03-07 05:16"];
+var avValues = [739392.27, 739392.27, 731833.96, 731823.66, 723845.98, 729321.07, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740612.08, 740739.99, 743701.19, 745312.58, 752616.97, 754789.25, 754789.25, 754789.25, 754789.25, 754789.25, 754789.25, 754789.25, 754789.25, 754789.25, 754764.82, 754940.29, 751085.75, 759106.21, 759106.21];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

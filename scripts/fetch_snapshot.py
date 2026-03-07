@@ -150,12 +150,22 @@ def main() -> None:
 
         time.sleep(0.25)
 
+    # Fetch current mid prices for all coins from HL
+    prices = {}
+    try:
+        r = httpx.post(BASE_URL, json={"type": "allMids"}, timeout=15)
+        r.raise_for_status()
+        prices = {coin: float(px) for coin, px in r.json().items()}
+    except Exception as e:
+        print(f"[WARN] allMids price fetch failed: {e}")
+
     # Save
     snapshot = {
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "total_wallets": len(results),
         "errors": errors,
         "top_coins": dict(coin_counter.most_common(30)),
+        "prices": prices,
         "wallets": results,
     }
     OUT_FILE.write_text(json.dumps(snapshot, indent=2), encoding="utf-8")

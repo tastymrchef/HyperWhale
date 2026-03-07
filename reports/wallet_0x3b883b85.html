@@ -85,25 +85,25 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#2EC4B622;color:#2EC4B6">shark</span>
         <span style="font-size:12px;color:#8b949e">Score: 41.5</span>
-        <span style="font-size:12px;color:#8b949e">  21 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-06 07:17:28</span>
+        <span style="font-size:12px;color:#8b949e">  32 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-07 05:16:59</span>
       </div>
     </div>
     <div class="stats-row">
       <div class="stat-pill">
-        <div class="val">$1.20M</div>
+        <div class="val">$1.40M</div>
         <div class="lbl">Account Value</div>
       </div>
       <div class="stat-pill">
-        <div class="val">$0.00</div>
+        <div class="val">$307.2K</div>
         <div class="lbl">Total Long</div>
       </div>
       <div class="stat-pill">
-        <div class="val">$5.37M</div>
+        <div class="val">$4.32M</div>
         <div class="lbl">Total Short</div>
       </div>
       <div class="stat-pill">
-        <div class="val">3</div>
+        <div class="val">4</div>
         <div class="lbl">Open Positions</div>
       </div>
     </div>
@@ -122,19 +122,19 @@ tr:hover td{background:#1c2128}
     <div class="card">
       <div class="card-title"> Long / Short Bias</div>
       <div class="card-body" style="padding-top:28px">
-        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">0% Long</div>
-        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">100% Short</div>
+        <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">7% Long</div>
+        <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">93% Short</div>
         <div class="bias-bar">
-          <div class="bias-fill" style="width:0.0%;background:#3fb950"></div>
+          <div class="bias-fill" style="width:6.641457277376488%;background:#3fb950"></div>
         </div>
         <div class="bias-labels"><span>Short</span><span>Long</span></div>
         <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
           <div style="background:#3fb95011;border:1px solid #3fb95033;border-radius:8px;padding:12px">
-            <div style="color:#3fb950;font-size:16px;font-weight:700">$0.00</div>
+            <div style="color:#3fb950;font-size:16px;font-weight:700">$307.2K</div>
             <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
           </div>
           <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
-            <div style="color:#f85149;font-size:16px;font-weight:700">$5.37M</div>
+            <div style="color:#f85149;font-size:16px;font-weight:700">$4.32M</div>
             <div style="color:#8b949e;font-size:11px;margin-top:2px">Short Notional</div>
           </div>
         </div>
@@ -157,29 +157,38 @@ tr:hover td{background:#1c2128}
             <tr>
                 <td class="mono">BTC</td>
                 <td style="color:#f85149;font-weight:600">SHORT</td>
-                <td>$2.46M</td>
-                <td><span style="color:#f85149">$80.8K</span></td>
+                <td>$2.38M</td>
+                <td><span style="color:#3fb950">+$2.3K</span></td>
                 <td>68402.0</td>
-                <td>102075.9758598049</td>
+                <td>105650.7788591634</td>
                 <td>25.0x</td>
-            </tr>
-            <tr>
-                <td class="mono">SOL</td>
-                <td style="color:#f85149;font-weight:600">SHORT</td>
-                <td>$1.76M</td>
-                <td><span style="color:#f85149">$17.9K</span></td>
-                <td>87.26</td>
-                <td>142.1126861043</td>
-                <td>20.0x</td>
             </tr>
             <tr>
                 <td class="mono">ETH</td>
                 <td style="color:#f85149;font-weight:600">SHORT</td>
-                <td>$1.14M</td>
-                <td><span style="color:#f85149">$10.4K</span></td>
+                <td>$1.09M</td>
+                <td><span style="color:#3fb950">+$41.9K</span></td>
                 <td>2057.98</td>
-                <td>4047.6930256995</td>
+                <td>4327.3108923644</td>
                 <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">SOL</td>
+                <td style="color:#f85149;font-weight:600">SHORT</td>
+                <td>$846.7K</td>
+                <td><span style="color:#3fb950">+$25.9K</span></td>
+                <td>87.26</td>
+                <td>213.1061674043</td>
+                <td>20.0x</td>
+            </tr>
+            <tr>
+                <td class="mono">HYPE</td>
+                <td style="color:#3fb950;font-weight:600">LONG</td>
+                <td>$307.2K</td>
+                <td><span style="color:#3fb950">+$7.2K</span></td>
+                <td>30.0</td>
+                <td>None</td>
+                <td>10.0x</td>
             </tr></tbody>
       </table>
     </div>
@@ -193,7 +202,273 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-06 07:17</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-07 05:16</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.38M</td>
+            <td><span style="color:#3fb950">+$2.3K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.09M</td>
+            <td><span style="color:#3fb950">+$41.9K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$846.7K</td>
+            <td><span style="color:#3fb950">+$25.9K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$307.2K</td>
+            <td><span style="color:#3fb950">+$7.2K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-07 02:37</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.38M</td>
+            <td><span style="color:#3fb950">+$4.0K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.09M</td>
+            <td><span style="color:#3fb950">+$42.4K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$847.8K</td>
+            <td><span style="color:#3fb950">+$24.8K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$310.2K</td>
+            <td><span style="color:#3fb950">+$10.2K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 17:33</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.38M</td>
+            <td><span style="color:#3fb950">+$3.7K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.68M</td>
+            <td><span style="color:#3fb950">+$61.4K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.08M</td>
+            <td><span style="color:#3fb950">+$47.7K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$297.2K</td>
+            <td><span style="color:#f85149">$2.8K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 16:54</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.39M</td>
+            <td><span style="color:#f85149">$4.4K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.69M</td>
+            <td><span style="color:#3fb950">+$54.0K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.09M</td>
+            <td><span style="color:#3fb950">+$46.3K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$297.9K</td>
+            <td><span style="color:#f85149">$2.1K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 14:18</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.40M</td>
+            <td><span style="color:#f85149">$14.5K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.70M</td>
+            <td><span style="color:#3fb950">+$40.4K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.11M</td>
+            <td><span style="color:#3fb950">+$24.9K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">HYPE</td>
+            <td style="color:#3fb950">LONG</td>
+            <td>$297.4K</td>
+            <td><span style="color:#f85149">$2.6K</span></td>
+            <td>10.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 13:15</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.44M</td>
+            <td><span style="color:#f85149">$54.8K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.73M</td>
+            <td><span style="color:#3fb950">+$13.5K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.13M</td>
+            <td><span style="color:#3fb950">+$5.5K</span></td>
+            <td>20.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 12:17</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.44M</td>
+            <td><span style="color:#f85149">$52.3K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.74M</td>
+            <td><span style="color:#3fb950">+$10.1K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.12M</td>
+            <td><span style="color:#3fb950">+$8.5K</span></td>
+            <td>20.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 11:47</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.46M</td>
+            <td><span style="color:#f85149">$73.7K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.76M</td>
+            <td><span style="color:#f85149">$11.0K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.14M</td>
+            <td><span style="color:#f85149">$2.7K</span></td>
+            <td>20.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 11:44</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.45M</td>
+            <td><span style="color:#f85149">$70.5K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.75M</td>
+            <td><span style="color:#f85149">$6.7K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.13M</td>
+            <td><span style="color:#f85149">$10.05</span></td>
+            <td>20.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 10:11</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.46M</td>
+            <td><span style="color:#f85149">$79.0K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.75M</td>
+            <td><span style="color:#f85149">$6.1K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.14M</td>
+            <td><span style="color:#f85149">$2.8K</span></td>
+            <td>20.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 09:34</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$2.47M</td>
+            <td><span style="color:#f85149">$88.5K</span></td>
+            <td>25.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">SOL</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.77M</td>
+            <td><span style="color:#f85149">$23.4K</span></td>
+            <td>20.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$1.14M</td>
+            <td><span style="color:#f85149">$12.1K</span></td>
+            <td>20.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-06 07:17</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">BTC</td>
             <td style="color:#f85149">SHORT</td>
@@ -277,272 +552,6 @@ tr:hover td{background:#1c2128}
             <td>$1.14M</td>
             <td><span style="color:#f85149">$8.2K</span></td>
             <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 16:39</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.90M</td>
-            <td><span style="color:#f85149">$165.1K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.82M</td>
-            <td><span style="color:#f85149">$72.4K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$34.1K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 13:16</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.91M</td>
-            <td><span style="color:#f85149">$171.8K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.83M</td>
-            <td><span style="color:#f85149">$86.9K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$38.5K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 12:22</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.92M</td>
-            <td><span style="color:#f85149">$183.0K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.84M</td>
-            <td><span style="color:#f85149">$90.0K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$42.2K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 11:18</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.93M</td>
-            <td><span style="color:#f85149">$187.8K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.85M</td>
-            <td><span style="color:#f85149">$100.3K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.18M</td>
-            <td><span style="color:#f85149">$49.5K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 10:29</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.91M</td>
-            <td><span style="color:#f85149">$165.5K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.82M</td>
-            <td><span style="color:#f85149">$76.6K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$35.2K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 09:59</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.90M</td>
-            <td><span style="color:#f85149">$163.8K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.83M</td>
-            <td><span style="color:#f85149">$80.5K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$37.6K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 07:17</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.90M</td>
-            <td><span style="color:#f85149">$161.8K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.82M</td>
-            <td><span style="color:#f85149">$70.2K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$36.9K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 06:17</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.89M</td>
-            <td><span style="color:#f85149">$150.8K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.80M</td>
-            <td><span style="color:#f85149">$50.8K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.16M</td>
-            <td><span style="color:#f85149">$30.3K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 05:15</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.91M</td>
-            <td><span style="color:#f85149">$174.4K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.81M</td>
-            <td><span style="color:#f85149">$63.3K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$42.0K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 02:13</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.91M</td>
-            <td><span style="color:#f85149">$167.4K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.80M</td>
-            <td><span style="color:#f85149">$59.3K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$33.7K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-05 01:49</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$2.92M</td>
-            <td><span style="color:#f85149">$175.7K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.80M</td>
-            <td><span style="color:#f85149">$55.3K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.17M</td>
-            <td><span style="color:#f85149">$34.3K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-04 18:16</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$3.30M</td>
-            <td><span style="color:#f85149">$221.4K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.83M</td>
-            <td><span style="color:#f85149">$89.8K</span></td>
-            <td>20.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">ETH</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.18M</td>
-            <td><span style="color:#f85149">$51.8K</span></td>
-            <td>20.0x</td>
-        </tr><tr class="snap-header"><td colspan="5">2026-03-04 17:17</td></tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">BTC</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$3.30M</td>
-            <td><span style="color:#f85149">$218.2K</span></td>
-            <td>25.0x</td>
-        </tr>
-        <tr>
-            <td class="mono" style="padding-left:20px">SOL</td>
-            <td style="color:#f85149">SHORT</td>
-            <td>$1.83M</td>
-            <td><span style="color:#f85149">$86.8K</span></td>
-            <td>20.0x</td>
         </tr></tbody>
       </table>
     </div>
@@ -569,8 +578,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17"];
-var avValues = [1157701.31, 1139069.14, 1020047.46, 994540.62, 997709.56, 986773.83, 1061092.71, 1065870.47, 1046441.6, 1094316.6, 1057380.26, 1044178.91, 1048942.5, 988558.01, 1011061.74, 1029058.35, 1054602.83, 1185871.19, 1231501.48, 1232288.92, 1203907.34];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17", "2026-03-06 09:34", "2026-03-06 10:11", "2026-03-06 11:44", "2026-03-06 11:47", "2026-03-06 12:17", "2026-03-06 13:15", "2026-03-06 14:18", "2026-03-06 16:54", "2026-03-06 17:33", "2026-03-07 02:37", "2026-03-07 05:16"];
+var avValues = [1157701.31, 1139069.14, 1020047.46, 994540.62, 997709.56, 986773.83, 1061092.71, 1065870.47, 1046441.6, 1094316.6, 1057380.26, 1044178.91, 1048942.5, 988558.01, 1011061.74, 1029058.35, 1054602.83, 1185871.19, 1231501.48, 1232288.92, 1203907.34, 1189025.31, 1225175.75, 1235887.65, 1225616.13, 1279382.41, 1277343.66, 1361301.06, 1406750.17, 1422867.35, 1408679.68, 1404531.24];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {

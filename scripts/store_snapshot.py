@@ -70,6 +70,55 @@ CREATE INDEX IF NOT EXISTS idx_positions_address        ON positions(address);
 CREATE INDEX IF NOT EXISTS idx_positions_snapshot       ON positions(snapshot_id);
 CREATE INDEX IF NOT EXISTS idx_positions_coin           ON positions(coin);
 
+-- Per-coin long/short bias snapshot (all tiers + smart money = apex+whale)
+CREATE TABLE IF NOT EXISTS coin_bias (
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
+    snapshot_id      INTEGER NOT NULL REFERENCES snapshots(id),
+    fetched_at       TEXT NOT NULL,
+    coin             TEXT NOT NULL,
+
+    -- ALL tracked wallets aggregate
+    long_notional    REAL NOT NULL DEFAULT 0,
+    short_notional   REAL NOT NULL DEFAULT 0,
+    long_pct         REAL NOT NULL DEFAULT 0,   -- 0-100
+    wallet_count     INTEGER NOT NULL DEFAULT 0,
+
+    -- Smart money only (apex + whale tiers)
+    sm_long_notional  REAL NOT NULL DEFAULT 0,
+    sm_short_notional REAL NOT NULL DEFAULT 0,
+    sm_long_pct       REAL NOT NULL DEFAULT 0,  -- 0-100  (NULL if no SM in coin)
+    sm_wallet_count   INTEGER NOT NULL DEFAULT 0,
+
+    -- Price at snapshot time (from HL allMids)
+    mark_price        REAL                       -- NULL for old backfilled rows
+);
+
+CREATE INDEX IF NOT EXISTS idx_coin_bias_snapshot ON coin_bias(snapshot_id);
+CREATE INDEX IF NOT EXISTS idx_coin_bias_coin     ON coin_bias(coin);
+CREATE INDEX IF NOT EXISTS idx_coin_bias_fetched  ON coin_bias(fetched_at);
+
+-- CEX top-trader long/short bias (Binance + Bybit), one row per coin per fetch
+CREATE TABLE IF NOT EXISTS cex_bias (
+    id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+    fetched_at            TEXT NOT NULL,
+    coin                  TEXT NOT NULL,
+    mark_price            REAL,           -- Binance mark price at fetch time
+
+    -- Binance top traders (big accounts)
+    bn_top_long_pct       REAL,   -- NULL if fetch failed
+    bn_all_long_pct       REAL,   -- global (all accounts)
+    bn_funding_rate       REAL,
+    bn_oi_usd             REAL,
+
+    -- Bybit top traders
+    by_top_long_pct       REAL,
+    by_funding_rate       REAL,
+    by_oi_usd             REAL
+);
+
+CREATE INDEX IF NOT EXISTS idx_cex_bias_coin    ON cex_bias(coin);
+CREATE INDEX IF NOT EXISTS idx_cex_bias_fetched ON cex_bias(fetched_at);
+
 -- Pre-computed baselines per wallet (rebuilt by anomaly detector later)
 CREATE TABLE IF NOT EXISTS wallet_baselines (
     address           TEXT PRIMARY KEY,
@@ -102,10 +151,22 @@ def store(snap_path: Path = DEFAULT_SNAP, db_path: Path = DB_PATH) -> None:
     total_wallets = snap.get("total_wallets", 0)
     errors        = snap.get("errors", 0)
     wallets       = snap.get("wallets", [])
+    prices        = snap.get("prices", {})
 
     db_path.parent.mkdir(parents=True, exist_ok=True)
     con = sqlite3.connect(db_path)
     con.executescript(DDL)
+
+    # Migrations — add columns that didn't exist in older schema (safe to re-run)
+    for migration in [
+        "ALTER TABLE coin_bias ADD COLUMN mark_price REAL",
+        "ALTER TABLE cex_bias  ADD COLUMN mark_price REAL",
+    ]:
+        try:
+            con.execute(migration)
+        except sqlite3.OperationalError:
+            pass  # column already exists — fine
+    con.commit()
 
     # Check for duplicate (same fetched_at already stored)
     existing = con.execute(
@@ -162,11 +223,118 @@ def store(snap_path: Path = DEFAULT_SNAP, db_path: Path = DB_PATH) -> None:
             )
             position_rows += 1
 
+    # Compute and store per-coin bias
+    coin_rows = store_coin_bias(snapshot_id, fetched_at, wallets, con, prices)
+
     con.commit()
     con.close()
 
     print(f"[store_snapshot] Stored snapshot {snapshot_id}  |  "
-          f"{wallet_rows} wallets  |  {position_rows} positions  |  {fetched_at}")
+          f"{wallet_rows} wallets  |  {position_rows} positions  |  "
+          f"{coin_rows} coin_bias rows  |  {fetched_at}")
+
+
+# ---------------------------------------------------------------------------
+# Per-coin bias aggregation
+# ---------------------------------------------------------------------------
+
+SMART_MONEY_TIERS = {"apex", "whale"}
+
+
+def _compute_coin_bias(wallets: list) -> dict:
+    """
+    Aggregate per-coin long/short notional for:
+      - all tiers combined
+      - smart money only (apex + whale)
+
+    Returns dict keyed by coin:
+      {
+        "BTC": {
+          "long": float, "short": float, "wallets": int,
+          "sm_long": float, "sm_short": float, "sm_wallets": int
+        }, ...
+      }
+    """
+    from collections import defaultdict
+    coins: dict = defaultdict(lambda: {
+        "long": 0.0, "short": 0.0, "wallets": 0,
+        "sm_long": 0.0, "sm_short": 0.0, "sm_wallets": 0,
+    })
+
+    for w in wallets:
+        tier = (w.get("tier") or "").lower()
+        is_sm = tier in SMART_MONEY_TIERS
+        positions = w.get("positions", [])
+        if not positions:
+            continue
+
+        # Track which coins this wallet touched (for wallet_count per coin)
+        touched: set = set()
+        sm_touched: set = set()
+
+        for p in positions:
+            coin = p.get("coin", "")
+            side = p.get("side", "")
+            n = abs(p.get("notional") or 0)
+            if not coin or not side or n == 0:
+                continue
+
+            if side == "long":
+                coins[coin]["long"] += n
+            elif side == "short":
+                coins[coin]["short"] += n
+
+            touched.add(coin)
+
+            if is_sm:
+                if side == "long":
+                    coins[coin]["sm_long"] += n
+                elif side == "short":
+                    coins[coin]["sm_short"] += n
+                sm_touched.add(coin)
+
+        for coin in touched:
+            coins[coin]["wallets"] += 1
+        for coin in sm_touched:
+            coins[coin]["sm_wallets"] += 1
+
+    return dict(coins)
+
+
+def store_coin_bias(
+    snapshot_id: int,
+    fetched_at: str,
+    wallets: list,
+    con: sqlite3.Connection,
+    prices: dict | None = None,
+) -> int:
+    """Compute and insert coin_bias rows. Returns number of coins written."""
+    bias = _compute_coin_bias(wallets)
+    prices = prices or {}
+    rows = []
+    for coin, d in bias.items():
+        tot    = d["long"] + d["short"]
+        sm_tot = d["sm_long"] + d["sm_short"]
+        long_pct    = round(d["long"]    / tot    * 100, 2) if tot    > 0 else 0.0
+        sm_long_pct = round(d["sm_long"] / sm_tot * 100, 2) if sm_tot > 0 else 0.0
+        mark_price  = prices.get(coin)
+        rows.append((
+            snapshot_id, fetched_at, coin,
+            round(d["long"],  2), round(d["short"],  2), long_pct,    d["wallets"],
+            round(d["sm_long"], 2), round(d["sm_short"], 2), sm_long_pct, d["sm_wallets"],
+            mark_price,
+        ))
+
+    con.executemany(
+        """INSERT INTO coin_bias
+           (snapshot_id, fetched_at, coin,
+            long_notional, short_notional, long_pct, wallet_count,
+            sm_long_notional, sm_short_notional, sm_long_pct, sm_wallet_count,
+            mark_price)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+        rows,
+    )
+    return len(rows)
 
 
 # ---------------------------------------------------------------------------
