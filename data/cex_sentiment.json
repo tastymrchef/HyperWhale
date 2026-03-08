@@ -1,47 +1,47 @@
 {
-  "fetched_at": "2026-03-07T05:18:29.105770+00:00",
+  "fetched_at": "2026-03-08T10:20:27.649197+00:00",
   "coins": {
     "BTC": {
       "coin": "BTC",
       "cex_sym": "BTCUSDT",
       "hl": {
-        "long_pct": 51.2,
-        "short_pct": 48.8,
-        "long_usd": 459031226,
-        "short_usd": 437610966,
-        "total_usd": 896642192,
-        "wallet_count": 268
+        "long_pct": 59.5,
+        "short_pct": 40.5,
+        "long_usd": 524086005,
+        "short_usd": 357412462,
+        "total_usd": 881498467,
+        "wallet_count": 263
       },
       "binance": {
         "top_traders": {
-          "long_pct": 66.6,
-          "short_pct": 33.4,
-          "ratio": 1.992
+          "long_pct": 68.6,
+          "short_pct": 31.4,
+          "ratio": 2.181
         },
         "all_traders": {
-          "long_pct": 65.7,
-          "short_pct": 34.3
+          "long_pct": 67.4,
+          "short_pct": 32.6
         },
         "open_interest": {
-          "oi_contracts": 84229.612,
-          "oi_usd": 5730425513.62605
+          "oi_contracts": 83448.247,
+          "oi_usd": 5646350391.9363
         },
         "funding": {
-          "funding_rate": 0.00196,
-          "mark_price": 67909.5
+          "funding_rate": -0.00151,
+          "mark_price": 67896.0
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 64.3,
-          "short_pct": 35.7
+          "long_pct": 65.6,
+          "short_pct": 34.4
         },
         "open_interest": {
-          "oi_contracts": 47603.824
+          "oi_contracts": 48345.305
         },
         "funding": {
-          "funding_rate": -0.0046,
-          "mark_price": 67902.06
+          "funding_rate": -0.00479,
+          "mark_price": 67894.9
         }
       }
     },
@@ -49,43 +49,43 @@
       "coin": "ETH",
       "cex_sym": "ETHUSDT",
       "hl": {
-        "long_pct": 52.6,
-        "short_pct": 47.4,
-        "long_usd": 413847600,
-        "short_usd": 372211671,
-        "total_usd": 786059271,
-        "wallet_count": 199
+        "long_pct": 51.1,
+        "short_pct": 48.9,
+        "long_usd": 420456381,
+        "short_usd": 402436506,
+        "total_usd": 822892886,
+        "wallet_count": 206
       },
       "binance": {
         "top_traders": {
-          "long_pct": 74.3,
-          "short_pct": 25.7,
-          "ratio": 2.888
+          "long_pct": 75.0,
+          "short_pct": 25.1,
+          "ratio": 2.992
         },
         "all_traders": {
-          "long_pct": 70.7,
-          "short_pct": 29.3
+          "long_pct": 71.0,
+          "short_pct": 29.0
         },
         "open_interest": {
-          "oi_contracts": 1950911.056,
-          "oi_usd": 3852268971.1776
+          "oi_contracts": 2007462.674,
+          "oi_usd": 3940046990.2598
         },
         "funding": {
-          "funding_rate": -0.00353,
-          "mark_price": 1973.25313178
+          "funding_rate": -0.00978,
+          "mark_price": 1966.40337984
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 73.3,
-          "short_pct": 26.7
+          "long_pct": 73.0,
+          "short_pct": 27.0
         },
         "open_interest": {
-          "oi_contracts": 821079.72
+          "oi_contracts": 852351.93
         },
         "funding": {
-          "funding_rate": -0.00515,
-          "mark_price": 1972.98
+          "funding_rate": 0.00147,
+          "mark_price": 1966.61
         }
       }
     },
@@ -93,43 +93,43 @@
       "coin": "SOL",
       "cex_sym": "SOLUSDT",
       "hl": {
-        "long_pct": 50.1,
-        "short_pct": 49.9,
-        "long_usd": 75261330,
-        "short_usd": 75007935,
-        "total_usd": 150269265,
-        "wallet_count": 130
+        "long_pct": 49.7,
+        "short_pct": 50.3,
+        "long_usd": 69325611,
+        "short_usd": 70274434,
+        "total_usd": 139600045,
+        "wallet_count": 124
       },
       "binance": {
         "top_traders": {
-          "long_pct": 76.3,
-          "short_pct": 23.7,
-          "ratio": 3.218
+          "long_pct": 76.8,
+          "short_pct": 23.2,
+          "ratio": 3.303
         },
         "all_traders": {
-          "long_pct": 74.2,
-          "short_pct": 25.8
+          "long_pct": 75.4,
+          "short_pct": 24.6
         },
         "open_interest": {
-          "oi_contracts": 9318376.14,
-          "oi_usd": 784793638.5108
+          "oi_contracts": 9533655.63,
+          "oi_usd": 792342119.4093
         },
         "funding": {
-          "funding_rate": -0.00127,
-          "mark_price": 84.13
+          "funding_rate": -0.01875,
+          "mark_price": 83.56309588
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 73.6,
-          "short_pct": 26.4
+          "long_pct": 75.0,
+          "short_pct": 24.9
         },
         "open_interest": {
-          "oi_contracts": 6723758.8
+          "oi_contracts": 7100693.8
         },
         "funding": {
-          "funding_rate": 0.00474,
-          "mark_price": 84.13
+          "funding_rate": -0.03132,
+          "mark_price": 83.614
         }
       }
     },
@@ -139,41 +139,41 @@
       "hl": {
         "long_pct": 36.9,
         "short_pct": 63.1,
-        "long_usd": 13286353,
-        "short_usd": 22676791,
-        "total_usd": 35963144,
-        "wallet_count": 67
+        "long_usd": 13223720,
+        "short_usd": 22658671,
+        "total_usd": 35882391,
+        "wallet_count": 68
       },
       "binance": {
         "top_traders": {
-          "long_pct": 74.6,
-          "short_pct": 25.4,
-          "ratio": 2.931
+          "long_pct": 74.2,
+          "short_pct": 25.8,
+          "ratio": 2.882
         },
         "all_traders": {
           "long_pct": 72.5,
           "short_pct": 27.5
         },
         "open_interest": {
-          "oi_contracts": 267362968.7,
-          "oi_usd": 364270772.8309896
+          "oi_contracts": 271118425.5,
+          "oi_usd": 368829506.0502
         },
         "funding": {
-          "funding_rate": -0.01354,
-          "mark_price": 1.3628
+          "funding_rate": -0.01859,
+          "mark_price": 1.364
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 77.1,
-          "short_pct": 22.9
+          "long_pct": 76.7,
+          "short_pct": 23.3
         },
         "open_interest": {
-          "oi_contracts": 139252250.2
+          "oi_contracts": 143617788.3
         },
         "funding": {
-          "funding_rate": -0.00942,
-          "mark_price": 1.3628
+          "funding_rate": -0.01255,
+          "mark_price": 1.3641
         }
       }
     },
@@ -181,43 +181,43 @@
       "coin": "ZEC",
       "cex_sym": "ZECUSDT",
       "hl": {
-        "long_pct": 35.9,
-        "short_pct": 64.1,
-        "long_usd": 7508749,
-        "short_usd": 13408894,
-        "total_usd": 20917643,
-        "wallet_count": 56
+        "long_pct": 34.8,
+        "short_pct": 65.2,
+        "long_usd": 6702916,
+        "short_usd": 12555889,
+        "total_usd": 19258805,
+        "wallet_count": 57
       },
       "binance": {
         "top_traders": {
-          "long_pct": 51.1,
-          "short_pct": 48.9,
-          "ratio": 1.045
+          "long_pct": 53.1,
+          "short_pct": 46.9,
+          "ratio": 1.13
         },
         "all_traders": {
-          "long_pct": 50.1,
-          "short_pct": 49.9
+          "long_pct": 52.0,
+          "short_pct": 48.0
         },
         "open_interest": {
-          "oi_contracts": 486710.189,
-          "oi_usd": 101659157.17643
+          "oi_contracts": 522587.782,
+          "oi_usd": 102326326.56748836
         },
         "funding": {
-          "funding_rate": -0.00936,
-          "mark_price": 208.75
+          "funding_rate": -0.01348,
+          "mark_price": 196.41
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 64.5,
-          "short_pct": 35.5
+          "long_pct": 63.7,
+          "short_pct": 36.3
         },
         "open_interest": {
-          "oi_contracts": 180774.61
+          "oi_contracts": 176669.95
         },
         "funding": {
-          "funding_rate": -0.00026,
-          "mark_price": 208.79
+          "funding_rate": -0.01417,
+          "mark_price": 196.36
         }
       }
     },
@@ -225,43 +225,43 @@
       "coin": "DOGE",
       "cex_sym": "DOGEUSDT",
       "hl": {
-        "long_pct": 45.9,
-        "short_pct": 54.1,
-        "long_usd": 4995005,
-        "short_usd": 5877669,
-        "total_usd": 10872674,
+        "long_pct": 46.7,
+        "short_pct": 53.3,
+        "long_usd": 4949215,
+        "short_usd": 5638669,
+        "total_usd": 10587884,
         "wallet_count": 55
       },
       "binance": {
         "top_traders": {
-          "long_pct": 73.2,
+          "long_pct": 73.1,
           "short_pct": 26.9,
-          "ratio": 2.724
+          "ratio": 2.719
         },
         "all_traders": {
-          "long_pct": 70.5,
-          "short_pct": 29.5
+          "long_pct": 71.3,
+          "short_pct": 28.7
         },
         "open_interest": {
-          "oi_contracts": 1916211053.0,
-          "oi_usd": 173999168.56595927
+          "oi_contracts": 2120424826.0,
+          "oi_usd": 190562579.11262
         },
         "funding": {
-          "funding_rate": -0.00794,
-          "mark_price": 0.09072152
+          "funding_rate": -0.01296,
+          "mark_price": 0.0902664
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 76.1,
-          "short_pct": 23.9
+          "long_pct": 76.3,
+          "short_pct": 23.6
         },
         "open_interest": {
-          "oi_contracts": 957220316.0
+          "oi_contracts": 1117472082.0
         },
         "funding": {
-          "funding_rate": -0.00886,
-          "mark_price": 0.09071
+          "funding_rate": 0.01,
+          "mark_price": 0.09027
         }
       }
     },
@@ -269,30 +269,30 @@
       "coin": "ENA",
       "cex_sym": "ENAUSDT",
       "hl": {
-        "long_pct": 37.0,
-        "short_pct": 63.0,
-        "long_usd": 2145929,
-        "short_usd": 3655636,
-        "total_usd": 5801565,
+        "long_pct": 37.1,
+        "short_pct": 62.9,
+        "long_usd": 2083787,
+        "short_usd": 3527203,
+        "total_usd": 5610990,
         "wallet_count": 49
       },
       "binance": {
         "top_traders": {
-          "long_pct": 68.4,
-          "short_pct": 31.6,
-          "ratio": 2.169
+          "long_pct": 65.8,
+          "short_pct": 34.2,
+          "ratio": 1.926
         },
         "all_traders": {
-          "long_pct": 64.3,
-          "short_pct": 35.7
+          "long_pct": 62.0,
+          "short_pct": 38.0
         },
         "open_interest": {
-          "oi_contracts": 547099309.0,
-          "oi_usd": 55999629.98507806
+          "oi_contracts": 559733615.0,
+          "oi_usd": 55996069.89276055
         },
         "funding": {
-          "funding_rate": 0.00147,
-          "mark_price": 0.1024
+          "funding_rate": -0.00524,
+          "mark_price": 0.10046139
         }
       },
       "bybit": {
@@ -301,11 +301,11 @@
           "short_pct": 23.9
         },
         "open_interest": {
-          "oi_contracts": 360556017.0
+          "oi_contracts": 366684927.0
         },
         "funding": {
-          "funding_rate": -0.01297,
-          "mark_price": 0.1024
+          "funding_rate": -0.00608,
+          "mark_price": 0.10048
         }
       }
     },
@@ -313,43 +313,43 @@
       "coin": "SUI",
       "cex_sym": "SUIUSDT",
       "hl": {
-        "long_pct": 61.9,
-        "short_pct": 38.1,
-        "long_usd": 6415665,
-        "short_usd": 3946943,
-        "total_usd": 10362608,
-        "wallet_count": 49
+        "long_pct": 52.2,
+        "short_pct": 47.8,
+        "long_usd": 4409446,
+        "short_usd": 4033525,
+        "total_usd": 8442971,
+        "wallet_count": 51
       },
       "binance": {
         "top_traders": {
-          "long_pct": 68.6,
-          "short_pct": 31.4,
-          "ratio": 2.182
+          "long_pct": 67.0,
+          "short_pct": 33.0,
+          "ratio": 2.034
         },
         "all_traders": {
-          "long_pct": 66.7,
-          "short_pct": 33.3
+          "long_pct": 65.3,
+          "short_pct": 34.7
         },
         "open_interest": {
-          "oi_contracts": 95376665.1,
-          "oi_usd": 86059966.29393703
+          "oi_contracts": 93940939.4,
+          "oi_usd": 84476351.23966485
         },
         "funding": {
-          "funding_rate": -0.00715,
-          "mark_price": 0.90083775
+          "funding_rate": -0.00796,
+          "mark_price": 0.9034349
         }
       },
       "bybit": {
         "top_traders": {
-          "long_pct": 75.5,
-          "short_pct": 24.5
+          "long_pct": 73.9,
+          "short_pct": 26.1
         },
         "open_interest": {
-          "oi_contracts": 61146140.0
+          "oi_contracts": 57058390.0
         },
         "funding": {
-          "funding_rate": -0.00136,
-          "mark_price": 0.9008
+          "funding_rate": -0.00344,
+          "mark_price": 0.9034
         }
       }
     }
