@@ -85,13 +85,13 @@ tr:hover td{background:#1c2128}
       <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
         <span class="tier-badge" style="background:#48BB7822;color:#48BB78">dolphin</span>
         <span style="font-size:12px;color:#8b949e">Score: 31.6</span>
-        <span style="font-size:12px;color:#8b949e">  42 snapshots tracked</span>
-        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-08 10:19:05</span>
+        <span style="font-size:12px;color:#8b949e">  53 snapshots tracked</span>
+        <span style="font-size:12px;color:#8b949e">  Last seen 2026-03-09 12:17:59</span>
       </div>
     </div>
     <div class="stats-row">
       <div class="stat-pill">
-        <div class="val">$1.54M</div>
+        <div class="val">$1.55M</div>
         <div class="lbl">Account Value</div>
       </div>
       <div class="stat-pill">
@@ -99,11 +99,11 @@ tr:hover td{background:#1c2128}
         <div class="lbl">Total Long</div>
       </div>
       <div class="stat-pill">
-        <div class="val">$329.6K</div>
+        <div class="val">$0.00</div>
         <div class="lbl">Total Short</div>
       </div>
       <div class="stat-pill">
-        <div class="val">2</div>
+        <div class="val">0</div>
         <div class="lbl">Open Positions</div>
       </div>
     </div>
@@ -125,7 +125,7 @@ tr:hover td{background:#1c2128}
         <div style="font-size:32px;font-weight:700;text-align:center;color:#e6edf3">0% Long</div>
         <div style="font-size:13px;color:#8b949e;text-align:center;margin-bottom:16px">100% Short</div>
         <div class="bias-bar">
-          <div class="bias-fill" style="width:0.0%;background:#3fb950"></div>
+          <div class="bias-fill" style="width:0%;background:#3fb950"></div>
         </div>
         <div class="bias-labels"><span>Short</span><span>Long</span></div>
         <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:center">
@@ -134,7 +134,7 @@ tr:hover td{background:#1c2128}
             <div style="color:#8b949e;font-size:11px;margin-top:2px">Long Notional</div>
           </div>
           <div style="background:#f8514911;border:1px solid #f8514933;border-radius:8px;padding:12px">
-            <div style="color:#f85149;font-size:16px;font-weight:700">$329.6K</div>
+            <div style="color:#f85149;font-size:16px;font-weight:700">$0.00</div>
             <div style="color:#8b949e;font-size:11px;margin-top:2px">Short Notional</div>
           </div>
         </div>
@@ -153,25 +153,7 @@ tr:hover td{background:#1c2128}
             <th>Unrealised PnL</th><th>Entry</th><th>Liq Price</th><th>Leverage</th>
           </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td class="mono">BTC</td>
-                <td style="color:#f85149;font-weight:600">SHORT</td>
-                <td>$228.8K</td>
-                <td><span style="color:#f85149">$53.89</span></td>
-                <td>67748.0</td>
-                <td>518015.891177276</td>
-                <td>4.0x</td>
-            </tr>
-            <tr>
-                <td class="mono">ETH</td>
-                <td style="color:#f85149;font-weight:600">SHORT</td>
-                <td>$100.8K</td>
-                <td><span style="color:#f85149">$264.37</span></td>
-                <td>1957.85</td>
-                <td>31357.3950641455</td>
-                <td>4.0x</td>
-            </tr></tbody>
+        <tbody><tr><td colspan="7" style="text-align:center;color:#8b949e">No open positions</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -184,7 +166,28 @@ tr:hover td{background:#1c2128}
         <thead>
           <tr><th>Coin</th><th>Side</th><th>Notional</th><th>uPnL</th><th>Leverage</th></tr>
         </thead>
-        <tbody><tr class="snap-header"><td colspan="5">2026-03-08 10:19</td></tr>
+        <tbody><tr class="snap-header"><td colspan="5">2026-03-09 02:01</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$181.7K</td>
+            <td><span style="color:#3fb950">+$2.7K</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-08 11:20</td></tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">BTC</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$572.8K</td>
+            <td><span style="color:#3fb950">+$1.5K</span></td>
+            <td>4.0x</td>
+        </tr>
+        <tr>
+            <td class="mono" style="padding-left:20px">ETH</td>
+            <td style="color:#f85149">SHORT</td>
+            <td>$170.9K</td>
+            <td><span style="color:#f85149">$459.37</span></td>
+            <td>4.0x</td>
+        </tr><tr class="snap-header"><td colspan="5">2026-03-08 10:19</td></tr>
         <tr>
             <td class="mono" style="padding-left:20px">BTC</td>
             <td style="color:#f85149">SHORT</td>
@@ -532,8 +535,8 @@ tr:hover td{background:#1c2128}
 </div>
 
 <script>
-var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17", "2026-03-06 09:34", "2026-03-06 10:11", "2026-03-06 11:44", "2026-03-06 11:47", "2026-03-06 12:17", "2026-03-06 13:15", "2026-03-06 14:18", "2026-03-06 16:54", "2026-03-06 17:33", "2026-03-07 02:37", "2026-03-07 05:16", "2026-03-07 06:16", "2026-03-07 10:04", "2026-03-07 13:18", "2026-03-07 17:08", "2026-03-08 02:07", "2026-03-08 03:26", "2026-03-08 06:14", "2026-03-08 07:59", "2026-03-08 09:38", "2026-03-08 10:19"];
-var avValues = [1588554.09, 1584810.74, 1551999.01, 1538053.35, 1540437.6, 1540150.47, 1533481.56, 1532057.76, 1536990.31, 1536990.31, 1539508.82, 1548285.99, 1548270.23, 1548797.08, 1551308.05, 1553121.1, 1553722.39, 1549627.25, 1537381.27, 1536038.77, 1545748.22, 1549281.77, 1544868.24, 1544916.12, 1544916.12, 1544916.12, 1544916.12, 1546471.29, 1537655.74, 1543210.99, 1541680.03, 1541680.03, 1542525.82, 1542484.01, 1543570.76, 1543794.1, 1544137.37, 1544955.76, 1545006.34, 1544947.29, 1544310.07, 1544337.54];
+var avLabels = ["2026-03-04 13:13", "2026-03-04 14:23", "2026-03-04 15:59", "2026-03-04 16:17", "2026-03-04 17:17", "2026-03-04 18:16", "2026-03-05 01:49", "2026-03-05 02:13", "2026-03-05 05:15", "2026-03-05 06:17", "2026-03-05 07:17", "2026-03-05 09:59", "2026-03-05 10:29", "2026-03-05 11:18", "2026-03-05 12:22", "2026-03-05 13:16", "2026-03-05 16:39", "2026-03-05 17:20", "2026-03-06 05:37", "2026-03-06 06:17", "2026-03-06 07:17", "2026-03-06 09:34", "2026-03-06 10:11", "2026-03-06 11:44", "2026-03-06 11:47", "2026-03-06 12:17", "2026-03-06 13:15", "2026-03-06 14:18", "2026-03-06 16:54", "2026-03-06 17:33", "2026-03-07 02:37", "2026-03-07 05:16", "2026-03-07 06:16", "2026-03-07 10:04", "2026-03-07 13:18", "2026-03-07 17:08", "2026-03-08 02:07", "2026-03-08 03:26", "2026-03-08 06:14", "2026-03-08 07:59", "2026-03-08 09:38", "2026-03-08 10:19", "2026-03-08 11:20", "2026-03-09 02:01", "2026-03-09 03:14", "2026-03-09 04:22", "2026-03-09 06:39", "2026-03-09 07:12", "2026-03-09 08:11", "2026-03-09 09:13", "2026-03-09 10:17", "2026-03-09 11:18", "2026-03-09 12:17"];
+var avValues = [1588554.09, 1584810.74, 1551999.01, 1538053.35, 1540437.6, 1540150.47, 1533481.56, 1532057.76, 1536990.31, 1536990.31, 1539508.82, 1548285.99, 1548270.23, 1548797.08, 1551308.05, 1553121.1, 1553722.39, 1549627.25, 1537381.27, 1536038.77, 1545748.22, 1549281.77, 1544868.24, 1544916.12, 1544916.12, 1544916.12, 1544916.12, 1546471.29, 1537655.74, 1543210.99, 1541680.03, 1541680.03, 1542525.82, 1542484.01, 1543570.76, 1543794.1, 1544137.37, 1544955.76, 1545006.34, 1544947.29, 1544310.07, 1544337.54, 1545695.87, 1551911.76, 1551846.4, 1551846.4, 1551830.88, 1551830.88, 1551830.88, 1551830.88, 1551830.88, 1551830.88, 1551830.88];
 
 var ctx = document.getElementById('avChart').getContext('2d');
 new Chart(ctx, {
