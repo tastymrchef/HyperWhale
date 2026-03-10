@@ -188,8 +188,22 @@ class WhaleRegistry:
 
     @property
     def active_addresses(self) -> list[str]:
-        """Return list of addresses we are actively tracking."""
-        return [w.address for w in self.whales.values() if w.is_active]
+        """Return list of addresses we are actively tracking.
+
+        Includes apex, whale, shark, and dormant_whale tiers only.
+        Excludes skip (low quality) and dolphin (too small to matter).
+        """
+        _TRACKED_TIERS = {
+            WhaleTier.APEX,
+            WhaleTier.WHALE,
+            WhaleTier.SHARK,
+            WhaleTier.DORMANT_WHALE,
+        }
+        return [
+            w.address
+            for w in self.whales.values()
+            if w.is_active and w.tier in _TRACKED_TIERS
+        ]
 
     def by_tier(self, tier: WhaleTier) -> list[WhaleProfile]:
         """Get all whales in a specific tier."""
@@ -197,7 +211,13 @@ class WhaleRegistry:
 
     @property
     def count(self) -> int:
+        """Total wallets in registry (all tiers including skip/dolphin)."""
         return len(self.whales)
+
+    @property
+    def active_count(self) -> int:
+        """Number of wallets actually being monitored (excludes skip/dolphin)."""
+        return len(self.active_addresses)
 
     def __repr__(self) -> str:
         tier_counts = {}

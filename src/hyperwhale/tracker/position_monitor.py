@@ -46,7 +46,8 @@ class PositionMonitor:
         self._event_callbacks: list = []
 
         logger.info(
-            f"PositionMonitor initialized — tracking {self.registry.count} whales"
+            f"PositionMonitor initialized — tracking {self.registry.active_count} whales "
+            f"(apex/whale/shark) out of {self.registry.count} total"
         )
 
     def on_event(self, callback) -> None:
@@ -80,26 +81,23 @@ class PositionMonitor:
                 # 1. Fetch current snapshot from API
                 new_snapshot = self.collector.fetch_position_snapshot(addr)
 
-                # 2. Update whale profile with latest account value
-                self.registry.update_account_value(addr, new_snapshot.account_value)
-
-                # 3. Get previous snapshot from DB
+                # 2. Get previous snapshot from DB
                 old_snapshot = self.db.get_latest_snapshot(addr)
 
-                # 4. Save new snapshot
+                # 3. Save new snapshot
                 self.db.save_snapshot(new_snapshot)
 
-                # 5. Detect changes
+                # 4. Detect changes
                 events = self.detector.detect(old_snapshot, new_snapshot)
 
-                # 6. Save events and notify
+                # 5. Save events and notify
                 for event in events:
                     self.db.save_event(event)
                     self._notify(event)
 
                 all_events.extend(events)
 
-                # 7. Fetch and save recent trades
+                # 6. Fetch and save recent trades
                 try:
                     # Get trades from the last hour
                     since_ms = int((datetime.utcnow().timestamp() - 3600) * 1000)
@@ -171,14 +169,15 @@ class PositionMonitor:
 
     def _print_status(self) -> None:
         """Print a status table showing tracked whales."""
-        table = RichTable(title="🐋 HyperWhale — Tracked Wallets")
+        table = RichTable(title="🐋 HyperWhale — Tracked Wallets (apex / whale / shark)")
         table.add_column("Address", style="cyan")
         table.add_column("Label", style="green")
         table.add_column("Tier", style="yellow")
         table.add_column("Account Value", justify="right")
 
+        active_set = set(self.registry.active_addresses)
         for whale in self.registry.whales.values():
-            if whale.is_active:
+            if whale.address in active_set:
                 table.add_row(
                     f"{whale.address[:6]}...{whale.address[-4:]}",
                     whale.label or "—",

@@ -134,7 +134,7 @@ def cmd_monitor(once: bool = False) -> None:
     alerter = TelegramAlerter(registry=monitor.registry)
     if alerter._enabled:
         monitor.on_event(alerter)
-        alerter.send_startup_message(whale_count=monitor.registry.count)
+        alerter.send_startup_message(whale_count=monitor.registry.active_count)
         console.print("[green]Telegram alerts enabled[/green]")
     else:
         console.print("[yellow]Telegram alerts disabled — set TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID in .env[/yellow]")
