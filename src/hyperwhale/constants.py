@@ -106,6 +106,6 @@ DEFAULT_CORRELATION_WINDOW_DAYS = 14         # window for correlation calc
 # ---------------------------------------------------------------------------
 # Polling Defaults
 # ---------------------------------------------------------------------------
-DEFAULT_POLL_INTERVAL_TOP = 30               # seconds — top whales
+DEFAULT_POLL_INTERVAL_TOP = 30               # seconds sleep after cycle — apex/whale/shark (~80s cycle + 30s sleep = ~110s total)
 DEFAULT_POLL_INTERVAL_OTHER = 60             # seconds — other whales
 TOP_WHALE_COUNT = 20                         # how many are "top"
