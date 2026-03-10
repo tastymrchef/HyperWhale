@@ -346,7 +346,7 @@ def render_wallet_table(wallets: list[dict]) -> str:
         margin_color = "#f85149" if margin_ratio > 70 else "#f0883e" if margin_ratio > 40 else "#3fb950"
 
         rows += f"""
-        <tr class="wallet-row" onclick="window.location='{detail}'" style="cursor:pointer">
+        <tr class="wallet-row" data-addr="{addr}" onclick="window.location='{detail}'" style="cursor:pointer">
           <td>
             <div style="display:flex;align-items:center;gap:8px">
               <span class="badge" style="background:{tier_bg};color:{tier_col}">{tier.upper()}</span>
@@ -683,6 +683,7 @@ def render_html(wallets: list[dict], agg: dict, generated_at: str) -> str:
       align-items: center;
       gap: 10px;
       margin: 0 0 14px;
+      flex-wrap: wrap;
     }}
     .section-title {{
       font-size: 1rem;
@@ -695,6 +696,46 @@ def render_html(wallets: list[dict], agg: dict, generated_at: str) -> str:
       background: #21262d;
       padding: 2px 8px;
       border-radius: 12px;
+    }}
+
+    /* Search bar */
+    .search-wrap {{
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }}
+    .search-input {{
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #c9d1d9;
+      font-size: 0.85rem;
+      padding: 6px 12px 6px 32px;
+      width: 240px;
+      outline: none;
+      transition: border-color 0.2s;
+    }}
+    .search-input:focus {{ border-color: #58a6ff; }}
+    .search-input::placeholder {{ color: #484f58; }}
+    .search-wrap .search-icon {{
+      position: absolute;
+      margin-left: 10px;
+      color: #484f58;
+      font-size: 0.85rem;
+      pointer-events: none;
+    }}
+    .search-container {{
+      position: relative;
+      display: flex;
+      align-items: center;
+    }}
+    .no-results {{
+      display: none;
+      text-align: center;
+      padding: 32px;
+      color: #484f58;
+      font-size: 0.88rem;
     }}
   </style>
 </head>
@@ -723,18 +764,55 @@ def render_html(wallets: list[dict], agg: dict, generated_at: str) -> str:
 
   <div class="section-header">
     <div class="section-title">All Tracked Wallets</div>
-    <div class="section-count">{wallet_count} wallets · click column headers to sort · click row for detail</div>
+    <div class="section-count" id="visibleCount">{wallet_count} wallets · click column headers to sort · click row for detail</div>
+    <div class="search-wrap">
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input
+          class="search-input"
+          id="walletSearch"
+          type="text"
+          placeholder="Search label, address, coin…"
+          oninput="filterTable(this.value)"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+    </div>
   </div>
 
   <div style="overflow-x:auto">
     {table_html}
+    <div class="no-results" id="noResults">No wallets match your search.</div>
   </div>
 </div>
 
 <script>
+function filterTable(query) {{
+  const q     = query.trim().toLowerCase();
+  const tbody = document.querySelector('#walletTable tbody');
+  const rows  = Array.from(tbody.querySelectorAll('tr'));
+  let   shown = 0;
+
+  rows.forEach(row => {{
+    // match visible text OR full address stored in data-addr
+    const text  = row.innerText.toLowerCase();
+    const addr  = (row.dataset.addr || '').toLowerCase();
+    const match = !q || text.includes(q) || addr.includes(q);
+    row.style.display = match ? '' : 'none';
+    if (match) shown++;
+  }});
+
+  const total = rows.length;
+  document.getElementById('visibleCount').textContent =
+    q ? `${{shown}} of ${{total}} wallets` : `${{total}} wallets · click column headers to sort · click row for detail`;
+  document.getElementById('noResults').style.display = shown === 0 ? 'block' : 'none';
+}}
+
 function sortTable(col) {{
   const table = document.getElementById('walletTable');
   const tbody = table.querySelector('tbody');
+  // only sort visible rows, keep hidden rows hidden
   const rows  = Array.from(tbody.querySelectorAll('tr'));
   const asc   = table.dataset.sortCol == col && table.dataset.sortDir == 'asc';
   rows.sort((a, b) => {{

@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS positions (
     upnl            REAL,
     entry           REAL,
     liq             TEXT,
-    leverage        REAL
+    leverage        REAL,
+    leverage_type   TEXT NOT NULL DEFAULT 'cross'   -- 'cross' or 'isolated'
 );
 
 CREATE INDEX IF NOT EXISTS idx_wallet_states_address    ON wallet_states(address);
@@ -208,8 +209,8 @@ def store(snap_path: Path = DEFAULT_SNAP, db_path: Path = DB_PATH) -> None:
             con.execute(
                 """INSERT INTO positions
                    (wallet_state_id, snapshot_id, fetched_at, address,
-                    coin, side, notional, upnl, entry, liq, leverage)
-                   VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
+                    coin, side, notional, upnl, entry, liq, leverage, leverage_type)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
                 (
                     wallet_state_id, snapshot_id, fetched_at, addr,
                     p.get("coin", ""),
@@ -219,6 +220,7 @@ def store(snap_path: Path = DEFAULT_SNAP, db_path: Path = DB_PATH) -> None:
                     p.get("entry", 0),
                     str(p.get("liq", "")),
                     p.get("leverage", 1),
+                    p.get("leverage_type", "cross"),
                 ),
             )
             position_rows += 1
